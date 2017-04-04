@@ -19,6 +19,9 @@ sites/*/services.local.yml
 # Ignore SimpleTest multi-site environment.
 sites/simpletest
 
+# Dev
+.idea
+
 # Packages #
 ############
 *.7z
