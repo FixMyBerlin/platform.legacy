@@ -1,0 +1,64 @@
+<article>
+  <style>
+    #map {
+      height: 600px;
+      width: 100%;
+
+      padding: 0;
+      margin: 0;
+    }
+
+    .list {
+      position: absolute;
+      background: white;
+      top: 180px;
+      left: 200px;
+      padding: 20px;
+      z-index: 10;
+      display: inline;
+    }
+  </style>
+
+
+  <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/3.15/themes/css/cartodb.css" />
+  <!--div class="list">
+    <?php #print ctools_modal_text_button(t('Add Point'), 'modal_forms/nojs/webform/2', t('Add Point')); ?>
+  </div-->
+
+  <div id="map"></div>
+
+  <script src="http://libs.cartocdn.com/cartodb.js/v3/3.15/cartodb.js"></script>
+  <script>
+    var url = '{{ content.field_vis_url[0] }}';
+    window.onload = function() {
+      cartodb.createVis('map', url, {
+        shareable: false,
+        title: false,
+        description: true,
+        search: false,
+        carto_logo: false,
+        fullscreen: true,
+        center_lat: 52.48840,
+        center_lon: 13.43249,
+        zoom: 14
+      }).done(function(vis, layers) {
+        vis.getNativeMap().on('click', function(e){
+        });
+      });
+    }
+          var obj = $("<a></a>").attr('href',"modal_forms/nojs/webform/2").addClass('ctools-use-modal-processed');
+          obj.unbind();
+          obj.click(Drupal.CTools.Modal.clickAjaxLink);
+          //obj.click();
+
+
+          var url  = 'modal_forms/nojs/webform/2';
+          var link = $("<a></a>").attr('href', url).addClass('ctools-use-modal-processed').click(Drupal.CTools.Modal.clickAjaxLink);
+          Drupal.ajax[url] = new Drupal.ajax(url, link.get(0), {
+            url: url,
+            event: 'click',
+            progress: { type: 'throbber'}
+          });
+          //link.click();
+  </script>
+</article>
