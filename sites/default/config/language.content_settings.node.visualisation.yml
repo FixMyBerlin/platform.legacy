@@ -1,0 +1,11 @@
+uuid: 182fe60b-bf60-4402-bbdb-58d45d61eccf
+langcode: de
+status: true
+dependencies:
+  config:
+    - node.type.visualisation
+id: node.visualisation
+target_entity_type_id: node
+target_bundle: visualisation
+default_langcode: site_default
+language_alterable: false

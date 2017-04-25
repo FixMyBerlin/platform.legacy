@@ -1,0 +1,22 @@
+uuid: 0f5bf0e0-7505-41e4-9bc0-5b2b5288f7ee
+langcode: de
+status: true
+dependencies:
+  theme:
+    - fixmy
+_core:
+  default_config_hash: qHdtze2DZ2mFfaJadxjZz6epm92_SN9SAFY4yJGl8Fo
+id: fixmy_local_tasks
+theme: fixmy
+region: header
+weight: -6
+provider: null
+plugin: local_tasks_block
+settings:
+  id: local_tasks_block
+  label: Tabs
+  provider: core
+  label_display: '0'
+  primary: true
+  secondary: true
+visibility: {  }

@@ -1,0 +1,22 @@
+uuid: e5fc587e-472c-42a6-8122-10786e7f6d69
+langcode: de
+status: false
+dependencies:
+  module:
+    - system
+  theme:
+    - fixmy
+_core:
+  default_config_hash: iggZSiUKz4mYP1YPJ8SsUfFu79HIgOTt6IDy3Up59aM
+id: fixmy_powered
+theme: fixmy
+region: navigation
+weight: -5
+provider: null
+plugin: system_powered_by_block
+settings:
+  id: system_powered_by_block
+  label: 'Powered by Drupal'
+  provider: system
+  label_display: '0'
+visibility: {  }

@@ -1,0 +1,25 @@
+uuid: 04c7c970-e7c3-45d9-b43e-7f3f041569dd
+langcode: de
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - fixmy
+_core:
+  default_config_hash: Cy3vkpYrD1O5JG-BeEnokF0bByHYDEa8CBfWivB4_SQ
+id: fixmy_branding
+theme: fixmy
+region: navigation
+weight: 0
+provider: null
+plugin: system_branding_block
+settings:
+  id: system_branding_block
+  label: 'Site branding'
+  provider: system
+  label_display: '0'
+  use_site_logo: true
+  use_site_name: false
+  use_site_slogan: false
+visibility: {  }
