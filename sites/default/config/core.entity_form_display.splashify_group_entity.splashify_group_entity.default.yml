@@ -1,0 +1,71 @@
+uuid: a4d01e5b-74b1-446e-b6c2-cbe9ac2d1fee
+langcode: de
+status: true
+dependencies:
+  module:
+    - field_group
+    - splashify
+third_party_settings:
+  field_group:
+    group_whe:
+      children:
+        - field_show
+        - field_disable_check_referrer
+        - field_often
+        - field_restrict
+        - field_roles
+        - group_roles
+      parent_name: ''
+      weight: 1
+      label: 'When should the splash page show up?'
+      format_type: details
+      format_settings:
+        label: 'When should the splash page show up?'
+        open: true
+        required_fields: true
+        id: ''
+        classes: ''
+    group_where:
+      children:
+        - field_where
+        - field_list_pages
+        - field_opposite
+      parent_name: ''
+      weight: 2
+      label: 'Where should the splash page come up?'
+      format_type: details
+      format_settings:
+        label: 'Where should the splash page come up?'
+        open: true
+        required_fields: true
+        id: ''
+        classes: ''
+    group_how:
+      children:
+        - field_mode
+        - field_splash_mode
+        - field_size
+      parent_name: ''
+      weight: 3
+      label: 'How should the splash page come up?'
+      format_type: details
+      format_settings:
+        label: 'How should the splash page come up?'
+        open: true
+        required_fields: true
+        id: ''
+        classes: ''
+_core:
+  default_config_hash: i_8BRjywFmJ5I9RihVnMinvxHyppzeVz9XU47EicOGA
+id: splashify_group_entity.splashify_group_entity.default
+targetEntityType: splashify_group_entity
+bundle: splashify_group_entity
+mode: default
+content:
+  langcode:
+    type: language_select
+    weight: 2
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden: {  }
