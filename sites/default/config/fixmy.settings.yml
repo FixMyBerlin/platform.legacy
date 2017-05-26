@@ -4,7 +4,7 @@ schemas:
 favicon:
   mimetype: image/vnd.microsoft.icon
   path: ''
-  url: 'http://localhost/themes/fixmy/favicon.ico'
+  url: 'http://dev-fixmyberlin.pantheonsite.io/themes/bootstrap/favicon.ico'
   use_default: true
 features:
   comment_user_picture: true
@@ -15,6 +15,3 @@ logo:
   path: 'public://logo_fmb_1.png'
   url: ''
   use_default: false
-fluid_container: 1
-table: ''
-langcode: de

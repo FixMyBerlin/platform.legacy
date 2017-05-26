@@ -1,4 +1,4 @@
-uuid: baac8251-cf05-468f-8c82-abac49bba852
+uuid: 0171fe54-3f17-4e4a-937b-9b3b7e373a90
 langcode: de
 status: true
 dependencies:
@@ -13,9 +13,7 @@ label: 'Visualisation URL'
 description: ''
 required: false
 translatable: false
-default_value:
-  -
-    value: 'http://bosh.carto.com/api/v2/viz/ee432f06-728e-11e6-aacc-0ee66e2c9693/viz.json'
+default_value: {  }
 default_value_callback: ''
 settings: {  }
 field_type: string
