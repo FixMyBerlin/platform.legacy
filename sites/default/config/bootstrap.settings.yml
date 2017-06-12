@@ -11,7 +11,7 @@ cdn_jsdelivr_theme: paper
 logo:
   path: 'public://logo_fmb_1.png'
   url: ''
-  use_default: false
+  use_default: true
 navbar_position: fixed-top
 table_responsive: '-1'
 table: ''
