@@ -1,0 +1,46 @@
+uuid: b36fe8a9-cec2-4e6a-9a2c-059c4957b265
+langcode: de
+status: true
+dependencies:
+  config:
+    - field.field.user.user.field_user_first_name
+    - field.field.user.user.field_user_gender
+    - field.field.user.user.field_user_last_name
+  module:
+    - user
+id: user.user.default
+targetEntityType: user
+bundle: user
+mode: default
+content:
+  account:
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_user_first_name:
+    weight: 2
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_user_gender:
+    weight: 1
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_user_last_name:
+    weight: 3
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+hidden:
+  langcode: true
+  language: true
+  timezone: true
