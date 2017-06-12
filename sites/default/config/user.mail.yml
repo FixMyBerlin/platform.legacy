@@ -9,7 +9,7 @@ register_admin_created:
   subject: 'Ein Administrator hat für Sie auf [site:name] ein Benutzerkonto angelegt'
 register_no_approval_required:
   body: "[user:display-name],\n\nvielen Dank für die Registrierung auf [site:name]. Sie können sich jetzt mit einem Klick auf den folgenden Link anmelden oder diesen alternativ in Ihren Browser kopieren:\n\n[user:one-time-login-url]\n\nDieser Link kann nur einmal verwendet werden und leitet Sie auf eine Seite, auf der Sie Ihr Passwort festlegen können.\n\nNachdem Sie Ihr Passwort festgelegt haben, können Sie sich zukünftig mit folgenden Zugangsdaten bei [site:login-url] anmelden:\n\nBenutzername: [user:name]\nPasswort: Ihr Passwort\n\nViele Grüße\nDas Team von [site:name]"
-  subject: 'Account details for [user:display-name] at [site:name]'
+  subject: 'Kontodetails für [user:display-name] auf [site:name]'
 register_pending_approval:
   body: "[user:display-name],\n\nvielen Dank für die Registrierung auf [site:name]. Ihr Antrag für ein Benutzerkonto wird aktuell geprüft. Sobald eine Freigabe erfolgt ist, erhalten Sie eine weitere E-Mail mit Informationen zum Login, Setzen Ihres Passwortes sowie weitere Details.\n\nViele Grüße\nDas Team von [site:name]"
   subject: 'Account details for [user:display-name] at [site:name] (pending admin approval)'
@@ -20,11 +20,11 @@ status_activated:
   body: "[user:display-name],\n\nIhr Benutzerkonto auf der Website [site:name] wurde aktiviert. \n\nSie können sich jetzt mit einem Klick auf den folgenden Link anmelden oder diesen alternativ in Ihren Browser kopieren:\n\n[user:one-time-login-url]\n\nDieser Link kann nur einmal verwendet werden und leitet Sie zu einer Seite, auf der Sie ein neues Passwort vergeben können.\n\nNachdem Sie Ihr Passwort festgelegt haben, können Sie sich zukünftig auf [site:login-url] mit den folgenden Zugangsdaten anmelden:\n\nBenutzername: [user:name]\nPasswort: Ihr Passwort\n\nViele Grüße\nDas Team von [site:name]"
   subject: 'Account details for [user:display-name] at [site:name] (approved)'
 status_blocked:
-  body: "[user:display-name],\n\nYour account on [site:name] has been blocked.\n\n--  [site:name] team"
+  body: "[user:display-name],\n\nIhr Benutzerkonto auf [site:name] wurde gesperrt.\n\n--  [site:name]-Team"
   subject: 'Details für Benutzerkonto [user:name] auf [site:name] (gesperrt)'
 status_canceled:
   body: "[user:display-name],\n\nIhr Benutzerkonto auf [site:name] wurde gelöscht.\n\nViele Grüße\nDas Team von [site:name]"
-  subject: 'Account details for [user:display-name] at [site:name] (canceled)'
+  subject: 'Details für Benutzerkonto [user:display-name] auf [site:name] (abgebrochen)'
 langcode: de
 _core:
   default_config_hash: m4J3ROov32OEquRYGLbx3SpdDGuqx9l_zJtNvihqdCg
