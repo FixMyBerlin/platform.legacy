@@ -1,16 +1,16 @@
-uuid: 8e849fe7-603f-4989-9518-a17819128f0f
+uuid: 34cb01fb-191d-4b3c-a3a7-26a7c49b7ba7
 langcode: de
 status: true
 dependencies:
   config:
     - field.storage.node.body
-    - node.type.visualisation
+    - node.type.project
   module:
     - text
-id: node.visualisation.body
+id: node.project.body
 field_name: body
 entity_type: node
-bundle: visualisation
+bundle: project
 label: Body
 description: ''
 required: false

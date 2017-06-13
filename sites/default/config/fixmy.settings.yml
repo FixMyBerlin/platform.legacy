@@ -18,3 +18,4 @@ schemas:
   bootstrap: 8000
   fixmy: 8000
 table: ''
+langcode: de

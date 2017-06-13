@@ -1,13 +1,13 @@
-uuid: a2b4a606-6c56-44ba-bfe9-4009a87a097f
+uuid: e781372d-40c3-4cc4-9f37-d1ecf0146fe9
 langcode: de
 status: true
 dependencies:
   config:
-    - node.type.visualisation
-id: node.visualisation.promote
+    - node.type.project
+id: node.project.promote
 field_name: promote
 entity_type: node
-bundle: visualisation
+bundle: project
 label: 'Auf der Startseite'
 description: ''
 required: false

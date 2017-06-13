@@ -1,11 +1,11 @@
-uuid: acc73ab6-ece6-4ed7-ae67-a77452414611
+uuid: 0244b36b-f02a-4892-8abd-a371906aad8f
 langcode: de
 status: true
 dependencies:
   module:
     - node
-id: node.field_vis_url
-field_name: field_vis_url
+id: node.field_visualization_url
+field_name: field_visualization_url
 entity_type: node
 type: string
 settings:

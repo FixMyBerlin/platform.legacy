@@ -9,14 +9,14 @@ label: Projekte
 type: 'canonical_entities:node'
 pattern: '/projekt/[node:title]'
 selection_criteria:
-  9a401471-0973-4b02-8b95-0885f12f385b:
+  3cee37f2-23a5-4f33-ac73-c5161c4a942a:
     id: node_type
     bundles:
-      visualisation: visualisation
+      project: project
     negate: false
     context_mapping:
       node: node
-    uuid: 9a401471-0973-4b02-8b95-0885f12f385b
+    uuid: 3cee37f2-23a5-4f33-ac73-c5161c4a942a
 selection_logic: and
 weight: -5
 relationships: {  }

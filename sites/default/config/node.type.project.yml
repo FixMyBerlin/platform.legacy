@@ -1,4 +1,4 @@
-uuid: bac5a67a-d8c3-4910-9d44-8878f4bb63f0
+uuid: 7afe2ac1-6c11-4f25-a3d5-a65ba8cbffca
 langcode: de
 status: true
 dependencies:
@@ -8,8 +8,8 @@ third_party_settings:
   menu_ui:
     available_menus: {  }
     parent: ''
-name: visualisation
-type: visualisation
+name: Projekt
+type: project
 description: ''
 help: ''
 new_revision: true

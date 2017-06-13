@@ -1,21 +1,26 @@
-uuid: b9fabbd1-da71-41d6-9b9e-c113c7dabe62
+uuid: cc266a7d-e29a-46e6-bb54-ed1cd1816635
 langcode: de
 status: true
 dependencies:
   config:
-    - field.field.node.visualisation.body
-    - field.field.node.visualisation.field_vis_url
-    - node.type.visualisation
+    - field.field.node.project.body
+    - field.field.node.project.field_sharing_image
+    - field.field.node.project.field_sharing_text
+    - field.field.node.project.field_visualization_url
+    - image.style.thumbnail
+    - node.type.project
   module:
+    - image
+    - path
     - text
-id: node.visualisation.default
+id: node.project.default
 targetEntityType: node
-bundle: visualisation
+bundle: project
 mode: default
 content:
   body:
     type: text_textarea_with_summary
-    weight: 26
+    weight: 31
     settings:
       rows: 9
       summary_rows: 3
@@ -28,8 +33,24 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
-  field_vis_url:
-    weight: 27
+  field_sharing_image:
+    weight: 34
+    settings:
+      progress_indicator: throbber
+      preview_image_style: thumbnail
+    third_party_settings: {  }
+    type: image_image
+    region: content
+  field_sharing_text:
+    weight: 33
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textarea
+    region: content
+  field_visualization_url:
+    weight: 32
     settings:
       size: 60
       placeholder: ''
@@ -39,6 +60,12 @@ content:
   langcode:
     type: language_select
     weight: 2
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  path:
+    type: path
+    weight: 30
     region: content
     settings: {  }
     third_party_settings: {  }
