@@ -1,16 +1,16 @@
-uuid: a321fe74-0438-4fa6-a883-16f73364e408
+uuid: 7e9bd51d-824b-405c-904c-bd4b74ef5c5c
 langcode: de
 status: true
 dependencies:
   module:
     - system
   theme:
-    - fixmy
+    - fixmycustom
 _core:
   default_config_hash: Cy3vkpYrD1O5JG-BeEnokF0bByHYDEa8CBfWivB4_SQ
-id: fixmy_branding
-theme: fixmy
-region: navigation
+id: fixmycustom_branding
+theme: fixmycustom
+region: header
 weight: 0
 provider: null
 plugin: system_branding_block

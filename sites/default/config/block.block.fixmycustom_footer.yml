@@ -1,4 +1,4 @@
-uuid: 0dacb75a-742d-4c22-ab7f-adde4491b335
+uuid: 4b0f82fe-6213-49a5-a9c9-900ee8ca0583
 langcode: de
 status: true
 dependencies:
@@ -7,11 +7,11 @@ dependencies:
   module:
     - system
   theme:
-    - fixmy
+    - fixmycustom
 _core:
   default_config_hash: h06zhb3xV9_2_3Zy9NsyylL7YBaEDlMwMEqNwAn8kMo
-id: fixmy_footer
-theme: fixmy
+id: fixmycustom_footer
+theme: fixmycustom
 region: footer
 weight: 0
 provider: null

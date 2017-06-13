@@ -1,15 +1,15 @@
-uuid: 1ffdd82a-1cf5-4ee3-b441-47ff10d4e38b
+uuid: 7f13b9f7-4e1c-4b0a-9230-c879ac9659d7
 langcode: de
 status: true
 dependencies:
   module:
     - system
   theme:
-    - fixmy
+    - fixmycustom
 _core:
   default_config_hash: wDR9JKEATSWldBjw8du8s3G2zjEYeQf88nlld11hMLo
-id: fixmy_breadcrumbs
-theme: fixmy
+id: fixmycustom_breadcrumbs
+theme: fixmycustom
 region: header
 weight: -6
 provider: null

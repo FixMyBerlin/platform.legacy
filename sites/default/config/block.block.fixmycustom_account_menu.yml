@@ -1,4 +1,4 @@
-uuid: 9e6acaaf-9b71-4665-ac7c-153ecb7e1783
+uuid: d8652281-3332-410d-952b-82de8f7acdac
 langcode: de
 status: false
 dependencies:
@@ -7,12 +7,12 @@ dependencies:
   module:
     - system
   theme:
-    - fixmy
+    - fixmycustom
 _core:
   default_config_hash: R2K_qX0ZUMbUL6ie_-S9tZVjvqmlWKlscikgeRv9vhw
-id: fixmy_account_menu
-theme: fixmy
-region: navigation
+id: fixmycustom_account_menu
+theme: fixmycustom
+region: header
 weight: -3
 provider: null
 plugin: 'system_menu_block:account'

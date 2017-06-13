@@ -39,7 +39,8 @@ module:
 theme:
   stark: 0
   bootstrap: 0
-  fixmy: 0
+  stable: 0
+  fixmycustom: 0
 _core:
   default_config_hash: m2GVq11UAOVuNgj8x0t5fMOPujpvQQ_zxLoaly1BMEU
 langcode: de

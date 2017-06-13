@@ -1,16 +1,16 @@
-uuid: 38eddf44-a662-4047-867a-45d2af23a95e
+uuid: 535d5076-61f9-4239-8e96-01a22df730c2
 langcode: de
 status: false
 dependencies:
   module:
     - system
   theme:
-    - fixmy
+    - fixmycustom
 _core:
   default_config_hash: iggZSiUKz4mYP1YPJ8SsUfFu79HIgOTt6IDy3Up59aM
-id: fixmy_powered
-theme: fixmy
-region: navigation
+id: fixmycustom_powered
+theme: fixmycustom
+region: header
 weight: -5
 provider: null
 plugin: system_powered_by_block

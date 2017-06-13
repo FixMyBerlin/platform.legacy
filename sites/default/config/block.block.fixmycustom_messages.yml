@@ -1,15 +1,15 @@
-uuid: 0e657715-2092-4111-a95f-4a3359662d52
+uuid: 26318197-38a3-4e7f-a154-265d246f3654
 langcode: de
 status: true
 dependencies:
   module:
     - system
   theme:
-    - fixmy
+    - fixmycustom
 _core:
   default_config_hash: 9RnnTUBcn0WRWXfrGOnId2H0Q31uQUeu_F5TnDxl2yg
-id: fixmy_messages
-theme: fixmy
+id: fixmycustom_messages
+theme: fixmycustom
 region: header
 weight: -6
 provider: null

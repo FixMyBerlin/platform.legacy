@@ -1,13 +1,13 @@
-uuid: 980f845f-a19a-42e0-b00a-2442113d98ae
+uuid: ddea3c20-e2e3-4153-955f-5a853d318940
 langcode: de
 status: true
 dependencies:
   theme:
-    - fixmy
+    - fixmycustom
 _core:
   default_config_hash: ffxthelqQF8xcr4GTG4HlaNNsluiHftN0pujmQpW0bQ
-id: fixmy_local_actions
-theme: fixmy
+id: fixmycustom_local_actions
+theme: fixmycustom
 region: header
 weight: -6
 provider: null

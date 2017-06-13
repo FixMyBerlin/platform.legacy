@@ -1,13 +1,13 @@
-uuid: 46dc1d58-a845-41ac-b0fe-4f3ab73606d3
+uuid: c7b87025-c73f-4416-a058-54d9d15e4999
 langcode: de
 status: true
 dependencies:
   theme:
-    - fixmy
+    - fixmycustom
 _core:
   default_config_hash: 1TQP4b3ZnlzvIH9bj6cpCz_SyUHdJjLQkZnHpikjjhw
-id: fixmy_page_title
-theme: fixmy
+id: fixmycustom_page_title
+theme: fixmycustom
 region: header
 weight: 0
 provider: null
