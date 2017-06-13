@@ -21,6 +21,7 @@ module:
   options: 0
   page_cache: 0
   path: 0
+  rate: 0
   rest: 0
   restui: 0
   serialization: 0
@@ -31,7 +32,9 @@ module:
   toolbar: 0
   update: 0
   user: 0
+  votingapi: 0
   pathauto: 1
+  views: 10
   minimal: 1000
 theme:
   stark: 0

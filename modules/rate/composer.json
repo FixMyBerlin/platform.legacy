@@ -1,0 +1,9 @@
+{
+  "name": "drupal/rate",
+  "description": "Flexible voting options for content entity types.",
+  "type": "drupal-module",
+  "homepage": "https://www.drupal.org/project/rate",
+  "support": {
+    "issues": "https://www.drupal.org/project/issues/rate"
+  }
+}

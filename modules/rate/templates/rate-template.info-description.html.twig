@@ -1,0 +1,18 @@
+{#
+/**
+ * @file
+ * Default theme implementation for voting extra info display.
+ *
+ * Available variables:
+ * - info: Short text to display.
+ * - description: Longer descriptive info to display.
+ *
+ * @ingroup themeable
+ */
+#}
+{% if info %}
+  <div{{ info_attributes }}>{{ info }}</div>
+{% endif %}
+{% if description %}
+  <div{{ info_attributes }}>{{ description }}</div>
+{% endif %}

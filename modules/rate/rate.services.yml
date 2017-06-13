@@ -1,0 +1,10 @@
+services:
+  rate.entity.vote_widget:
+    class: Drupal\rate\RateEntityVoteWidget
+    arguments: ['@config.factory', '@entity_type.manager', '@current_user', '@plugin.manager.votingapi.resultfunction']
+  rate.bot_detector:
+    class: Drupal\rate\RateBotDetector
+    arguments: ['@config.factory', '@database', '@http_client', '@request_stack']
+  rate.vote:
+    class: Drupal\rate\RateVote
+    arguments: ['@entity_type.manager', '@plugin.manager.votingapi.resultfunction', '@database', '@rate.bot_detector', '@current_user']

@@ -1,0 +1,424 @@
+<?php
+
+/**
+ * @file
+ * Hook implementation code for the Rate module.
+ */
+
+use Drupal\Core\Access\AccessResult;
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
+use Drupal\Core\Url;
+use Drupal\Core\Link;
+use Drupal\Core\Session\AccountInterface;
+use Drupal\Core\Template\Attribute;
+
+// @Todo add closed and extra info.
+
+/**
+ * Implements hook_entity_extra_field_info().
+ */
+function rate_entity_extra_field_info() {
+  $extra = [];
+  $config = \Drupal::config('rate.settings');
+  $enabled_types_bundles = $config->get('enabled_types_bundles');
+  if (!empty($enabled_types_bundles)) {
+    foreach ($enabled_types_bundles as $entity_type_id => $bundles) {
+      foreach ($bundles as $bundle) {
+        $extra[$entity_type_id][$bundle]['display']['rate_vote_widget'] = array(
+          'label' => t('Rate Vote Widget'),
+          'description' => t('Displays the rate voting widget selected from the settings page.'),
+          'weight' => 100,
+          'visible' => TRUE,
+        );
+      }
+    }
+  }
+
+  return $extra;
+}
+
+/**
+ * Implements hook_entity_view_alter().
+ */
+function rate_entity_view(array &$build, EntityInterface $entity, EntityViewDisplayInterface $display, $view_mode) {
+  if ($display->getComponent('rate_vote_widget')) {
+    $vote_widget_service = \Drupal::service('rate.entity.vote_widget');
+    $vote_widget = $vote_widget_service->buildRateVotingWidget(
+      $entity->id(),
+      $entity->getEntityTypeId(),
+      $entity->bundle()
+    );
+    $build = array_merge($build, $vote_widget);
+  }
+}
+
+/**
+ * Implements hook_menu_local_tasks_alter().
+ *
+ * This unsets Voting Results tab for non-voting-enabled node types.
+ */
+function rate_menu_local_tasks_alter(&$data, $route_name) {
+  if (isset($data['tabs'][0]) && isset($data['tabs'][0]['entity.node.canonical'])) {
+    $node = Drupal::request()->attributes->get('node');
+    $config = \Drupal::config('rate.settings');
+    $enabled_types_bundles = $config->get('enabled_types_bundles');
+    if (!empty($enabled_types_bundles)) {
+      foreach ($enabled_types_bundles as $entity_type_id => $bundles) {
+        if ($entity_type_id !== 'node') {
+          continue;
+        }
+        if (!in_array($node->bundle(), $bundles)) {
+          unset($data['tabs'][0]['rate.results_page']);
+          break;
+        }
+      }
+    }
+    elseif (isset($data['tabs'][0]['rate.results_page'])) {
+      unset($data['tabs'][0]['rate.results_page']);
+    }
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function rate_theme($existing, $type, $theme, $path) {
+  return array(
+    // Templates for default widget types.
+    'rate_template_info_description' => array(
+      'variables' => [
+        'info' => '',
+        'description' => '',
+      ],
+      'template' => 'rate-template-info-description',
+    ),
+    'rate_template_thumbs_up' => array(
+      'variables' => [
+        'up_votes' => 0,
+        'use_ajax' => FALSE,
+        'can_vote' => FALSE,
+        'has_voted' => FALSE,
+        'entity_id' => NULL,
+        'entity_type_id' => NULL,
+      ],
+      'template' => 'rate-template-thumbs-up',
+    ),
+    'rate_template_thumbs_up_down' => array(
+      'variables' => [
+        'up_votes' => 0,
+        'down_votes' => 0,
+        'use_ajax' => FALSE,
+        'can_vote' => FALSE,
+        'has_voted' => FALSE,
+        'entity_id' => NULL,
+        'entity_type_id' => NULL,
+      ],
+      'template' => 'rate-template-thumbs-up-down',
+    ),
+    'rate_template_number_up_down' => [
+      'variables' => [
+        'up_votes' => 0,
+        'down_votes' => 0,
+        'use_ajax' => FALSE,
+        'can_vote' => FALSE,
+        'has_voted' => FALSE,
+        'entity_id' => NULL,
+        'entity_type_id' => NULL,
+      ],
+      'template' => 'rate-template-number-up-down',
+    ],
+    'rate_template_fivestar' => array(
+      'variables' => [
+        'star1_votes' => 0,
+        'star2_votes' => 0,
+        'star3_votes' => 0,
+        'star4_votes' => 0,
+        'star5_votes' => 0,
+        'use_ajax' => FALSE,
+        'can_vote' => FALSE,
+        'has_voted' => FALSE,
+        'entity_id' => NULL,
+        'entity_type_id' => NULL,
+      ],
+      'template' => 'rate-template-fivestar',
+    ),
+    'rate_template_yesno' => array(
+      'variables' => [
+        'up_votes' => 0,
+        'down_votes' => 0,
+        'use_ajax' => FALSE,
+        'can_vote' => FALSE,
+        'has_voted' => FALSE,
+        'entity_id' => NULL,
+        'entity_type_id' => NULL,
+      ],
+      'template' => 'rate-template-yesno',
+    ),
+  );
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for rate-template-number-up-down.html.twig.
+ */
+function template_preprocess_rate_template_number_up_down(&$variables) {
+  $vote_types = ['up', 'down'];
+  foreach ($vote_types as $vote_type) {
+    $variables[$vote_type . '_attributes'] = new Attribute();
+    $variables[$vote_type . '_attributes']['class'] = [];
+    $variables[$vote_type . '_attributes']['class'][] = 'rate-number-up-down-btn-' . $vote_type;
+
+    if ($variables['use_ajax'] && !$variables['has_voted'] && $variables['can_vote']) {
+      $variables[$vote_type . '_attributes']['class'][] = 'use-ajax';
+    }
+  }
+
+  $score = $variables['up_votes'] - $variables['down_votes'];
+  if ($score > 0) {
+    $score = '+' . $score;
+    $score_class = 'positive';
+  }
+  elseif ($score < 0) {
+    $score = $score;
+    $score_class = 'negative';
+  }
+  else {
+    $score_class = 'neutral';
+  }
+  $variables['score'] = $score;
+  $variables['score_attributes'] = new Attribute();
+  $variables['score_attributes']['class'] = [];
+  $variables['score_attributes']['class'][] = 'rate-number-up-down-rating';
+  $variables['score_attributes']['class'][] = $score_class;
+
+  _rate_set_common_theme_variables($variables);
+  _rate_get_undo_link($variables);
+  $variables['#attached']['library'][] = 'rate/number-up-down';
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for rate-template-fivestar.html.twig.
+ */
+function template_preprocess_rate_template_fivestar(&$variables) {
+  $variables['stars'] = [];
+
+  // Calculate the score.
+  $score = 0;
+  $total_votes = 0;
+  for ($counter = 1; $counter < 6; $counter++) {
+    $score += ($variables['star' . $counter . '_votes'] * $counter);
+    $total_votes += $variables['star' . $counter . '_votes'];
+  }
+  if ($score > 0 && $total_votes > 0) {
+    $score = round($score / $total_votes);
+  }
+
+  // Set up the links.
+  for ($counter = 1; $counter < 6; $counter++) {
+    $variables['stars'][$counter]['star_attributes'] = new Attribute();
+    $variables['stars'][$counter]['star_attributes']['class'] = [];
+
+    if ($counter <= $score) {
+      $variables['stars'][$counter]['star_attributes']['class'][] = 'rate-fivestar-btn-filled';
+    }
+    else {
+      $variables['stars'][$counter]['star_attributes']['class'][] = 'rate-fivestar-btn-empty';
+    }
+    $variables['stars'][$counter]['star_attributes']['class'][] = ' rate-fivestar-' . $counter;
+
+    if ($variables['use_ajax'] && !$variables['has_voted'] && $variables['can_vote']) {
+      $variables['stars'][$counter]['star_attributes']['class'][] = 'use-ajax';
+    }
+
+    $variables['stars'][$counter]['star_link'] = Url::fromRoute('rate.vote', [
+      'entity_type_id' => $variables['entity_type_id'],
+      'vote_type_id' => 'star' . $counter,
+      'entity_id' => $variables['entity_id'],
+      'destination' => drupal_get_destination()['destination'],
+    ]);
+  }
+
+  _rate_set_common_theme_variables($variables, FALSE);
+  _rate_get_undo_link($variables);
+  $variables['#attached']['library'][] = 'rate/fivestar';
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for rate-template-thumbs_up_down.html.twig.
+ */
+function template_preprocess_rate_template_thumbs_up_down(&$variables) {
+  $vote_types = ['up', 'down'];
+  foreach ($vote_types as $vote_type) {
+    $variables[$vote_type . '_li_attributes'] = new Attribute();
+    $variables[$vote_type . '_li_attributes']['class'] = [];
+    $variables[$vote_type . '_li_attributes']['class'] = 'thumb-' . $vote_type;
+
+    $variables[$vote_type . '_attributes'] = new Attribute();
+    $variables[$vote_type . '_attributes']['class'] = [];
+    $variables[$vote_type . '_attributes']['class'][] = 'rate-thumbs-up-down-btn-' . $vote_type;
+
+    if ($variables['use_ajax'] && !$variables['has_voted'] && $variables['can_vote']) {
+      $variables[$vote_type . '_attributes']['class'][] = 'use-ajax';
+    }
+  }
+
+  $variables['percent_attributes'] = new Attribute();
+  $variables['percent_attributes']['class'] = [];
+  $variables['percent_attributes']['class'][] = 'percent';
+
+  $total_votes = $variables['up_votes'] + $variables['down_votes'];
+  $variables['up_percent'] = round(($variables['up_votes'] / $total_votes) * 100);
+  $variables['down_percent'] = round(($variables['down_votes'] / $total_votes) * 100);
+
+  _rate_set_common_theme_variables($variables);
+  _rate_get_undo_link($variables);
+  $variables['#attached']['library'][] = 'rate/thumbs-up-down';
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for rate-template-thumbs_up.html.twig.
+ */
+function template_preprocess_rate_template_thumbs_up(&$variables) {
+  $variables['up_attributes'] = new Attribute();
+  $variables['up_attributes']['class'] = [];
+  $variables['up_attributes']['class'][] = 'rate-thumbs-up-btn-up';
+
+  if ($variables['use_ajax'] && !$variables['has_voted'] && $variables['can_vote']) {
+    $variables['up_attributes']['class'][] = 'use-ajax';
+  }
+  $variables['score_attributes'] = new Attribute();
+  $variables['score_attributes']['class'] = [];
+  $variables['score_attributes']['class'][] = 'rate-score';
+
+  _rate_set_common_theme_variables($variables);
+  _rate_get_undo_link($variables);
+  $variables['#attached']['library'][] = 'rate/thumbs-up';
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for rate-template-yes_no.html.twig.
+ */
+function template_preprocess_rate_template_yesno(&$variables) {
+  $vote_types = ['yes', 'no'];
+
+  foreach ($vote_types as $vote_type) {
+    $variables[$vote_type . '_li_attributes'] = new Attribute();
+    $variables[$vote_type . '_li_attributes']['class'] = [];
+    $variables[$vote_type . '_li_attributes']['class'][] = 'rate-' . $vote_type;
+
+    $variables[$vote_type . '_attributes'] = new Attribute();
+    $variables[$vote_type . '_attributes']['class'] = [];
+    $variables[$vote_type . '_attributes']['class'][] = 'rate-yesno-btn';
+    $variables[$vote_type . '_attributes']['class'][] = 'rate-' . $vote_type . '-btn';
+
+    if ($variables['use_ajax'] && !$variables['has_voted'] && $variables['can_vote']) {
+      $variables[$vote_type . '_attributes']['class'][] = 'use-ajax';
+    }
+  }
+
+  $variables['score_attributes'] = new Attribute();
+  $variables['score_attributes']['class'] = [];
+  $variables['score_attributes']['class'][] = 'rate-yesno-votes';
+
+  _rate_set_common_theme_variables($variables, TRUE, 'yes', 'no');
+  _rate_get_undo_link($variables);
+  $variables['#attached']['library'][] = 'rate/yesno';
+}
+
+/**
+ * Helper function to return an undo link.
+ */
+function _rate_get_undo_link(&$variables) {
+  $variables['undo'] = '';
+  $variables['undo_attributes'] = new Attribute();
+  $variables['undo_attributes']['class'] = [];
+  $variables['undo_attributes']['class'][] = 'rate-undo-vote';
+
+  $undo_link_class = 'rate-undo';
+  if ($variables['use_ajax']) {
+    $undo_link_class .= ' use-ajax';
+  }
+  if ($variables['has_voted']) {
+    $variables['undo'] = Link::fromTextAndUrl(
+      'Undo',
+      Url::fromRoute('rate.undo_vote', [
+        'entity_type_id' => $variables['entity_type_id'],
+        'entity_id' => $variables['entity_id'],
+        'destination' => drupal_get_destination()['destination'],
+      ], [
+        'attributes' => ['class' => $undo_link_class],
+      ])
+    );
+  }
+}
+
+/**
+ * Helper function to set common themeing variables.
+ */
+function _rate_set_common_theme_variables(&$variables, $generate_links = TRUE) {
+  if ($generate_links) {
+    $variables['up_url'] = Url::fromRoute('rate.vote', [
+      'entity_type_id' => $variables['entity_type_id'],
+      'vote_type_id' => 'up',
+      'entity_id' => $variables['entity_id'],
+      'destination' => drupal_get_destination()['destination'],
+    ]);
+
+    $variables['down_url'] = Url::fromRoute('rate.vote', [
+      'entity_type_id' => $variables['entity_type_id'],
+      'vote_type_id' => 'down',
+      'entity_id' => $variables['entity_id'],
+      'destination' => drupal_get_destination()['destination'],
+    ]);
+  }
+
+  $output['info_description'] = [
+    // @Todo: Add info and description to to settings form.
+    '#theme' => 'info_description',
+    '#info' => '',
+    '#description' => '',
+  ];
+  $variables['destination'] = drupal_get_destination()['destination'];
+
+  $variables['widget_attributes'] = new Attribute();
+  $variables['widget_attributes']['id'] = 'rate-' . $variables['entity_type_id'] . '-' . $variables['entity_id'];
+  $variables['widget_attributes']['class'] = [];
+  $class = str_ireplace('rate_template_', '', $variables['theme_hook_original']);
+  $variables['widget_attributes']['class'][] = 'rate-widget-' . str_ireplace('_', '-', $class);
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_access().
+ */
+function rate_vote_type_access(EntityInterface $vote_type, $operation, AccountInterface $account) {
+  // If the user has the 'view rate results page' permission, we grant 'view'
+  // access to all of the vote_type configuration entities defined
+  // by the Rate module.
+  $rate_types = [
+    'down',
+    'up',
+    'star1',
+    'star2',
+    'star3',
+    'star4',
+    'star5',
+  ];
+
+  // Allow users with the permission 'view rate results page' to view metadata
+  // about any of the vote types provided by this module.
+  if (in_array($vote_type->id(), $rate_types)) {
+    switch ($operation) {
+      case 'view':
+        return AccessResult::allowedIf($account->hasPermission('view rate results page'))
+          ->cachePerPermissions()
+          ->cachePerUser();
+        break;
+
+      default:
+        return AccessResult::neutral();
+    }
+  }
+  else {
+    return AccessResult::neutral();
+  }
+}

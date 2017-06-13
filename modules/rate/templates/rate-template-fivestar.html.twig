@@ -1,0 +1,33 @@
+{#
+/**
+ * @file
+ * Default theme implementation for fivestart voting display.
+ *
+* Available variables:
+ * - widget_attributes: Attributes for outer div.
+ * - stars: The images/text to display for voting.
+ * - undo: Link to undo placed vote.
+ * - undo_attributes: Attributes for undo div.
+ * - info_description: Extra textual info to display.
+ *
+ * @ingroup themeable
+ */
+#}
+<div{{ widget_attributes }}>
+  <div class="item-list">
+    <ul>
+      {% for index, star in stars %}
+        <li>
+          {% if has_voted or not can_vote %}
+            <div{{ star.star_attributes }}>{{ 'Star'|t }}</div>
+          {% else %}
+            <a {{ star.star_attributes }} href="{{ star.vote_url }}">{{ 'Star'|t }}</a>
+          {% endif %}
+        </li>
+      {% endfor %}
+    </ul>
+  {% if undo %}
+    <div{{ undo_attributes }}>{{ undo }}</div>
+  {% endif %}
+  {{ info_description }}
+</div>
