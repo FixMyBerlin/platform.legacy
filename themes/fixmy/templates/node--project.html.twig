@@ -10,7 +10,7 @@
 
   <script src="http://libs.cartocdn.com/cartodb.js/v3/3.15/cartodb.js"></script>
   <script>
-    var url = '{{ content.field_vis_url[0] }}';
+    var url = '{{ content.field_visualization_url[0] }}';
     window.onload = function() {
       cartodb.createVis('map', url, {
         shareable: false,
