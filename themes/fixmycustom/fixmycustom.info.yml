@@ -1,0 +1,20 @@
+core: 8.x
+type: theme
+
+name: 'Fix My Berlin Custom'
+description: 'Fix My Berlin Custom'
+
+libraries:
+  - 'fixmycustom/global-styling'
+  
+#base theme: classy
+
+regions:
+  header: Header
+  content: Content
+#  sidebar_first: 'Sidebar first'
+  footer: Footer
+  
+#stylesheets-remove:
+#  - '@classy/css/components/tabs.css'
+#  - core/assets/vendor/normalize-css/normalize.css
