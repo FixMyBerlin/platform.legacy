@@ -24,21 +24,6 @@
       });
     }
 
-          var obj = $("<a></a>").attr('href',"modal_forms/nojs/webform/2").addClass('ctools-use-modal-processed');
-          obj.unbind();
-          obj.click(Drupal.CTools.Modal.clickAjaxLink);
-          //obj.click();
-
-
-          var url  = 'modal_forms/nojs/webform/2';
-          var link = $("<a></a>").attr('href', url).addClass('ctools-use-modal-processed').click(Drupal.CTools.Modal.clickAjaxLink);
-          Drupal.ajax[url] = new Drupal.ajax(url, link.get(0), {
-            url: url,
-            event: 'click',
-            progress: { type: 'throbber'}
-          });
-          //link.click();
-          
   </script>
 
 </div>
@@ -50,7 +35,7 @@
 
     var is_map_overlay_visible=false;
     var is_map_overlay_blocked=false;
-    
+
     function mapOverlayToggle() {
         if (!is_map_overlay_blocked) {
             if (is_map_overlay_visible) {
@@ -63,9 +48,9 @@
         }
         is_map_overlay_blocked=false;
     }
-    
+
     var deblock_timer=null;
-    
+
     function mapOverlayBlock() {
         is_map_overlay_blocked=true;
         window.clearTimeout(deblock_timer);
@@ -79,43 +64,44 @@
 <div id="map_overlay_container" class="map_overlay_container_hidden">
 
     <div id="map_overlay_triangle"></div>
-    
+
     <div id="map_overlay_head">
         <h2 id="map_overlay_head_label">
             <span>Projekt #TS-011</span>
             <span>Neubau Radanlage</span>
-            <span>Status: in Planung</span>
+            <span>Status: {{ content.field_project_status }}</span>
         </h2>
         <h1 id="map_overlay_head_title">
-            Lückenschluss am Kottbusser Damm
+            {{ node.label }}
         </h1>
     </div>
-    
+
     <ul id="map_overlay_gallery">
-        <li style="background-image:url('http://radbahn.berlin/content/home/6-hotspot/rba_foto_6_hotspot_stimmung-1.jpg')"></li><!--
-        --><li style="background-image:url('http://radbahn.berlin/content/home/4-am-wasser/rba_foto_4_am-wasser_stimmung_web.jpg')"></li>
+        <!--li style="background-image:url('http://radbahn.berlin/content/home/6-hotspot/rba_foto_6_hotspot_stimmung-1.jpg')"></li>
+        <li style="background-image:url('http://radbahn.berlin/content/home/4-am-wasser/rba_foto_4_am-wasser_stimmung_web.jpg')"></li-->
+        {{ content.field_project_images }}
     </ul>
-    
+
     <div id="map_overlay_data">
-        
+
         <div class="map_overlay_title">Ziel dieser Maßnahme</div>
         <div class="map_overlay_content">Durch diese neue geschützte Radanlage wird eine fehlende Netzverbindung im Hauptstraßennetz geschlossen. <a>mehr dazu</a></div>
-    
+
         <div class="map_overlay_divide"><div></div><div></div></div>
-    
+
         <div class="map_overlay_title">Fakten zur Maßnahme</div>
         <div class="map_overlay_content">
             <span class="map_overlay_content_fact"><span>Bauzeit:</span> Vorrausichtlich Februar – Mai 2018</span>
             <span class="map_overlay_content_fact"><span>Kosten:</span> ca 30.000 €</span>
             <a>weitere Fakten</a>
         </div>
-        
+
         <div class="map_overlay_divide"><div></div><div></div></div>
-    
+
         <div class="map_overlay_title">Zahlen und Daten</div>
         <div class="map_overlay_bignumber">+20%</div>
         <div class="map_overlay_bignumber_label">mehr Radverkehr seit 2005</div>
-    
+
     </div>
 
 </div>

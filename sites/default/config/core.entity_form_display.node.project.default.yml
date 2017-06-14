@@ -4,6 +4,8 @@ status: true
 dependencies:
   config:
     - field.field.node.project.body
+    - field.field.node.project.field_project_images
+    - field.field.node.project.field_project_status
     - field.field.node.project.field_sharing_image
     - field.field.node.project.field_sharing_text
     - field.field.node.project.field_visualization_url
@@ -33,6 +35,23 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  field_project_images:
+    weight: 36
+    settings:
+      progress_indicator: throbber
+      preview_image_style: thumbnail
+    third_party_settings: {  }
+    type: image_image
+    region: content
+  field_project_status:
+    weight: 35
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
   field_sharing_image:
     weight: 34
     settings:

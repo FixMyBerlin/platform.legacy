@@ -5,8 +5,12 @@ dependencies:
   config:
     - field.field.user.user.field_user_first_name
     - field.field.user.user.field_user_gender
+    - field.field.user.user.field_user_image
     - field.field.user.user.field_user_last_name
+    - image.style.thumbnail
   module:
+    - image
+    - path
     - user
 id: user.user.default
 targetEntityType: user
@@ -31,6 +35,14 @@ content:
     settings: {  }
     third_party_settings: {  }
     type: options_select
+    region: content
+  field_user_image:
+    weight: 31
+    settings:
+      progress_indicator: throbber
+      preview_image_style: thumbnail
+    third_party_settings: {  }
+    type: image_image
     region: content
   field_user_last_name:
     weight: 3

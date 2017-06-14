@@ -1,0 +1,23 @@
+uuid: 573559b4-2bf9-4ca7-94b9-e1cc37b27978
+langcode: de
+status: true
+dependencies:
+  module:
+    - ctools
+    - taxonomy
+id: projects_status
+label: 'Projekte Status'
+type: 'canonical_entities:taxonomy_term'
+pattern: 'projekte/status/[term:name]'
+selection_criteria:
+  a955e1c0-0b17-4314-973a-8a2481a4caef:
+    id: 'entity_bundle:taxonomy_term'
+    bundles:
+      project_status: project_status
+    negate: false
+    context_mapping:
+      taxonomy_term: taxonomy_term
+    uuid: a955e1c0-0b17-4314-973a-8a2481a4caef
+selection_logic: and
+weight: -5
+relationships: {  }

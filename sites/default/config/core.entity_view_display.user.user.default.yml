@@ -5,8 +5,10 @@ dependencies:
   config:
     - field.field.user.user.field_user_first_name
     - field.field.user.user.field_user_gender
+    - field.field.user.user.field_user_image
     - field.field.user.user.field_user_last_name
   module:
+    - image
     - options
     - user
 id: user.user.default
@@ -28,6 +30,15 @@ content:
     settings: {  }
     third_party_settings: {  }
     type: list_default
+    region: content
+  field_user_image:
+    weight: 4
+    label: above
+    settings:
+      image_style: ''
+      image_link: ''
+    third_party_settings: {  }
+    type: image
     region: content
   field_user_last_name:
     weight: 3
