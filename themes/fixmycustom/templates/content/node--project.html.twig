@@ -20,6 +20,7 @@
         center_lon: 13.409779,
         zoom: 13
       }).done(function(vis, layers) {
+        vis.getNativeMap().addControl(L.control.zoom());
         vis.getNativeMap().on('click', function(e){
         });
       });
