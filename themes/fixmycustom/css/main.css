@@ -107,6 +107,13 @@ a {
     margin-right: 20px;
 }
 
+#logo_beta {
+    position: absolute;
+    left:40px;
+    top: 30px;
+    width: 60px;
+}
+
 /*
 #logo_hamburger_container {
     position: relative;
@@ -145,13 +152,14 @@ a {
 
 /* fullscreen navigation ———————————————————————————————————————————————————————————————————————————————— */
 
+/*
 .page-node-type-project #logo_hamburger div {
     background-color: white;
 }
 
 .page-node-type-project #logo_container {
     background: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0));
-}
+}*/
 
 
 /* page ————————————————————————————————————————————————————————————————————————————————————————————————— */
@@ -160,7 +168,7 @@ a {
     position: relative;
     width:100%;
     height: auto;
-    overflow: hidden;
+  /*  overflow: hidden;*/
     padding-top: 40px;
     padding-bottom: 40px;
 }
@@ -218,7 +226,52 @@ a {
     padding-bottom: 0px;
 }
 
+#page_content .rate-widget-thumbs-up-down {
+    display: none;
+}
+
 /* map ————————————————————————————————————————————————————————————————————————————————————————————————— */
+
+#menu_button {
+    position: absolute;
+    right: 40px;
+    top:40px;
+    z-index: 18;
+    color: #F8AE00;
+}
+
+#menu_button_label {
+    position: relative;
+    float: left;
+    font-weight: bold;
+    padding-right: 18px;
+    padding-top: 5px;
+}
+
+.menu_button_hud #menu_button_label {
+    text-shadow: 0px 0px 40px rgba(0,0,0,0.9);
+}
+
+#menu_button_circle {
+    position: relative;
+    float: left;
+    width:36px;
+    height: 36px;
+    border: 2px solid #F8AE00;
+    text-align: center;
+    border-radius: 50%;
+    font-family: 'Roboto Slab', serif;
+    font-weight: bold;
+    font-size: 28px;
+}
+
+#menu_button_circle div {
+    position: absolute;
+    left:0px;
+    width:100%;
+    top: -3px;
+}
+
 
 #map_container {
     position: fixed;
@@ -427,4 +480,85 @@ a {
     width:100%;
     text-align: center;
     font-weight: bold;
+}
+
+/* carto override  ————————————————————————————————————————————————————————————————————————————————————————————————— */
+
+.leaflet-bottom, .leaflet-top {
+    position: static !important;
+    top: auto !important;
+    left:auto !important;
+}
+
+.leaflet-control-zoom {
+    left:18px;
+    bottom:50px;
+    position: absolute !important;
+}
+
+.leaflet-control-zoom , .loader, .cartodb-layer-selector-box, .cartodb-dropdown {
+    box-shadow: 0px 0px 20px rgba(0,0,0,0.25) !important;
+    border-radius: 0px !important;
+    margin: 0px !important;
+    border: 0px none !important;
+}
+
+.leaflet-bar {
+    border-radius: 0px !important;
+}
+
+.leaflet-bar a {
+    border-radius: 0px !important;
+    width:28px !important;
+    height: 28px !important;
+}
+
+.cartodb-tiles-loader {
+    left:18px;
+    bottom:125px;
+    position: absolute !important;
+    margin: 0px !important;
+}
+
+.loader {
+    border: 0px none !important;
+    border-radius: 0px !important;
+}
+
+.leaflet-control-attribution {
+    bottom: 0px !important;
+    right:0px !important;
+    position: absolute !important;
+    padding: 15px !important;
+    padding-left: 18px !important;
+    padding-right: 18px !important;
+    background-color: transparent !important;
+    text-shadow: 0px 0px 25px rgba(0,0,0,0.7);
+    color: white !important;
+    font-weight: bold;
+}
+
+.leaflet-control-attribution a {
+    color: inherit !important;
+}
+
+.cartodb-layer-selector-box {
+    left: 18px !important;
+    top: 173px !important;
+    position: absolute !important;
+    margin: 0px !important;
+    width: 160px !important;
+}
+
+.cartodb-dropdown {
+    left:0px !important;
+  /*  display: block !important;*/
+}
+
+.tail {
+    display: none;
+}
+
+.cartodb-dropdown {
+    top: 47px !important; 
 }
