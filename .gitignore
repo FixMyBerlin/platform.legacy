@@ -11,8 +11,6 @@ sites/*/settings.local.php
 #   $settings['container_yamls'][] = __DIR__ . '/services.local.yml';
 sites/*/services.local.yml
 
-# ignore vendor
-vendor/*
 
 # ** Only works in OSs that support newer versions of fnmatch (Bash 4+)
 /sites/default/**/files
