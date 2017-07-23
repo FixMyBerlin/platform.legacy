@@ -1,0 +1,49 @@
+{#
+/**
+ * @file
+ * Default theme implementation for yes/no voting display.
+ *
+ * Available variables:
+ * - widget_attributes: Attributes for outer div.
+ * - yes_li_attributes: Attributes for yes li.
+ * - yes_attributes: Attributes for yes div or link.
+ * - up_votes: Number of up/yes votes.
+ * - up_url: Url to vote yes/up.
+ * - no_li_attributes: Attributes for no li.
+ * - no_attributes: Attributes for no div or link.
+ * - score_attributes: Attributes for vote total div.
+ * - down_votes: Number of down/no votes.
+ * - down_url: Url to vote no/down.
+ * - undo: Link to undo placed vote.
+ * - undo_attributes: Attributes for undo div.
+ * - info_description: Extra textual info to display.
+ *
+ * @ingroup themeable
+ */
+#}
+<div{{ widget_attributes }}>
+  <div class="item-list">
+    <ul>
+      <li{{ yes_li_attributes }}>
+        {% if (has_voted or not can_vote) %}
+          <div{{ yes_attributes }}>{{ 'Yes'|t }}</div>
+        {% else %}
+          <a {{ yes_attributes }} href="{{ up_url }}">{{ 'Yes'|t }}</a>
+        {% endif %}
+        <div{{ score_attributes }}>{{ up_votes }}</div>
+      </li>
+      <li{{ no_li_attributes }}>
+        {% if (has_voted or not can_vote) %}
+          <div{{ no_attributes }}>{{ 'No'|t }}</div>
+        {% else %}
+          <a {{ no_attributes }} href="{{ down_url }}">{{ 'No'|t }}</a>
+        {% endif %}
+        <div {{ score_attributes }}>{{ down_votes }}</div>
+      </li>
+    </ul>
+  </div>
+  {% if undo %}
+    <div{{ undo_attributes }}>{{ undo }}</div>
+  {% endif %}
+  {{ info_description }}
+</div>

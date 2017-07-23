@@ -25,5 +25,13 @@ content:
   links:
     weight: 100
     region: content
+  rate_vote_widget:
+    weight: 100
+    region: content
 hidden:
+  field_project_images: true
+  field_project_status: true
+  field_sharing_image: true
+  field_sharing_text: true
+  field_visualization_url: true
   langcode: true

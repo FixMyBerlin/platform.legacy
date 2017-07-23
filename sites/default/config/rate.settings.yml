@@ -4,9 +4,8 @@ _core:
 langcode: de
 enabled_types_bundles:
   node:
-    - page
     - project
-widget_type: thumbs_up_down
+widget_type: yesno
 bot_minute_threshold: '0'
 bot_hour_threshold: '0'
 botscout_key: ''

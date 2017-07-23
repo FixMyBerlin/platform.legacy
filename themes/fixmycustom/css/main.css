@@ -8,8 +8,8 @@ b, u, i, center,
 dl, dt, dd, ol, ul, li,
 fieldset, form, label, legend,
 table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed, 
-figure, figcaption, footer, header, hgroup, 
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
 menu, nav, output, ruby, section, summary,
 time, mark, audio, video {
     margin: 0;
@@ -21,7 +21,7 @@ time, mark, audio, video {
 }
 
 /* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure, 
+article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
     display: block;
 }
@@ -52,18 +52,18 @@ body {
     background-color: white;
     color: black;
     cursor: default;
-    -webkit-user-select: text; 
-    -moz-user-select: text; 
-    -ms-user-select: text; 
+    -webkit-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
     user-select: text;
     line-height: 1.5;
     font-weight: 300;
     min-height:100%;
     height: 100%;
     width: 100%;
-    
+
   /*  font-family: 'Roboto Slab', serif;*/
-    
+
 }
 
 ::selection {
@@ -92,9 +92,9 @@ a {
     height: auto;
     overflow: hidden;
     z-index: 10;
-    
+
     height: 174px;
-    
+
     pointer-events: none;
 }
 
@@ -226,10 +226,6 @@ a {
     padding-bottom: 0px;
 }
 
-#page_content .rate-widget-thumbs-up-down {
-    display: none;
-}
-
 /* map ————————————————————————————————————————————————————————————————————————————————————————————————— */
 
 #menu_button {
@@ -311,14 +307,14 @@ a {
     position: absolute;
     top:calc( 50% - 20px );
     left: -40px;
-        
-    width: 0; 
-    height: 0; 
+
+    width: 0;
+    height: 0;
     border-top: 40px solid transparent;
     border-bottom: 40px solid transparent;
-      
+
     border-right: 40px solid white;
-      
+
 }
 
 #map_overlay_head {
@@ -385,7 +381,7 @@ a {
   /*  background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;*/
-    
+
 }
 
 #map_overlay_data {
@@ -444,7 +440,7 @@ a {
     position: relative;
     width:100%;
     height: 1px;
-    overflow: hidden;    
+    overflow: hidden;
     margin-top: 10px;
     margin-bottom: 10px;
 }
@@ -560,5 +556,5 @@ a {
 }
 
 .cartodb-dropdown {
-    top: 47px !important; 
+    top: 47px !important;
 }
