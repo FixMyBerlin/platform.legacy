@@ -3,7 +3,6 @@ sites/*/files
 sites/*/private
 files/*
 
-# Pantheon commits a settings.php for environment-specific settings.
 # Place local settings in settings.local.php
 sites/*/settings.local.php
 
@@ -11,6 +10,7 @@ sites/*/settings.local.php
 # to use this file add the following to your settings.local.php file:
 #   $settings['container_yamls'][] = __DIR__ . '/services.local.yml';
 sites/*/services.local.yml
+
 
 # ** Only works in OSs that support newer versions of fnmatch (Bash 4+)
 /sites/default/**/files

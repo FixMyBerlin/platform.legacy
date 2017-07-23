@@ -1,0 +1,17 @@
+name: Rate
+description: 'Flexible voting options for content entity types'
+# core: 8.x
+package: Voting
+dependencies:
+  - votingapi
+# project: rate
+type: module
+configure: rate.admin_settings
+# version: '8.x-1.0-alpha1'
+# core: '8.x'
+
+# Information added by Drupal.org packaging script on 2017-01-13
+version: '8.x-1.x-dev'
+core: '8.x'
+project: 'rate'
+datestamp: 1484328491

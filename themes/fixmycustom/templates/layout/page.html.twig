@@ -1,0 +1,45 @@
+<header>
+    <div id="logo_container">
+            <img id="logo_image" src="/themes/fixmycustom/logo.png">
+                <img id="logo_beta" src="/themes/fixmycustom/beta.png">
+            <!--<div id="logo_hamburger_container">-->
+           <!--     <div id="logo_hamburger">
+                    <div></div> <div></div> <div></div>
+                </div>--
+            <!--</div>-->
+    </div>
+</header>
+
+ {% if node.getType!="project" %}
+
+<div id="menu_button">
+    <a href="/">
+        <div id="menu_button_label">Zur Karte</div>
+        <div id="menu_button_circle"><div>i</div></div>
+    </a>
+</div>
+
+ {% endif %}
+  
+
+
+<article id="page_container">
+
+        <h1 id="page_head">FixMyBerlin</h2>
+
+
+    <!--
+      <div class="">
+        {% if page.primary_menu %}
+          {{ page.primary_menu }}
+        {% endif %}
+      </div>
+    -->
+
+
+
+
+        {{ page.content }}
+
+
+</article>

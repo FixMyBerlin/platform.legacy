@@ -1,0 +1,22 @@
+uuid: 26318197-38a3-4e7f-a154-265d246f3654
+langcode: de
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - fixmycustom
+_core:
+  default_config_hash: 9RnnTUBcn0WRWXfrGOnId2H0Q31uQUeu_F5TnDxl2yg
+id: fixmycustom_messages
+theme: fixmycustom
+region: header
+weight: -6
+provider: null
+plugin: system_messages_block
+settings:
+  id: system_messages_block
+  label: Status-Nachrichten
+  provider: system
+  label_display: '0'
+visibility: {  }

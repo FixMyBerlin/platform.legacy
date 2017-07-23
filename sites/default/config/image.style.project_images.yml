@@ -1,0 +1,14 @@
+uuid: 42685f82-a034-4228-a596-d8d5360b36a9
+langcode: de
+status: true
+dependencies: {  }
+name: project_images
+label: 'Projekt Bilder'
+effects:
+  babfd411-11d6-4c96-97f0-94944cb14515:
+    uuid: babfd411-11d6-4c96-97f0-94944cb14515
+    id: image_resize
+    weight: 1
+    data:
+      width: 300
+      height: 200

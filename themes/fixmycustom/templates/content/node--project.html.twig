@@ -1,0 +1,117 @@
+
+<div id="menu_button" class="menu_button_hud">
+    <a href="/ueber-uns">
+        <div id="menu_button_label">Über uns</div>
+        <div id="menu_button_circle"><div>i</div></div>
+    </a>
+</div>
+
+<div id="map_container" onclick="mapOverlayToggle()"  onmousemove="mapOverlayBlock()">
+
+  <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/3.15/themes/css/cartodb.css" />
+
+  <div id="map"></div>
+
+  <script src="http://libs.cartocdn.com/cartodb.js/v3/3.15/cartodb.js"></script>
+  <script>
+    var url = '{{ content.field_visualization_url[0] }}';
+    window.onload = function() {
+      cartodb.createVis('map', url, {
+        shareable: false,
+        title: false,
+        description: true,
+        layer_selector: true,
+        search: false,
+        carto_logo: false,
+        fullscreen: true,
+        center_lat: 52.520645,
+        center_lon: 13.409779,
+        zoom: 13
+      }).done(function(vis, layers) {
+        vis.getNativeMap().addControl(L.control.zoom());
+        vis.getNativeMap().on('click', function(e){
+        });
+      });
+    }
+
+  </script>
+
+</div>
+
+
+
+
+<script>
+
+    var is_map_overlay_visible=false;
+    var is_map_overlay_blocked=false;
+
+    function mapOverlayToggle() {
+        if (!is_map_overlay_blocked) {
+            if (is_map_overlay_visible) {
+                is_map_overlay_visible=false;
+                document.getElementById("map_overlay_container").className="map_overlay_container_hidden";
+            } else {
+                is_map_overlay_visible=true;
+                document.getElementById("map_overlay_container").className="";
+            }
+        }
+        is_map_overlay_blocked=false;
+    }
+
+    var deblock_timer=null;
+
+    function mapOverlayBlock() {
+        is_map_overlay_blocked=true;
+        window.clearTimeout(deblock_timer);
+        deblock_timer=window.setTimeout("is_map_overlay_blocked=false", 100);
+
+    }
+
+</script>
+
+
+<div id="map_overlay_container" class="map_overlay_container_hidden">
+
+    <div id="map_overlay_triangle"></div>
+
+    <div id="map_overlay_head">
+        <h2 id="map_overlay_head_label">
+            <span>Projekt #TS-011</span>
+            <span>Neubau Radanlage</span>
+            <span>Status: {{ content.field_project_status }}</span>
+        </h2>
+        <h1 id="map_overlay_head_title">
+            {{ node.label }}
+        </h1>
+    </div>
+
+    <ul id="map_overlay_gallery">
+        <!--li style="background-image:url('http://radbahn.berlin/content/home/6-hotspot/rba_foto_6_hotspot_stimmung-1.jpg')"></li>
+        <li style="background-image:url('http://radbahn.berlin/content/home/4-am-wasser/rba_foto_4_am-wasser_stimmung_web.jpg')"></li-->
+        {{ content.field_project_images }}
+    </ul>
+
+    <div id="map_overlay_data">
+
+        <div class="map_overlay_title">Ziel dieser Maßnahme</div>
+        <div class="map_overlay_content">Durch diese neue geschützte Radanlage wird eine fehlende Netzverbindung im Hauptstraßennetz geschlossen. <a>mehr dazu</a></div>
+
+        <div class="map_overlay_divide"><div></div><div></div></div>
+
+        <div class="map_overlay_title">Fakten zur Maßnahme</div>
+        <div class="map_overlay_content">
+            <span class="map_overlay_content_fact"><span>Bauzeit:</span> Vorrausichtlich Februar – Mai 2018</span>
+            <span class="map_overlay_content_fact"><span>Kosten:</span> ca 30.000 €</span>
+            <a>weitere Fakten</a>
+        </div>
+
+        <div class="map_overlay_divide"><div></div><div></div></div>
+
+        <div class="map_overlay_title">Zahlen und Daten</div>
+        <div class="map_overlay_bignumber">+20%</div>
+        <div class="map_overlay_bignumber_label">mehr Radverkehr seit 2005</div>
+
+    </div>
+
+</div>

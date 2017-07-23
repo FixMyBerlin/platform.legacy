@@ -1,0 +1,22 @@
+uuid: 535d5076-61f9-4239-8e96-01a22df730c2
+langcode: de
+status: false
+dependencies:
+  module:
+    - system
+  theme:
+    - fixmycustom
+_core:
+  default_config_hash: iggZSiUKz4mYP1YPJ8SsUfFu79HIgOTt6IDy3Up59aM
+id: fixmycustom_powered
+theme: fixmycustom
+region: header
+weight: -5
+provider: null
+plugin: system_powered_by_block
+settings:
+  id: system_powered_by_block
+  label: 'Powered by Drupal'
+  provider: system
+  label_display: '0'
+visibility: {  }

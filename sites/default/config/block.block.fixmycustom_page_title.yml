@@ -1,0 +1,20 @@
+uuid: c7b87025-c73f-4416-a058-54d9d15e4999
+langcode: de
+status: true
+dependencies:
+  theme:
+    - fixmycustom
+_core:
+  default_config_hash: 1TQP4b3ZnlzvIH9bj6cpCz_SyUHdJjLQkZnHpikjjhw
+id: fixmycustom_page_title
+theme: fixmycustom
+region: header
+weight: 0
+provider: null
+plugin: page_title_block
+settings:
+  id: page_title_block
+  label: Seitentitel
+  provider: core
+  label_display: '0'
+visibility: {  }

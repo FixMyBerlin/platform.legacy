@@ -1,0 +1,48 @@
+{#
+/**
+ * @file
+ * Default theme implementation for thumbs up/down voting display.
+ *
+ * Available variables:
+ * - widget_attributes: Attributes for outer div.
+ * - has_voted: Boolean if user has voted.
+ * - up_li_attributes: Attributes for the up li.
+ * - up_attributes: Attributes for the up div or link.
+ * - up_url: Url to vote up.
+ * - up_percent: Score of up votes.
+ * - percent_attributes: Attributes for the percent display div.
+ * - down_percent: Score of down votes.
+ * - down_li_attributes: Attributes for the down li.
+ * - down_url: Url to vote Down.
+ * - down_attributes: Attributes for down div or link.
+ * - undo: Link to undo placed vote.
+ * - undo_attributes: Attributes for undo div.
+ * - info_description: Extra textual info to display.
+ *
+ * @ingroup themeable
+ */
+#}
+<div{{ widget_attributes }}>
+  <ul>
+    <li{{ up_li_attributes }}>
+      {% if has_voted or not can_vote %}
+        <div{{ up_attributes }}>{{ 'Up'|t }}</div>
+      {% else %}
+        <a {{ up_attributes }} href="{{ up_url }}">{{ 'Up'|t }}</a>
+      {% endif %}
+      <div{{ percent_attributes }}>{{ up_percent }}%</div>
+    </li>
+    <li{{ down_li_attributes }}>
+      {% if has_voted %}
+        <div{{ down_attributes }}>{{ 'Down'|t }}</div>
+      {% else %}
+        <a {{ down_attributes }} href="{{ down_url }}">{{ 'Down'|t }}</a>
+      {% endif %}
+      <div{{ percent_attributes }}>{{ down_percent }}%</div>
+    </li>
+  </ul>
+  {% if undo %}
+    <div{{ undo_attributes }}>{{ undo }}</div>
+  {% endif %}
+  {{ info_description }}
+</div>

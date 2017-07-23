@@ -1,0 +1,10 @@
+uuid: 803bc410-f733-4b89-a282-08f21dff26d5
+langcode: de
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: LO_gjrlut9F13VpGAGUu0IKAy_TkiI_CueedBJouH8w
+id: star3
+label: 'Three stars'
+value_type: points
+description: 'Fivestar voting - 3 stars.'

@@ -1,0 +1,20 @@
+uuid: ddea3c20-e2e3-4153-955f-5a853d318940
+langcode: de
+status: true
+dependencies:
+  theme:
+    - fixmycustom
+_core:
+  default_config_hash: ffxthelqQF8xcr4GTG4HlaNNsluiHftN0pujmQpW0bQ
+id: fixmycustom_local_actions
+theme: fixmycustom
+region: header
+weight: -6
+provider: null
+plugin: local_actions_block
+settings:
+  id: local_actions_block
+  label: 'Primäre Admin-Aktionen'
+  provider: core
+  label_display: '0'
+visibility: {  }

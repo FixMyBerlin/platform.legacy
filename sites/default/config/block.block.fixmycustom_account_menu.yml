@@ -1,0 +1,26 @@
+uuid: d8652281-3332-410d-952b-82de8f7acdac
+langcode: de
+status: false
+dependencies:
+  config:
+    - system.menu.account
+  module:
+    - system
+  theme:
+    - fixmycustom
+_core:
+  default_config_hash: R2K_qX0ZUMbUL6ie_-S9tZVjvqmlWKlscikgeRv9vhw
+id: fixmycustom_account_menu
+theme: fixmycustom
+region: header
+weight: -3
+provider: null
+plugin: 'system_menu_block:account'
+settings:
+  id: 'system_menu_block:account'
+  label: Benutzermenü
+  provider: system
+  label_display: '0'
+  level: 1
+  depth: 2
+visibility: {  }

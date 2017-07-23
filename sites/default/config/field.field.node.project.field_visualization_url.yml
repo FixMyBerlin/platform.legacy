@@ -1,0 +1,21 @@
+uuid: 4745c532-11ff-49cd-b89d-0347cdee451c
+langcode: de
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_visualization_url
+    - node.type.project
+id: node.project.field_visualization_url
+field_name: field_visualization_url
+entity_type: node
+bundle: project
+label: Visualisierungs-URL
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 'https://hejco.carto.com/api/v2/viz/4bc7b2e4-4536-11e7-b199-0e3ff518bd15/viz.json'
+default_value_callback: ''
+settings: {  }
+field_type: string

@@ -1,0 +1,30 @@
+uuid: f0ed6377-e0cb-4449-98b7-a579d9c95d7d
+langcode: de
+status: true
+dependencies:
+  module:
+    - options
+    - user
+id: user.field_user_gender
+field_name: field_user_gender
+entity_type: user
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: f
+      label: Frau
+    -
+      value: m
+      label: Herr
+    -
+      value: o
+      label: Hallo
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

@@ -1,0 +1,81 @@
+uuid: f1d6e6a5-8d87-453f-98bb-8b822f632d37
+langcode: de
+status: true
+dependencies:
+  config:
+    - field.field.node.project.body
+    - field.field.node.project.field_project_images
+    - field.field.node.project.field_project_status
+    - field.field.node.project.field_sharing_image
+    - field.field.node.project.field_sharing_text
+    - field.field.node.project.field_visualization_url
+    - node.type.project
+  module:
+    - image
+    - text
+    - user
+id: node.project.default
+targetEntityType: node
+bundle: project
+mode: default
+content:
+  body:
+    label: hidden
+    type: text_default
+    weight: 101
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  field_project_images:
+    weight: 106
+    label: hidden
+    settings:
+      image_style: project_images
+      image_link: ''
+    third_party_settings: {  }
+    type: image
+    region: content
+  field_project_status:
+    weight: 105
+    label: hidden
+    settings:
+      link: false
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_sharing_image:
+    weight: 104
+    label: above
+    settings:
+      image_style: ''
+      image_link: ''
+    third_party_settings: {  }
+    type: image
+    region: content
+  field_sharing_text:
+    weight: 103
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  field_visualization_url:
+    weight: 102
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  links:
+    weight: 100
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  rate_vote_widget:
+    weight: 100
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  langcode: true

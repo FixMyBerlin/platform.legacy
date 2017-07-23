@@ -1,0 +1,7 @@
+rate.settings:
+  type: config_object
+  label: 'Rate settings'
+  mapping:
+    use_ajax:
+      type: boolean
+      label: 'Use AJAX'

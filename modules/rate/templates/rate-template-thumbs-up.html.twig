@@ -1,0 +1,33 @@
+{#
+/**
+ * @file
+ * Default theme implementation for up/down voting display.
+ *
+ * Available variables:
+ * - widget_attributes: Attributes for outer div.
+ * - has_voted: Boolean if user has voted.
+ * - up_attributes: Attributes for up div or link.
+ * - up_url: Url for an up vote.
+ * - score_attributes: Attributes for score display div.
+ * - up_votes: Number of up votes.
+ * - undo: Link to undo placed vote.
+ * - undo_attributes: Attributes for undo div.
+ * - info_description: Extra textual info to display.
+ *
+ * @ingroup themeable
+ */
+#}
+<div{{ widget_attributes }}>
+  {% if has_voted or not can_vote %}
+    <div{{up_attributes}}>{{ 'Up'|t }}</div>
+  {% else %}
+    <a {{ up_attributes }} href="{{ up_url }}">{{ 'Up'|t }}</a>
+  {% endif %}
+  <div{{ score_attributes }}>
+    {{ up_votes }}
+  </div>
+  {% if undo %}
+    <div{{ undo_attributes }}>{{ undo }}</div>
+  {% endif %}
+  {{ info_description }}
+</div>

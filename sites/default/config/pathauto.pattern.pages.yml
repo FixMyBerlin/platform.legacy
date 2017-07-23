@@ -1,0 +1,22 @@
+uuid: 824faecb-2949-4741-8845-102b2cb1008b
+langcode: de
+status: true
+dependencies:
+  module:
+    - node
+id: pages
+label: Seiten
+type: 'canonical_entities:node'
+pattern: '[node:title]'
+selection_criteria:
+  04093ae7-5db0-4fe6-95ef-e0a14d07eff6:
+    id: node_type
+    bundles:
+      page: page
+    negate: false
+    context_mapping:
+      node: node
+    uuid: 04093ae7-5db0-4fe6-95ef-e0a14d07eff6
+selection_logic: and
+weight: -5
+relationships: {  }

@@ -1,0 +1,10 @@
+uuid: 66b2c0f2-1d55-4300-bb3b-fe772964ea3e
+langcode: de
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: TgfDeNpE2oGpOrxLTd7_MeKS5F5GUDiZ5Xez6Xir59k
+id: star4
+label: 'Four stars'
+value_type: points
+description: 'Fivestar voting - 4 stars.'

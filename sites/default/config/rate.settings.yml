@@ -1,0 +1,12 @@
+use_ajax: true
+_core:
+  default_config_hash: 1kY_ibjpKYrLZZWifcrYumCcksc1NQ5dElTWUvaUGfg
+langcode: de
+enabled_types_bundles:
+  node:
+    - page
+    - project
+widget_type: thumbs_up_down
+bot_minute_threshold: '0'
+bot_hour_threshold: '0'
+botscout_key: ''
