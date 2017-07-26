@@ -367,10 +367,15 @@ a {
     box-sizing: border-box;
 }
 
-#map_overlay_gallery li, #map_overlay_gallery img {
+#map_overlay_gallery div {
+   display: inline-block; 
+}
+
+/*#map_overlay_gallery li, */#map_overlay_gallery img {
     position: relative;
     display: inline-block;
-    width:80%;
+  /*  width:80%;*/
+    height: auto;
  /*   height: calc( 100% - 20px );*/
  /*   background-color: rgb(245,245,245);*/
     margin: 0px;
@@ -558,3 +563,70 @@ a {
 .cartodb-dropdown {
     top: 47px !important;
 }
+
+/* splashscreen ——————————————————————————————————————————————————————————————— */
+
+#splashscreen {
+    position: fixed;
+    left:0px;
+    top:0px;
+    height: 100%;
+    width:100%;
+    z-index: 999999999;
+    background-color: rgba(0,0,20,0.5);
+}
+
+#splashscreen_container {
+    position: absolute;
+    left:80px;
+    right:80px;
+    top:80px;
+    bottom: 80px;
+    height: auto;
+    width: auto;
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color:rgba(255,255,255,0.9);
+    color: black;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+#splashscreen_logo {
+    position: relative;
+    width:100px;
+    left:calc( 50% - 50px );
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+#splashscreen_text {
+    position: relative;
+    width:100%;
+    box-sizing: border-box;
+    padding-left: 80px;
+    padding-right:80px;
+    font-size: 20px;
+    font-family: 'Roboto Slab', serif;
+    padding-top: 11px;
+    padding-bottom: 13px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

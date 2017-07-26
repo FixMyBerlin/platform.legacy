@@ -6,6 +6,19 @@
     </a>
 </div>
 
+
+<section id="splashscreen" onclick="this.style.display='none';">
+    <div id="splashscreen_container">
+        <img id="splashscreen_logo" src="/themes/fixmycustom/logo.png">
+        <div id="splashscreen_text">
+            <strong>Wie sieht Berlin aus, wenn wir überall mit dem Fahrrad sicher und entspannt unterwegs sein können? Wie können wir dieses Ziel miteinander am schnellsten erreichen?</strong><br>
+            <br>
+            FixMyBerlin ist in der Entwicklung. Die Karte zeigt zunächst die vorhandenen Radverkehrsanlagen in Berlin, so wie sie von der Senatsverwaltung zur Verfügung gestellt werden. Dazu werden die Unfallschwerpunkte der letzten 2 Jahre abgebildet. (Dank an Stefan Wehrmeyer) Die Plattform soll zukünftig Radverkehrsplanungen des Senates und der Bezirke übersichtlich abbilden und verschiedene Feedback- und Beteiligungsmöglichkeiten bieten. Für aktuelle Informationen abonniert unseren Newsletter. Kontakt für Feedback und Anregungen.
+        </div>
+    </div>
+</section>
+
+
 <div id="map_container" onclick="mapOverlayToggle()"  onmousemove="mapOverlayBlock()">
 
   <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/3.15/themes/css/cartodb.css" />
@@ -28,11 +41,27 @@
         center_lon: 13.409779,
         zoom: 13
       }).done(function(vis, layers) {
+        //layers[0].setInteraction(true);
+        console.log(layers);
+
         vis.getNativeMap().addControl(L.control.zoom());
         vis.getNativeMap().on('click', function(e){
+            console.log("click");
+        });
+        vis.getNativeMap().on('featureClick', function(e, latlng, pos, data) {
+          //  console.log("Hey! You clicked " + data.cartodb_id);
+                      console.log("featureclick");
+
         });
       });
     }
+    
+    
+    
+    
+    
+    
+    
 
   </script>
 
