@@ -1,0 +1,8 @@
+<?php
+function fixmycustom_preprocess_node(&$variables) {
+  $block = \Drupal\block\Entity\Block::load('simplenewsabonnement');
+  $block_content = \Drupal::entityTypeManager()
+  ->getViewBuilder('block')
+  ->view($block);
+  $variables['block_simple_newsletter'] = $block_content;
+}
