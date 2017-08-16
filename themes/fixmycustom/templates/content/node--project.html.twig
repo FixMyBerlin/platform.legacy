@@ -28,7 +28,91 @@
   <div id="map"></div>
 
   <script src="http://libs.cartocdn.com/cartodb.js/v3/3.15/cartodb.js"></script>
+  <style type="text/css" id="berliner_bezirke">
+    #layer {
+      polygon-fill: ramp([spatial_name], (#5F4690, #a0d9f1, #38A6A5, #0F8554, #73AF48, #EDAD08, #f49a2f, #CC503E, #94346E, #6F4070, #666666), ("01", "02", "03", "04", "05", "06", "07", "08", "09", "10"), "=");
+      polygon-opacity: 0.0;
+      line-width: 3;
+      line-color: #e7abab;
+      line-opacity: 0.7;
+
+    #XHain [spatial_name='02']{
+      polygon-fill: #a0d9f1;
+      polygon-opacity: 0.3;
+      line-width: 3;
+      line-color: #a3a3a3;
+      }
+    #Pank [spatial_name='03']{
+      polygon-fill: #e7ce90;
+      polygon-opacity: 0.1;
+      line-width: 3;
+      line-color: #a3a3a3;
+      }
+      #Span [spatial_name='05']{
+      polygon-fill: #e7ce90;
+      polygon-opacity: 0.1;
+      line-width: 3;
+      line-color: #a3a3a3;
+        }
+     #TS [spatial_name='07']{
+      polygon-fill: #e7ce90;
+      polygon-opacity: 0.1;
+      line-width: 3;
+      line-color: #a3a3a3;
+      }
+    }
+  </style>
+  <style type="text/css" id="radverkehrsprojekte">
+    #layer {
+      line-width: 7;
+      line-color: ramp([art_d_feedback], (#cd38c6, #641d96, #df98e8), ("Feedback", "Like", "Review"), "=");
+    }
+  </style>
   <script>
+    var map = new L.Map('map', {
+      center: [52.520645, 13.409779],
+      zoom: 13,
+    });
+
+    L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
+        attribution: 'Positron'
+      }).addTo(map);
+
+    // Layer Bezirke
+    cartodb.createLayer(map, {
+        user_name: 'hejco',
+        type: 'cartodb',
+        sublayers: [{
+          sql: "SELECT * FROM berliner_bezirke",
+          cartocss: $('#berliner_bezirke').html(),
+        }]
+      })
+      .addTo(map);
+
+    // Layer XBerg Maßnahmen
+    cartodb.createLayer(map, {
+        user_name: 'hejco',
+        type: 'cartodb',
+        sublayers: [{
+          sql: "SELECT * FROM radverkehrsprojekte_friedrichshainkreuzberg WHERE do_import='1'",
+          cartocss: $('#radverkehrsprojekte').html(),
+          interactivity: "cartodb_id, uuid",
+        }]
+      })
+      .addTo(map)
+      .on('done', function(layer) {
+        layer.setInteraction(true);
+        layer.on('featureOver', function(e, latlng, pos, data) {
+          console.log(data);
+        })
+        .on('error', function(data) {
+          alert("error: " + data);
+        });
+      })
+      .on('error', function(data) {
+        alert("error: " + data);
+      });
+    /*
     var url = '{{ content.field_visualization_url[0] }}';
     window.onload = function() {
       cartodb.createVis('map', url, {
@@ -42,35 +126,29 @@
         center_lat: 52.520645,
         center_lon: 13.409779,
         zoom: 13
-      }).done(function(vis, layers) {
-        //layers[0].setInteraction(true);
-        console.log(layers);
+      }).on('done', function(vis, layers) {
 
+        // add zoom controls
         vis.getNativeMap().addControl(L.control.zoom());
-        vis.getNativeMap().on('click', function(e){
-            console.log("click");
-        });
-        vis.getNativeMap().on('featureClick', function(e, latlng, pos, data) {
-          //  console.log("Hey! You clicked " + data.cartodb_id);
-                      console.log("featureclick");
+        console.log(layers[1].getSubLayer(1).infowindow.attributes.fields["0"].name);
 
+        //
+        layers[1].setInteraction(true);
+        layers[1].on('featureClick', function(e, latlng, pos, data) {
+          var sql_query_url = "https://hejco.carto.com/api/v2/sql?q=SELECT * FROM berlin_bike_accident_spots_2016 WHERE cartodb_id=" + data.cartodb_id;
+          $.getJSON(sql_query_url, function(data) {
+            $.each(data.rows, function(key, val) {
+            });
+          });
         });
+      })
+      .on('error', function(e){
+        console.log('error: ' + e);
       });
     }
-
-
-
-
-
-
-
-
+    */
   </script>
-
 </div>
-
-
-
 
 <script>
 
