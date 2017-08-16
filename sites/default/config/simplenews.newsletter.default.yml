@@ -1,0 +1,19 @@
+uuid: 32578b0b-4b83-473f-832b-d895d4cfc588
+langcode: de
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: hj6zGNwndnW_J6lKfFcg-tY5e5YqWfgXyt0qioGtXL8
+name: FixMyBerlin
+id: default
+description: 'This is an example newsletter. Change it.'
+format: plain
+priority: 0
+receipt: true
+from_name: FixMyBerlin
+subject: '[[simplenews-newsletter:name]] [node:title]'
+from_address: hello@fixmyberlin.de
+hyperlinks: false
+new_account: 'on'
+opt_inout: double
+weight: 0

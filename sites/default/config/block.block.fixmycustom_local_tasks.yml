@@ -9,7 +9,7 @@ _core:
 id: fixmycustom_local_tasks
 theme: fixmycustom
 region: header
-weight: -6
+weight: -3
 provider: null
 plugin: local_tasks_block
 settings:

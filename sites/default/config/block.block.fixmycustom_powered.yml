@@ -11,7 +11,7 @@ _core:
 id: fixmycustom_powered
 theme: fixmycustom
 region: header
-weight: -5
+weight: 1
 provider: null
 plugin: system_powered_by_block
 settings:

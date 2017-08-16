@@ -1,0 +1,25 @@
+uuid: a66e08d8-a0e6-42c9-a66c-35577acd159f
+langcode: de
+status: true
+dependencies:
+  config:
+    - field.storage.simplenews_subscriber.subscriptions
+  module:
+    - simplenews
+_core:
+  default_config_hash: '-FGoXJQMTtfhnYhAdYmmB815lFLwEn09sI0nyn2EbKM'
+id: simplenews_subscriber.simplenews_subscriber.subscriptions
+field_name: subscriptions
+entity_type: simplenews_subscriber
+bundle: simplenews_subscriber
+label: Abonnements
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:simplenews_newsletter'
+  handler_settings:
+    target_bundles: null
+field_type: simplenews_subscription

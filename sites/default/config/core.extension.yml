@@ -29,15 +29,18 @@ module:
   rest: 0
   restui: 0
   serialization: 0
+  simplenews: 0
   system: 0
   taxonomy: 0
   text: 0
   token: 0
   toolbar: 0
+  twig_tweak: 0
   update: 0
   user: 0
   votingapi: 0
   pathauto: 1
+  views: 10
   minimal: 1000
 theme:
   stark: 0

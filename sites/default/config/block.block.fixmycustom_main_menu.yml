@@ -13,7 +13,7 @@ _core:
 id: fixmycustom_main_menu
 theme: fixmycustom
 region: header
-weight: -6
+weight: -5
 provider: null
 plugin: 'system_menu_block:main'
 settings:

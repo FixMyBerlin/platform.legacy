@@ -1,0 +1,30 @@
+uuid: 549df5f8-b482-459b-8180-98fd4d795985
+langcode: de
+status: true
+dependencies:
+  module:
+    - simplenews
+    - system
+  theme:
+    - fixmycustom
+id: simplenewsabonnement
+theme: fixmycustom
+region: content
+weight: -5
+provider: null
+plugin: simplenews_subscription_block
+settings:
+  id: simplenews_subscription_block
+  label: 'FixMyBerlin Newsletter'
+  provider: simplenews
+  label_display: visible
+  newsletters:
+    default: default
+  message: 'Deine E-Mail-Adresse'
+  unique_id: fixmyberlin_newsletter_subscription
+visibility:
+  request_path:
+    id: request_path
+    pages: ''
+    negate: true
+    context_mapping: {  }

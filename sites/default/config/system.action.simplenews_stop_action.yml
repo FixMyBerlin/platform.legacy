@@ -1,0 +1,13 @@
+uuid: 47c76361-ff57-42bc-824b-dd30bc75e3d5
+langcode: de
+status: true
+dependencies:
+  module:
+    - simplenews
+_core:
+  default_config_hash: 03Ao5qcJ1Dn0biP58cSBcKu_JNkpvt9n8tHLi5SToJ4
+id: simplenews_stop_action
+label: 'Stop sending'
+type: node
+plugin: simplenews_stop_action
+configuration: {  }

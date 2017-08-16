@@ -9,7 +9,7 @@ _core:
 id: fixmycustom_local_actions
 theme: fixmycustom
 region: header
-weight: -6
+weight: -4
 provider: null
 plugin: local_actions_block
 settings:

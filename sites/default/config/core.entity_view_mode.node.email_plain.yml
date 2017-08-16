@@ -1,0 +1,15 @@
+uuid: ebc0f164-4f4b-4df8-9ce6-feea503e6046
+langcode: de
+status: false
+dependencies:
+  enforced:
+    module:
+      - simplenews
+  module:
+    - node
+_core:
+  default_config_hash: rCDGCl6pMFu6zZuErLQggKvmawfFDysFcZNCDL72U4M
+id: node.email_plain
+label: 'E-Mail: Nur-Text'
+targetEntityType: node
+cache: true
