@@ -5,7 +5,7 @@ window.onload = function () {
 
 function load() {
 
-    if ($("map_overlay_bignumber_slider")) { // große nummern initialiseren
+    if ($$("map_overlay_bignumber_slider")) { // große nummern initialiseren
         bignumberInit();
     }    
     
@@ -25,7 +25,7 @@ function bignumberStep() {
 
     console.log("step");
     
-    $("map_overlay_bignumber_slider").style.transform="translate3d(-"+(current_big_number_index*25)+"%,0px,0)";
+    $$("map_overlay_bignumber_slider").style.transform="translate3d(-"+(current_big_number_index*25)+"%,0px,0)";
 
     current_big_number_index++;
     if (current_big_number_index>=4) {
@@ -54,7 +54,7 @@ function votingExtend(element) {
        // alert(current_voting_type);   
        
         // voting container extenden
-        $("map_overlay_voting").className="map_overlay_voting_extended";
+        $$("map_overlay_voting").className="map_overlay_voting_extended";
        
         // voting container ausblenden und verschieben
         var voting_container_elements=document.getElementsByClassName("map_overlay_voting_container");
@@ -68,12 +68,12 @@ function votingExtend(element) {
         }
         
         // feedback container einblenden
-        $("map_overlay_voting_feedback").style.display="flex";
-        window.setTimeout('$("map_overlay_voting_feedback").style.opacity=1;',0);
+        $$("map_overlay_voting_feedback").style.display="flex";
+        window.setTimeout('$$("map_overlay_voting_feedback").style.opacity=1;',0);
         
         // richtige überschrift anzeigen
-        $("map_overlay_voting_feedback_title_"+current_voting_type).style.display="block";
-        $("map_overlay_voting_feedback_field").placeholder=$("map_overlay_voting_feedback_placeholder_"+current_voting_type).innerText;
+        $$("map_overlay_voting_feedback_title_"+current_voting_type).style.display="block";
+        $$("map_overlay_voting_feedback_field").placeholder=$$("map_overlay_voting_feedback_placeholder_"+current_voting_type).innerText;
         
         is_voting_extended=true;
     
@@ -84,7 +84,7 @@ function votingExtend(element) {
 function votingCollapse() {
 
     // voting container schrumpfen
-    $("map_overlay_voting").className="";
+    $$("map_overlay_voting").className="";
        
     // voting container anzeigen und verschieben
     var voting_container_elements=document.getElementsByClassName("map_overlay_voting_container");
@@ -94,8 +94,8 @@ function votingCollapse() {
     }
     
     // feedback container ausblenden
-    $("map_overlay_voting_feedback").style.opacity=0;
-    window.setTimeout('$("map_overlay_voting_feedback").style.display="none";',200);
+    $$("map_overlay_voting_feedback").style.opacity=0;
+    window.setTimeout('$$("map_overlay_voting_feedback").style.display="none";',200);
     
     is_voting_extended=false;
 
@@ -108,7 +108,7 @@ function zufall(a,b) {
     return Math.floor(Math.random()*(b-a+1))+a;
 }
 
-function $(id) {
+function $$(id) {
     return document.getElementById(id);
 }
 
