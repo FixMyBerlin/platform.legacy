@@ -245,23 +245,50 @@
         <div class="map_overlay_divide"><div></div><div></div></div>
 
         <div class="map_overlay_title">Zahlen und Daten</div>
-        <div class="map_overlay_bignumber">+20%</div>
-        <div class="map_overlay_bignumber_label">mehr Radverkehr seit 2005</div>
+        <div id="map_overlay_bignumber_slider">
+            <div class="map_overlay_bignumber_element">
+                <div class="map_overlay_bignumber">+20%</div>
+                <div class="map_overlay_bignumber_label">mehr Radverkehr seit 2005</div>
+            </div>
+            <div class="map_overlay_bignumber_element">
+                <div class="map_overlay_bignumber">-15%</div>
+                <div class="map_overlay_bignumber_label">weniger Feinstaub (Ziel bis 2019)</div>
+            </div>
+            <div class="map_overlay_bignumber_element">
+                <div class="map_overlay_bignumber">-30%</div>
+                <div class="map_overlay_bignumber_label">weniger schwere Unfälle (Ziel bis 2018)</div>
+            </div>
+            <div class="map_overlay_bignumber_element">
+                <div class="map_overlay_bignumber">-17%</div>
+                <div class="map_overlay_bignumber_label">weniger Lärm für die Anwohner</div>
+            </div>
+        </div>
 
     </div>
-
     <div id="map_overlay_voting">
-        <div class="map_overlay_voting_container" id="map_overlay_voting_container_gut">
+        <div class="map_overlay_voting_container" id="map_overlay_voting_container_gut" onclick="votingAction(this);">
             <div class="map_overlay_voting_icon"></div>
             <div class="map_overlay_voting_description">Find ich gut!</div>
         </div>
-        <div class="map_overlay_voting_container" id="map_overlay_voting_container_gut_aber">
+        <div class="map_overlay_voting_container" id="map_overlay_voting_container_gut_aber" onclick="votingAction(this);">
             <div class="map_overlay_voting_icon"></div>
             <div class="map_overlay_voting_description">Gut, aber</div>
         </div>
-        <div class="map_overlay_voting_container" id="map_overlay_voting_container_gefallt_mir_nicht">
+        <div class="map_overlay_voting_container" id="map_overlay_voting_container_gefallt_mir_nicht" onclick="votingAction(this);">
             <div class="map_overlay_voting_icon"></div>
             <div class="map_overlay_voting_description">Gefällt mir nicht!</div>
+        </div>
+        <div id="map_overlay_voting_feedback">
+            <div id="map_overlay_voting_feedback_title">
+                <div class="map_overlay_voting_feedback_title_element" id="map_overlay_voting_feedback_title_gut_aber">Was stört euch an dieser Maßnahme?</div>
+                <div class="map_overlay_voting_feedback_title_element" id="map_overlay_voting_feedback_title_gefallt_mir_nicht">Was könnte an dieser Maßnahme noch verbessert werden?</div>
+            </div>
+            <div id="map_overlay_voting_feedback_placeholder">
+                <div id="map_overlay_voting_feedback_placeholder_gut_aber">Schreibt uns eure Einwände</div>
+                <div id="map_overlay_voting_feedback_placeholder_gefallt_mir_nicht">Schreibt uns eure Anregungen</div>
+            </div>
+            <textarea id="map_overlay_voting_feedback_field"></textarea>
+            <div id="map_overlay_voting_feedback_send"><div>Abschicken</div></div>
         </div>
     </div>
 

@@ -297,8 +297,8 @@ a {
     box-shadow: 0px 0px 60px rgba(0,0,0,0.5);
     font-size: 14px;
     transition: transform 0.3s;
-    overflow-x: hidden;
-    overflow-y: auto;
+ /*   overflow-x: hidden;
+    overflow-y: auto;*/
 }
 
 .map_overlay_container_hidden {
@@ -373,8 +373,8 @@ a {
     padding-left: 10px;
     padding-right: 10px;
     margin-top: 10px;
-  /*  overflow-x: auto;
-    overflow-y: hidden;*/
+    overflow-x: auto;
+    overflow-y: hidden;
     box-sizing: border-box;
     
     width: calc( 100% + 40px );
@@ -489,6 +489,20 @@ a {
     background: linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,1));
 }
 
+#map_overlay_bignumber_slider {
+    position: relative;
+    width:400%;
+    height: auto;
+    overflow: hidden;
+    transition: transform 1.5s;
+}
+
+.map_overlay_bignumber_element {
+    position: relative;
+    float: left;
+    width:25%;
+}
+
 .map_overlay_bignumber {
     position: relative;
     width:100%;
@@ -515,13 +529,24 @@ a {
     position: absolute;
     left:0px;
     bottom: 0px;
+    transition: height 0.2s;
+}
+
+.map_overlay_voting_extended {
+    height: calc( 50% - 60px ) !important;
 }
 
 .map_overlay_voting_container {
-    position: relative;
-    float: left;
+    position: absolute;
+    top:0px;
     width:33.333333%;
     height: 100%;
+    transition: left 0.2s, opacity 0.2s, transform 0.4s;
+}
+
+.map_overlay_voting_container:active {
+    transform: translate3d(0px,-5px,0);
+    transition: left 0.2s, opacity 0.2s, transform 0.1s;
 }
 
 .map_overlay_voting_icon {
@@ -541,6 +566,18 @@ a {
     background-repeat: no-repeat;
     background-position: center center;
     transition: transform 0.4s;
+}
+
+#map_overlay_voting_container_gut {
+    left:0px;
+}
+
+#map_overlay_voting_container_gut_aber {
+    left:33.333333%;
+}
+
+#map_overlay_voting_container_gefallt_mir_nicht {
+    left:66.666666%;
 }
 
 #map_overlay_voting_container_gut_aber .map_overlay_voting_icon {
@@ -567,10 +604,107 @@ a {
     position: absolute;
     width: 100%;
     text-align: center;
-    bottom: 15px;
+    top: 80px;
     left:0px;
     color: white;
     font-weight: bold;
+}
+
+#map_overlay_voting_feedback {
+    position: absolute;
+    right:0px;
+    width:66.666666%;
+    top: 0px;
+    height: 100%;
+    display: none;
+    opacity: 0;
+    transition: opacity 0.2s;
+    padding-right: 20px;
+    box-sizing: border-box;
+    
+   /* display: flex; */
+    flex-direction: column;
+
+}
+
+#map_overlay_voting_feedback_title {
+    position: relative;
+    width:100%;
+    height: auto;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    font-weight: bold;
+}
+
+.map_overlay_voting_feedback_title_element {
+    display: none;
+}
+
+#map_overlay_voting_feedback_placeholder {
+    display: none;
+}
+
+#map_overlay_voting_feedback_field {
+    position: relative;
+    width:100%;
+
+    height: auto;
+    padding: 0px;
+    margin: 0px;
+    font:inherit;
+    background-color: transparent;
+    border: 0px none;
+    outline: 0px none;
+    resize:none;
+    
+    margin-bottom: 20px;
+    padding-left: 20px;
+    box-sizing: border-box;
+    box-shadow: inset 1px 0px 0px rgba(0,0,0,0.1);
+    
+    flex-grow: 1; 
+}
+
+#map_overlay_voting_feedback_field::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+    color: rgba(0,0,0,0.3);
+}
+#map_overlay_voting_feedback_field:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color: rgba(0,0,0,0.3);
+    opacity:  1;
+}
+#map_overlay_voting_feedback_field::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color: rgba(0,0,0,0.3);
+    opacity:  1;
+}
+#map_overlay_voting_feedback_field:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: rgba(0,0,0,0.3);
+}
+#map_overlay_voting_feedback_field::-ms-input-placeholder { /* Microsoft Edge */
+    color: rgba(0,0,0,0.3);
+}
+
+#map_overlay_voting_feedback_send {
+    position: relative;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+#map_overlay_voting_feedback_send div {
+    position: relative;
+    display: inline-block;
+    border: 2px solid black;
+    color:black;
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-weight: bold;
+    transition: backgrounnd-color 0.2s, color 0.2s;
+    cursor: pointer;
+}
+
+#map_overlay_voting_feedback_send div:hover {
+    background-color: black;
+    color: rgb(250,220,165);
 }
 
 /* carto override  ————————————————————————————————————————————————————————————————————————————————————————————————— */
