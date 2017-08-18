@@ -7,18 +7,35 @@
 </div>
 
 
-<section id="splashscreen" onclick="this.style.display='none';">
+<section id="splashscreen">
+    <div id="splashscreen_back" onclick="this.parentNode.style.display='none';"></div>
     <div id="splashscreen_container">
-        <img id="splashscreen_logo" src="/themes/fixmycustom/logo.png">
         <div id="splashscreen_text">
-            <strong>Wie sieht Berlin aus, wenn wir überall mit dem Fahrrad sicher und entspannt unterwegs sein können? Wie können wir dieses Ziel miteinander am schnellsten erreichen?</strong><br>
+            <div id="splashscreen_text_statement">Wie sieht Berlin aus, wenn wir überall mit dem Fahrrad sicher und entspannt unterwegs sein können? Wie können wir dieses Ziel miteinander am schnellsten erreichen?</div>
             <br>
-            FixMyBerlin ist in der Entwicklung. Die Karte zeigt zunächst die vorhandenen Radverkehrsanlagen in Berlin, so wie sie von der Senatsverwaltung zur Verfügung gestellt werden. Dazu werden die Unfallschwerpunkte der letzten 2 Jahre abgebildet. (Dank an Stefan Wehrmeyer) Die Plattform soll zukünftig Radverkehrsplanungen des Senates und der Bezirke übersichtlich abbilden und verschiedene Feedback- und Beteiligungsmöglichkeiten bieten. Für aktuelle Informationen abonniert unseren Newsletter. Kontakt für Feedback und Anregungen.
-            <br /><br />
+            FixMyBerlin ist in der Entwicklung. Die Karte zeigt zunächst die vorhandenen Radverkehrsanlagen in Berlin, so wie sie von der Senatsverwaltung zur Verfügung gestellt werden. Dazu werden die Unfallschwerpunkte der letzten 2 Jahre abgebildet. (Dank an Stefan Wehrmeyer) Die Plattform soll zukünftig Radverkehrsplanungen des Senates und der Bezirke übersichtlich abbilden und verschiedene Feedback- und Beteiligungsmöglichkeiten bieten. Für aktuelle Informationen abonniert unseren Newsletter. <a>Kontakt</a> für Feedback und Anregungen.
+            <input type="email" id="splashscreen_newsletter_email" placeholder="Deine E-Mail Adresse"> 
+            <div id="splashscreen_newsletter_email_button">Newsletter abonnieren</div>
+            <!--<br /><br />-->
             {{ block_simple_newsletter }}
         </div>
+        <img id="splashscreen_logo" src="/themes/fixmycustom/logo.png">
     </div>
 </section>
+
+<script type="text/javascript">
+    
+    var current_timestamp=Date.now();
+    
+    var last_saved_timestamp=localStorage.getItem("splashscreen_timestamp");
+    
+    if ( last_saved_timestamp==null || current_timestamp-last_saved_timestamp > 1 * 24 * 60 * 60 * 1000  ) { // 1 min
+        localStorage.setItem("splashscreen_timestamp",current_timestamp);
+        document.getElementById("splashscreen").style.display="block";
+    }    
+    
+</script>
+
 
 
 <div id="map_container" onclick="mapOverlayToggle()"  onmousemove="mapOverlayBlock()">
@@ -186,22 +203,25 @@
 
     <div id="map_overlay_head">
         <h2 id="map_overlay_head_label">
-            <span>Projekt #TS-011</span>
-            <span>Neubau Radanlage</span>
-            <span>Status: {{ content.field_project_status }}</span>
+            Projekt #TS-011<br>
+            Neubau Radanlage
+            {{ content.field_project_status }}
         </h2>
-        <h1 id="map_overlay_head_title">
-            {{ node.label }}
-            {{ content.votingapi_links }}
-        </h1>
     </div>
-
-    <ul id="map_overlay_gallery">
-        {{ content.field_project_images }}
-    </ul>
 
     <div id="map_overlay_data">
 
+        <ul id="map_overlay_gallery">
+            {{ content.field_project_images }}
+        </ul>
+    
+        <h1 id="map_overlay_head_title">
+            {{ node.label }}
+            <div style="display:none;">
+           {{ content.votingapi_links }}
+           </div>
+        </h1>
+        
         <div class="map_overlay_title">Ziel dieser Maßnahme</div>
         <div class="map_overlay_content">Durch diese neue geschützte Radanlage wird eine fehlende Netzverbindung im Hauptstraßennetz geschlossen. <a>mehr dazu</a></div>
 
@@ -220,6 +240,21 @@
         <div class="map_overlay_bignumber">+20%</div>
         <div class="map_overlay_bignumber_label">mehr Radverkehr seit 2005</div>
 
+    </div>
+    
+    <div id="map_overlay_voting">
+        <div class="map_overlay_voting_container" id="map_overlay_voting_container_gut">
+            <div class="map_overlay_voting_icon"></div>
+            <div class="map_overlay_voting_description">Find ich gut!</div>
+        </div>
+        <div class="map_overlay_voting_container" id="map_overlay_voting_container_gut_aber">
+            <div class="map_overlay_voting_icon"></div>
+            <div class="map_overlay_voting_description">Gut, aber</div>
+        </div>
+        <div class="map_overlay_voting_container" id="map_overlay_voting_container_gefallt_mir_nicht">
+            <div class="map_overlay_voting_icon"></div>
+            <div class="map_overlay_voting_description">Gefällt mir nicht!</div>
+        </div>
     </div>
 
 </div>

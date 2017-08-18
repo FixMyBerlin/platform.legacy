@@ -297,6 +297,8 @@ a {
     box-shadow: 0px 0px 60px rgba(0,0,0,0.5);
     font-size: 14px;
     transition: transform 0.3s;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 
 .map_overlay_container_hidden {
@@ -327,6 +329,12 @@ a {
     font-weight: bold;
     padding-top: 10px;
     padding-bottom: 10px;
+    
+    position: absolute;
+    left:0px;
+    top:0px;
+    height: 51px;
+    width:100%;
 }
 
 #map_overlay_head_label {
@@ -346,12 +354,15 @@ a {
 }
 
 #map_overlay_head_title {
+    position: relative;
     font-size: 24px;
     width:100%;
-    padding: 20px;
+    /*padding: 20px;*/
     padding-top: 1px;
-    padding-bottom: 1px;
+    padding-bottom: 2px;
     box-sizing: border-box;
+    font-weight: bold;
+    font-family: 'Roboto Slab', serif;
 }
 
 #map_overlay_gallery {
@@ -362,9 +373,12 @@ a {
     padding-left: 10px;
     padding-right: 10px;
     margin-top: 10px;
-    overflow-x: auto;
-    overflow-y: hidden;
+  /*  overflow-x: auto;
+    overflow-y: hidden;*/
     box-sizing: border-box;
+    
+    width: calc( 100% + 40px );
+    margin-left: -20px;
 }
 
 #map_overlay_gallery div {
@@ -397,6 +411,14 @@ a {
     overflow: hidden;
     padding-left: 20px;
     padding-right: 20px;
+    
+    position: absolute;
+    top:71px;
+    bottom: 114px;
+    height: auto;
+    width:100%;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 
 .map_overlay_title {
@@ -480,6 +502,74 @@ a {
     position: relative;
     width:100%;
     text-align: center;
+    font-weight: bold;
+    padding-bottom: 24px;
+}
+
+#map_overlay_voting {
+    position: relative;
+    width:100%;
+    height: 114px;
+    background-color: rgb(250,220,165);
+    
+    position: absolute;
+    left:0px;
+    bottom: 0px;
+}
+
+.map_overlay_voting_container {
+    position: relative;
+    float: left;
+    width:33.333333%;
+    height: 100%;
+}
+
+.map_overlay_voting_icon {
+    position: absolute;
+    width:50px;
+    height: 50px;
+    left:0px;
+    right: 0px;
+    top:20px; 
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 50%;
+  /*  box-shadow: 0px 0px 20px rgba(0,0,0,0.2);*/
+    background-image: url('../images/like.png');
+    background-size: 70% 70%;
+    background-color: white;
+    background-repeat: no-repeat;
+    background-position: center center;
+    transition: transform 0.4s;
+}
+
+#map_overlay_voting_container_gut_aber .map_overlay_voting_icon {
+    transform: rotateZ(45deg);
+}
+
+#map_overlay_voting_container_gefallt_mir_nicht .map_overlay_voting_icon {
+    transform: rotateZ(180deg);
+}
+
+#map_overlay_voting_container_gut:hover .map_overlay_voting_icon {
+    transform: scale(1.15) rotateZ(20deg);
+}
+
+#map_overlay_voting_container_gut_aber:hover .map_overlay_voting_icon {
+    transform: scale(1.15) rotateZ(45deg);
+}
+
+#map_overlay_voting_container_gefallt_mir_nicht:hover .map_overlay_voting_icon {
+    transform: scale(1.15) rotateZ(200deg);
+}
+
+.map_overlay_voting_description {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    bottom: 15px;
+    left:0px;
+    color: white;
     font-weight: bold;
 }
 
@@ -573,6 +663,27 @@ a {
     height: 100%;
     width:100%;
     z-index: 999999999;
+    display: none;
+}
+
+#splashscreen a {
+    box-shadow: 0px 1px 0px black;
+    padding-bottom: 2px;
+    cursor: pointer;
+    transition: color 0.2s, box-shadow 0.2s;
+}
+
+#splashscreen a:hover {
+    color: rgba(0,0,0,0.5);
+    box-shadow: 0px 1px 0px rgba(0,0,0,0.5);
+}
+
+#splashscreen_back {
+    position: absolute;
+    left:0px;
+    top:0px;
+    width:100%;
+    height: 100%;
     background-color: rgba(0,0,20,0.5);
 }
 
@@ -585,41 +696,111 @@ a {
     height: auto;
     width: auto;
     max-width: 1000px;
+    max-height: 500px;
     margin-left: auto;
     margin-right: auto;
+    margin-top: auto;
+    margin-bottom: auto;
     background-color:rgba(255,255,255,0.9);
     color: black;
     padding-top: 20px;
     padding-bottom: 20px;
+}
+
+#splashscreen_logo {
+    position: absolute;
+    height:140px;
+    left:0px;
+    right:0px;
+    margin-left: auto;
+    margin-right: auto;
+  /*  left:calc( 50% - 50px );*/
+    top:-40px;
+}
+
+#splashscreen_text {
+    position: absolute;
+    width:100%;
+    height: 100%;
+    top:0px;
+    left:0px;
+    box-sizing: border-box;
+    padding-left: 80px;
+    padding-right:80px;
+    font-size: 18px;
+    font-family: 'Roboto Slab', serif;
+    padding-top: 11px;
+    /*padding-bottom: 13px;*/
+    
+    padding-top: 130px;
+    
     overflow-x: hidden;
     overflow-y: auto;
 }
 
-#splashscreen_logo {
-    position: relative;
-    width:100px;
-    left:calc( 50% - 50px );
-    margin-top: 20px;
-    margin-bottom: 20px;
-}
-
-#splashscreen_text {
-    position: relative;
-    width:100%;
-    box-sizing: border-box;
-    padding-left: 80px;
-    padding-right:80px;
+#splashscreen_text_statement {
     font-size: 20px;
-    font-family: 'Roboto Slab', serif;
-    padding-top: 11px;
-    padding-bottom: 13px;
+    font-weight: bold;
 }
 
+#splashscreen_newsletter_email {
+    position: relative;
+    float: left;
+    display: block;
+    padding: 0px;
+    margin: 0px;
+    font: inherit;
+    background-color: transparent;
+    outline: 0px none;
+    border: 0px none;
+    padding: 10px;
+    padding-left: 0px;
+    padding-right: 15px;
+    font-family: 'Roboto', sans-serif;
+    /*border: 1px solid #F8AE00;*/
+    color: #F8AE00;
+    border-right: 0px none;
+    margin-top: 34px;
+    margin-bottom: 80px;
+    width: calc( 100% - 300px );
+    box-sizing: border-box;
+    font-weight: bold;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    padding-bottom: 9px;
+    transition: padding-bottom 0.2s, border-bottom 0.2s;
+}
 
+#splashscreen_newsletter_email:hover, #splashscreen_newsletter_email:focus {
+    border-bottom: 3px solid #F8AE00 !important;
+    padding-bottom: 7px !important;
+}
 
+#splashscreen_newsletter_email_button {
+    position: relative;
+    float: left;
+    margin-top: 34px;
+    margin-bottom: 80px;
+  /*  border: 1px solid #F8AE00;*/
+    padding: 10px;
+    text-align: center;
+    width: 300px;
+    box-sizing: border-box;
+    background-color: #F8AE00;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.2s, border-color 0.2s, color 0.2s;
+}
 
+#splashscreen_newsletter_email_button:hover {
+   /* background-color: #D69702;*/
+   /* border-color: #D69702;*/
+}
 
-
+#splashscreen_newsletter_email_button:active {
+    color: rgba(255,255,255,0.8);
+    background-color: #D69702;
+   /* border-color: #D69702;*/
+}
 
 
 
