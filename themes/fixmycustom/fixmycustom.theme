@@ -1,8 +1,29 @@
 <?php
 function fixmycustom_preprocess_node(&$variables) {
-  $block = \Drupal\block\Entity\Block::load('simplenewsabonnement');
-  $block_content = \Drupal::entityTypeManager()
-  ->getViewBuilder('block')
-  ->view($block);
-  $variables['block_simple_newsletter'] = $block_content;
+  if($variables['node']->getType() == 'project'){
+
+    // add block for newsletter subscription
+    $block = \Drupal\block\Entity\Block::load('simplenewsabonnement');
+    $block_content = \Drupal::entityTypeManager()
+    ->getViewBuilder('block')
+    ->view($block);
+    $variables['block_simple_newsletter'] = $block_content;
+
+    // add mapping array for uuid to nid / alias
+    $query = \Drupal::entityQuery('node')
+      ->condition('status', 1)
+      ->condition('type', 'project');
+    $nids = $query->execute();
+    $nodes =  \Drupal\node\Entity\Node::loadMultiple($nids);
+    $project_mapping = array();
+    foreach($nodes as $node) {
+      $alias = \Drupal::service('path.alias_manager')->getAliasByPath('/node/'.$node->nid->value);
+      $project_mapping[$node->uuid->value] = array(
+          'nid' => $node->nid->value,
+          'alias' => $alias,
+        );
+    }
+    $variables['project_mapping'] = $project_mapping;
+  }
+
 }

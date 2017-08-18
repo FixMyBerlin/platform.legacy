@@ -86,6 +86,7 @@
     }
   </style>
   <script>
+
     var map = new L.Map('map', {
       center: [52.520645, 13.409779],
       zoom: 13,
@@ -168,6 +169,9 @@
 </div>
 
 <script>
+
+    // mapping project uuid to nid and alias
+    var project_mapping = {{ project_mapping|json_encode|raw }};
 
     var is_map_overlay_visible=false;
     var is_map_overlay_blocked=false;
