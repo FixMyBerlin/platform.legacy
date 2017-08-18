@@ -1,11 +1,11 @@
 uuid: 0c72802c-997f-4644-9854-69664d1a5947
-name: Drupal
+name: FixMyBerlin
 mail: boris@fixmyberlin.de
 slogan: ''
 page:
   403: ''
   404: ''
-  front: /user/login
+  front: /node/5
 admin_compact_mode: false
 weight_select_max: 100
 langcode: de
