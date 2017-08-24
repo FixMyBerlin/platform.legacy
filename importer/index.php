@@ -1,10 +1,5 @@
 <?php
 
-#require_once 'init.php';
-#$spreadsheet = $service->spreadsheets_values->get($fileId, 'Radverkehrsprojekte');
-#$spreadsheet->values;
-#file_put_contents('test.json', json_encode($spreadsheet->values, JSON_PRETTY_PRINT));
-
 define('DRUPAL_DIR', dirname(__DIR__));
 use Drupal\Core\DrupalKernel;
 use Symfony\Component\HttpFoundation\Request;
@@ -23,10 +18,11 @@ $kernel->prepareLegacyRequest($request);
 use \Drupal\node\Entity\Node;
 use \Drupal\node\Entity\TaxonomyTerm;
 
-$values = json_decode(file_get_contents('test.json'));
+require_once 'init.php';
+$spreadsheet = $service->spreadsheets_values->get($fileId, 'Radverkehrsprojekte');
 
 // identify column names
-foreach($values as &$row) {
+foreach($spreadsheet->values as &$row) {
   foreach($row as &$cell) {
     $cell = trim($cell);
     if($cell == "UUID") {
@@ -35,8 +31,12 @@ foreach($values as &$row) {
   }
 }
 
-//
-foreach($values as $row) {
+if(!isset($index)) {
+  die("Header column not found.");
+}
+
+// check and import content
+foreach($spreadsheet->values as $row) {
 
   // check if do import is true and UUID is in valid format
   if(@$row[$index['do_import']] == 1 && preg_match('/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/', @$row[$index['UUID']])) {
