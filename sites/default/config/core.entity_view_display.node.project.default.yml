@@ -5,6 +5,7 @@ dependencies:
   config:
     - field.field.node.project.body
     - field.field.node.project.field_project_images
+    - field.field.node.project.field_project_number
     - field.field.node.project.field_project_status
     - field.field.node.project.field_sharing_image
     - field.field.node.project.field_sharing_text
@@ -34,6 +35,14 @@ content:
       image_link: ''
     third_party_settings: {  }
     type: image
+    region: content
+  field_project_number:
+    weight: 107
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
     region: content
   field_project_status:
     weight: 105

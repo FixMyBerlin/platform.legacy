@@ -5,6 +5,7 @@ dependencies:
   config:
     - field.field.node.project.body
     - field.field.node.project.field_project_images
+    - field.field.node.project.field_project_number
     - field.field.node.project.field_project_status
     - field.field.node.project.field_sharing_image
     - field.field.node.project.field_sharing_text
@@ -42,6 +43,14 @@ content:
       preview_image_style: thumbnail
     third_party_settings: {  }
     type: image_image
+    region: content
+  field_project_number:
+    weight: 37
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
     region: content
   field_project_status:
     weight: 35

@@ -210,7 +210,7 @@
 
     <div id="map_overlay_head">
         <h2 id="map_overlay_head_label">
-            Projekt #TS-011<br>
+            Projekt #{{ content.field_project_number }}<br>
             Neubau Radanlage
             {{ content.field_project_status }}
         </h2>
@@ -230,7 +230,7 @@
         </h1>
 
         <div class="map_overlay_title">Ziel dieser Maßnahme</div>
-        <div class="map_overlay_content">Durch diese neue geschützte Radanlage wird eine fehlende Netzverbindung im Hauptstraßennetz geschlossen. <a>mehr dazu</a></div>
+        <div class="map_overlay_content">{{ content.body }}</div>
 
         <div class="map_overlay_divide"><div></div><div></div></div>
 
