@@ -1,0 +1,7 @@
+name: FMB Importer
+description: Imports Data from Google into drupal and Carto
+restrict access: TRUE
+package: Custom
+
+type: module
+core: 8.x

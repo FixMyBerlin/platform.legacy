@@ -2,7 +2,7 @@
 
 require_once 'google-api-php-client/vendor/autoload.php';
 $client = new Google_Client();
-$client->setAuthConfig('../../FixMyBerlin-9c2989a86d05.json');
+$client->setAuthConfig(DRUPAL_ROOT.'/../FixMyBerlin-9c2989a86d05.json');
 $client->setApplicationName("FixMyBerlin Sheets API");
 $client->useApplicationDefaultCredentials();
 $client->addScope('https://spreadsheets.google.com/feeds');

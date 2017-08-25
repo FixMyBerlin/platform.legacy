@@ -1,0 +1,7 @@
+hello_world.content:
+  path: '/admin/fmb/importer'
+  defaults:
+    _controller: '\Drupal\fmb_importer\Controller\FMBController::content'
+    _title: 'FMB Importer'
+  requirements:
+    _permission: 'administer site configuration'
