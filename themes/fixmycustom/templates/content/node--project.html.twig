@@ -158,7 +158,7 @@
     <div id="map_overlay_inner">
         
         <!-- MAP OVERLAY INNER START -->
-        
+    
         <div id="map_overlay_head">
         
             <div id="map_overlay_head_wappen" class="map_overlay_head_wappen_friedrichshain_kreuzberg"></div>
@@ -170,32 +170,7 @@
             <div id="map_overlay_head_status" class="map_overlay_head_status_planung"></div>
             <div class="map_overlay_head_social_media map_overlay_head_social_media_twitter">t</div>
             <div class="map_overlay_head_social_media map_overlay_head_social_media_facebook">f</div>
-        </div>
-
-        <div id="map_overlay_data">
-    
-            <ul id="map_overlay_gallery">
-                {{ content.field_project_images }}
-            </ul>
-    
-            <h1 id="map_overlay_head_title">
-                {{ node.label }}
-                <div style="display:none;">
-               {{ content.votingapi_links }}
-               </div>
-            </h1>
-    
-            <div class="map_overlay_title">Ziel dieser Maßnahme</div>
-            <div class="map_overlay_content">{{ content.body }}</div>
-    
-            <div class="map_overlay_divide"><div></div><div></div></div>
-    
-            <div class="map_overlay_title">Fakten zur Maßnahme</div>
-            <div class="map_overlay_content">
-                <span class="map_overlay_content_fact"><span>Bauzeit:</span> Vorrausichtlich Februar – Mai 2018</span>
-                <span class="map_overlay_content_fact"><span>Kosten:</span> ca 30.000 €</span>
-                <a>weitere Fakten</a>
-
+            
         </div>
     
         <div id="map_overlay_data">
@@ -212,7 +187,7 @@
             </h1>
     
             <div class="map_overlay_title">Ziel dieser Maßnahme</div>
-            <div class="map_overlay_content">Durch diese neue geschützte Radanlage wird eine fehlende Netzverbindung im Hauptstraßennetz geschlossen. <a>mehr dazu</a></div>
+            <div class="map_overlay_content">{{ content.body }}<a>mehr dazu</a></div>
     
             <div class="map_overlay_divide"><div></div><div></div></div>
     
@@ -246,6 +221,7 @@
             </div>
     
         </div>
+        
         <div id="map_overlay_voting">
             <div class="map_overlay_voting_container" id="map_overlay_voting_container_gut" onclick="votingAction(this);">
                 <div class="map_overlay_voting_icon"></div>
@@ -274,7 +250,7 @@
         </div>
         
         <!-- MAP OVERLAY INNER END -->
-    
+        
     </div>
     
     <div id="map_overlay_loader"></div>

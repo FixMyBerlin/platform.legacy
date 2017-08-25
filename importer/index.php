@@ -1,6 +1,6 @@
 <?php
 
-define('DRUPAL_DIR', dirname(__DIR__));
+define('DRUPAL_DIR', /*dirname(__DIR__)*/"/Applications/MAMP/htdocs");
 use Drupal\Core\DrupalKernel;
 use Symfony\Component\HttpFoundation\Request;
 require_once DRUPAL_DIR . '/core/includes/database.inc';
