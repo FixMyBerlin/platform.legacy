@@ -41,6 +41,11 @@ i,em {
 
 /* schriften ——————————————————————————————————————————————————————————————————————————————————————————— */
 
+@font-face {
+    font-family: "Social";
+    src: url('../fonts/Social-Regular.otf');
+    font-weight: normal;
+}
 
 /* body ————————————————————————————————————————————————————————————————————————————————————————————————— */
 
@@ -276,6 +281,7 @@ a {
     width:100%;
     height: 100%;
     z-index: 5;
+    background-color: rgb(220,220,220);
 }
 
 #map {
@@ -297,6 +303,7 @@ a {
     box-shadow: 0px 0px 60px rgba(0,0,0,0.5);
     font-size: 14px;
     transition: transform 0.3s;
+    transition-timing-function: cubic-bezier(0, 0, 0.08, 0.99);
  /*   overflow-x: hidden;
     overflow-y: auto;*/
 }
@@ -317,6 +324,58 @@ a {
 
     border-right: 40px solid white;
 
+}
+
+#map_overlay_loader {
+    position: absolute;
+    left:0px;
+    top:0px;
+    right:0px;
+    bottom:0px;
+    margin-left: auto;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-right: auto;
+    width:100px;
+    height: 100px;
+    border: 3px solid rgb(220, 222, 220);
+    border-left-color: transparent;
+    box-sizing: border-box;
+    border-radius: 50%;
+    
+    -webkit-animation-name: spin;
+    -webkit-animation-duration: 3s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+    -moz-animation-name: spin;
+    -moz-animation-duration: 3s;
+    -moz-animation-iteration-count: infinite;
+    -moz-animation-timing-function: linear;
+    -ms-animation-name: spin;
+    -ms-animation-duration: 3s;
+    -ms-animation-iteration-count: infinite;
+    -ms-animation-timing-function: linear;
+    
+    transition: opacity 0.2s;
+    opacity: 0;
+    
+}
+
+@-moz-keyframes spin {
+    from { -moz-transform: rotate(0deg); }
+    to { -moz-transform: rotate(360deg); }
+}
+@-webkit-keyframes spin {
+    from { -webkit-transform: rotate(0deg); }
+    to { -webkit-transform: rotate(360deg); }
+}
+@keyframes spin {
+    from {transform:rotate(0deg);}
+    to {transform:rotate(360deg);}
+}
+
+#map_overlay_inner {
+    transition: opacity 0.2s;
 }
 
 #map_overlay_head {
@@ -345,6 +404,8 @@ a {
     padding-bottom: 5px;
     box-sizing: border-box;
     color:rgb(127,127,127);
+    width:50%;
+    padding-left: 64px;
 }
 
 #map_overlay_head_label span:not(:last-child) {
@@ -363,6 +424,71 @@ a {
     box-sizing: border-box;
     font-weight: bold;
     font-family: 'Roboto Slab', serif;
+}
+
+#map_overlay_head_wappen {
+    position: absolute;
+    left:20px;
+    top:18px;
+    width:24px;
+    height: 35px;
+    background-size: contain;
+    background-repeat:no-repeat;
+    background-position: center center;
+    opacity: 0.5;
+}
+
+.map_overlay_head_wappen_friedrichshain_kreuzberg {
+    background-image: url('../images/wappen_friedrichshain_kreuzberg.svg');
+}
+
+#map_overlay_head_status {
+    position: absolute;
+    width:calc( 60% - 20px - 31px - 31px - 20px );
+    right:102px;
+    top:0px;
+    height: 100%;
+    background-size: contain;
+    background-repeat:no-repeat;
+    background-position: center center;
+}
+
+.map_overlay_head_status_planung {
+    background-image: url('../images/status_planung.png');
+}
+
+.map_overlay_head_status_vorschlag {
+    background-image: url('../images/status_vorschlag.png');
+}
+
+.map_overlay_head_social_media {
+    font-family: "Social";
+    position: absolute;
+    top:20px;
+    width:31px;
+    height: 31px;
+    text-align: center;
+    font-size: 17px;
+    box-sizing: border-box;
+    border: 2px solid #F8AE00;
+    color: #F8AE00;
+    transition: color 0.2s,background-color 0.2s;
+    cursor: pointer;
+}
+
+.map_overlay_head_social_media:hover {
+    color:white;
+    background-color: #F8AE00;
+}
+
+.map_overlay_head_social_media_twitter {
+    right:20px;
+    border-left-width: 1px;
+ }
+
+.map_overlay_head_social_media_facebook {
+    right:51px;
+    border-right-width: 1px;
 }
 
 #map_overlay_gallery {
