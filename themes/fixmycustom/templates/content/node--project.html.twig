@@ -16,7 +16,6 @@
             FixMyBerlin ist in der Entwicklung. Die Karte zeigt zunächst die vorhandenen Radverkehrsanlagen in Berlin, so wie sie von der Senatsverwaltung zur Verfügung gestellt werden. Dazu werden die Unfallschwerpunkte der letzten 2 Jahre abgebildet. (Dank an Stefan Wehrmeyer) Die Plattform soll zukünftig Radverkehrsplanungen des Senates und der Bezirke übersichtlich abbilden und verschiedene Feedback- und Beteiligungsmöglichkeiten bieten. Für aktuelle Informationen abonniert unseren Newsletter. <a>Kontakt</a> für Feedback und Anregungen.
             <input type="email" id="splashscreen_newsletter_email" placeholder="Deine E-Mail Adresse">
             <div id="splashscreen_newsletter_email_button">Newsletter abonnieren</div>
-            <!--<br /><br />-->
             {{ block_simple_newsletter }}
         </div>
         <img id="splashscreen_logo" src="/themes/fixmycustom/logo.png">
@@ -82,13 +81,15 @@
   <style type="text/css" id="radverkehrsprojekte">
     #layer {
       line-width: 7;
-      line-color: ramp([art_d_feedback], (#cd38c6, #641d96, #df98e8), ("Feedback", "Like", "Review"), "=");
+      line-color: ramp([type_feedback], (#cd38c6, #641d96, #df98e8), ("Feedback", "Like", "Review"), "=");
     }
   </style>
   <script>
     var map = new L.Map('map', {
       center: [52.520645, 13.409779],
       zoom: 13,
+      minZoom: 12,
+      maxZoom: 15,
     });
 
     L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
@@ -108,10 +109,10 @@
 
     // Layer XBerg Maßnahmen
     cartodb.createLayer(map, {
-        user_name: 'hejco',
+        user_name: 'bosh',
         type: 'cartodb',
         sublayers: [{
-          sql: "SELECT * FROM radverkehrsprojekte_friedrichshainkreuzberg WHERE do_import='1'",
+          sql: "SELECT * FROM radverkehrsprojekte WHERE do_import='1'",
           cartocss: $('#radverkehrsprojekte').html(),
           interactivity: "cartodb_id, uuid",
         }]
@@ -129,41 +130,6 @@
       .on('error', function(data) {
         alert("error: " + data);
       });
-    /*
-    var url = '{{ content.field_visualization_url[0] }}';
-    window.onload = function() {
-      cartodb.createVis('map', url, {
-        shareable: false,
-        title: false,
-        description: true,
-        layer_selector: true,
-        search: false,
-        carto_logo: false,
-        fullscreen: true,
-        center_lat: 52.520645,
-        center_lon: 13.409779,
-        zoom: 13
-      }).on('done', function(vis, layers) {
-
-        // add zoom controls
-        vis.getNativeMap().addControl(L.control.zoom());
-        console.log(layers[1].getSubLayer(1).infowindow.attributes.fields["0"].name);
-
-        //
-        layers[1].setInteraction(true);
-        layers[1].on('featureClick', function(e, latlng, pos, data) {
-          var sql_query_url = "https://hejco.carto.com/api/v2/sql?q=SELECT * FROM berlin_bike_accident_spots_2016 WHERE cartodb_id=" + data.cartodb_id;
-          $.getJSON(sql_query_url, function(data) {
-            $.each(data.rows, function(key, val) {
-            });
-          });
-        });
-      })
-      .on('error', function(e){
-        console.log('error: ' + e);
-      });
-    }
-    */
   </script>
 </div>
 
