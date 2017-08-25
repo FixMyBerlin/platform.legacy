@@ -94,7 +94,7 @@
 
     L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
         attribution: 'Positron'
-      }).addTo(map)
+      }).addTo(map);/*
       .on('done', function(layer) {
         layer.setInteraction(true);
         layer.on('featureClick', function(e, latlng, pos, data) {
@@ -105,7 +105,7 @@
           alert("error: " + data);
         });
       });
-
+*/
     // Layer Bezirke
     cartodb.createLayer(map, {
         user_name: 'hejco',
@@ -131,7 +131,7 @@
       .on('done', function(layer) {
         layer.setInteraction(true);
         layer.on('featureClick', function(e, latlng, pos, data) {
-          loadProjectByUUID(e,data, latlng);
+          loadProjectByUUID(data, latlng);
         })
         .on('error', function(data) {
           alert("error: " + data);
@@ -167,7 +167,10 @@
                 Neubau Radanlage
                 {{ content.field_project_status }}
             </h2>
-            <div id="map_overlay_head_status" class="map_overlay_head_status_planung"></div>
+            <div id="map_overlay_head_status" class="map_overlay_head_status_planung">
+                <div class="map_overlay_head_status_label" id="map_overlay_head_status_label_planung">In Planung</div>
+                <div class="map_overlay_head_status_label" id="map_overlay_head_status_label_vorschlag">Vorschlag</div>
+            </div>
             <div class="map_overlay_head_social_media map_overlay_head_social_media_twitter">t</div>
             <div class="map_overlay_head_social_media map_overlay_head_social_media_facebook">f</div>
             

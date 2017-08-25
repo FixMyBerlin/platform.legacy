@@ -461,6 +461,34 @@ a {
     background-image: url('../images/status_vorschlag.png');
 }
 
+.map_overlay_head_status_planung #map_overlay_head_status_label_planung {
+    display: block;
+}
+
+.map_overlay_head_status_vorschlag #map_overlay_head_status_label_vorschlag {
+    display: block;
+}
+
+.map_overlay_head_status_label {
+    font-size: 10px;
+    position: absolute;
+    bottom: 5px;
+    color: rgb(127,127,127);
+    display: none;
+}
+
+#map_overlay_head_status_label_vorschlag {
+    left: -15px;
+ }
+
+#map_overlay_head_status_label_planung {
+    /*left: calc( 22% - 12px );*/
+    left:0px;
+    width:57%;
+    text-align: center;
+ }
+
+
 .map_overlay_head_social_media {
     font-family: "Social";
     position: absolute;

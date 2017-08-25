@@ -64,23 +64,28 @@ function loadProjectByUUID(data, latlng){
     
     
      // console.log(project_mapping['9c48e1bf-abad-4892-8f61-b5c1a60f47f4']);
-     // console.log(project_mapping['9c48e1bf-abad-4892-8f61-b5c1a60f47f4'].alias);
      
-     projectExpand();
+
+     
+   //   alert(project_mapping[data.uuid].alias);
+      
+     // /projekt/gitschiner-strasse-skalitzer-strasse
+     
+     projectExpand(project_mapping[data.uuid].alias);
      
 }
 
 var is_project_visible=false;
 
-function projectExpand() {
+function projectExpand(alias) {
 
-    var current_project_uuid="a87b00bc-6c07-4dfe-bb64-ad9b914500be";
+    //var current_project_alias="a87b00bc-6c07-4dfe-bb64-ad9b914500be";
     
     if (is_project_visible) { // gab schon ein anderes projekt
         projectCollapse();
-        window.setTimeout("projectExpandLoad('"+current_project_uuid+"');",300);
+        window.setTimeout("projectExpandLoad('"+alias+"');",300);
     } else {
-        projectExpandLoad(current_project_uuid);
+        projectExpandLoad(alias);
     }
 
     is_project_visible=true;
@@ -88,11 +93,11 @@ function projectExpand() {
 
 var load_time_start=null;
 
-function projectExpandLoad(project_uuid) {
+function projectExpandLoad(alias) {
 
     load_time_start=Date.now();
     
-    get("/projekt/gitschiner-strasse", "projectExpandEnd", "projectExpandFailed", null, []);
+    get(alias, "projectExpandEnd", "projectExpandFailed", null, []);
     
     $$("map_overlay_inner").innerHTML=""; // leeren container schon zeigen
     $$("map_overlay_container").className="";
