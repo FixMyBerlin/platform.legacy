@@ -942,6 +942,21 @@ a {
     top: 47px !important;
 }
 
+.leaflet-clickable {
+    pointer-events:none;
+}
+
+.leaflet-clickable-hover {
+    transition: opacity 0.2s;
+    pointer-events: all;
+}
+
+.leaflet-clickable-hover:hover {
+    opacity: 0.6;
+}
+
+
+
 /* splashscreen ——————————————————————————————————————————————————————————————— */
 
 #splashscreen {
@@ -1089,10 +1104,6 @@ a {
     background-color: #D69702;
    /* border-color: #D69702;*/
 }
-
-
-
-
 
 
 

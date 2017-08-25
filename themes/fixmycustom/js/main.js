@@ -13,10 +13,9 @@ function load() {
     
 }
 
-/* GENRAL ================================================================================ */
+/* GENERAL =============================================================================== */
 
 
-var is_map_action_feature=false;
 var is_map_action_moved=false;
 
 function mapActionDown() {
@@ -31,56 +30,27 @@ function mapAction() {
 
     if (!is_map_action_moved) { // alle map drags ignorieren
         
-        is_map_action_feature=false;
-        window.setTimeout(mapActionEnd, 200);
-    
+        projectCollapse();
+        mapRemoveMarkings(); // alle verbleibenden markings weg
+        
         is_map_action_moved=false;
-    
+        
     }
 
-}
-
-function mapActionEnd() {
-    if (!is_map_action_feature) { // war kein feature click
-        projectCollapse();    
-    }
-    is_map_action_feature=false;
 }
 
 /* SIDEBAR =============================================================================== */
 
 /* Project Load ———————————————————————————————————————— */
 
-
-function loadProjectByUUID(data, latlng){
-
-    is_map_action_feature=true;
-
-    //alert("load");
-
-   // e.stopPropagation();
-    
-   // console.log(data.uuid);
-    
-    
-     // console.log(project_mapping['9c48e1bf-abad-4892-8f61-b5c1a60f47f4']);
-     
-
-     
-   //   alert(project_mapping[data.uuid].alias);
-      
-     // /projekt/gitschiner-strasse-skalitzer-strasse
-     
-     projectExpand(project_mapping[data.uuid].alias);
-     
+function loadProjectByUUID(uuid) {
+    projectExpand(project_mapping[uuid].alias);
 }
 
 var is_project_visible=false;
 
 function projectExpand(alias) {
 
-    //var current_project_alias="a87b00bc-6c07-4dfe-bb64-ad9b914500be";
-    
     if (is_project_visible) { // gab schon ein anderes projekt
         projectCollapse();
         window.setTimeout("projectExpandLoad('"+alias+"');",300);
@@ -128,32 +98,7 @@ function projectExpandFailed(inhalt) {
 function projectCollapse() {
     $$("map_overlay_container").className="map_overlay_container_hidden";
     is_project_visible=false;
-}
-
-/*
-function projectToggle() {
-    if (is_project_visible) {
-        is_project_visible=false;
-       // document.getElementById("map_overlay_container").className="map_overlay_container_hidden";
-    } else {
-        is_project_visible=true;
-      //  document.getElementById("map_overlay_container").className="";
-    }
-}*/
-
-/*
-var deblock_timer=null;
-
-function mapOverlayBlock() {
-    is_map_overlay_blocked=true;
-    window.clearTimeout(deblock_timer);
-    deblock_timer=window.setTimeout("is_map_overlay_blocked=false", 100);
-
-}
-    
-    */
-    
-    
+}    
     
 /* Big Number ———————————————————————————————————————— */
 
@@ -165,8 +110,6 @@ function bignumberInit() {
 
 function bignumberStep() {
 
-  //  console.log("step");
-    
     $$("map_overlay_bignumber_slider").style.transform="translate3d(-"+(current_big_number_index*25)+"%,0px,0)";
 
     current_big_number_index++;
@@ -193,7 +136,6 @@ function votingExtend(element) {
     var current_voting_type=element.id.split("map_overlay_voting_container_")[1];
     
     if (current_voting_type!="gut") { // alle ausser gut werden extended
-       // alert(current_voting_type);   
        
         // voting container extenden
         $$("map_overlay_voting").className="map_overlay_voting_extended";
@@ -243,8 +185,7 @@ function votingCollapse() {
 
 }
 
-
-// helper —————————————————————————————————————————————————————————————————————————————————————————————————————
+/* HELPER =============================================================================== */
 
 function zufall(a,b) {
     return Math.floor(Math.random()*(b-a+1))+a;

@@ -85,28 +85,26 @@
     }
   </style>
   <script>
+  
+    // Setup ------------------------------------------------
+
     var map = new L.Map('map', {
       center: [52.520645, 13.409779],
       zoom: 13,
       minZoom: 12,
       maxZoom: 15,
     });
+        
+    // Basemap ----------------------------------------------
 
-    L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
+    var is_retina=window.devicePixelRatio>=2?"@2x":"";    
+
+    L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}'+is_retina+'.png', {
         attribution: 'Positron'
-      }).addTo(map);/*
-      .on('done', function(layer) {
-        layer.setInteraction(true);
-        layer.on('featureClick', function(e, latlng, pos, data) {
-          //loadProjectByUUID(e,data, latlng);
-          alert("background-click");
-        })
-        .on('error', function(data) {
-          alert("error: " + data);
-        });
-      });
-*/
-    // Layer Bezirke
+      }).addTo(map);
+
+    // Layer Bezirke ----------------------------------------
+    
     cartodb.createLayer(map, {
         user_name: 'hejco',
         type: 'cartodb',
@@ -117,30 +115,93 @@
       })
       .addTo(map);
 
-    // Layer XBerg Maßnahmen
-    cartodb.createLayer(map, {
-        user_name: 'bosh',
-        type: 'cartodb',
-        sublayers: [{
-          sql: "SELECT * FROM radverkehrsprojekte WHERE do_import='1'",
-          cartocss: $('#radverkehrsprojekte').html(),
-          interactivity: "cartodb_id, uuid",
-        }]
-      })
-      .addTo(map)
-      .on('done', function(layer) {
-        layer.setInteraction(true);
-        layer.on('featureClick', function(e, latlng, pos, data) {
-          loadProjectByUUID(data, latlng);
-        })
-        .on('error', function(data) {
-          alert("error: " + data);
-        });
-      })
-      .on('error', function(data) {
-        alert("error: " + data);
-      });
-  </script>
+    // Maßnahmen VEKTOR -------------------------------------
+    
+    var color_def={     // grün     // magenta
+        "Like":         "#88E6DD",  //E1A2E9
+        "Feedback":     "#39C6B8",  //BA1DC8
+        "Dialog":       "#1B8A7A",  //FF3CD3
+        "Review":       "#DEA167",  //652097
+    };
+    
+    var sql = new cartodb.SQL({ user: 'bosh', format: 'geojson' });
+        
+    var map_marking_wide;
+    var map_marking_close;
+    var map_marking_line;
+    
+    function mapRemoveMarkings() {
+        
+        // alte markings entfernen
+                        
+        if (map_marking_wide) {
+            map.removeLayer(map_marking_wide);
+        }
+                
+        if (map_marking_close) {
+            map.removeLayer(map_marking_close);
+        }
+                
+        if (map_marking_line) {
+            map.removeLayer(map_marking_line);
+        }
+        
+    }
+
+    sql.execute("SELECT the_geom,type_feedback,uuid FROM radverkehrsprojekte WHERE do_import='1'").done(function(geojson) { //cartodb_id="+cartodb_id
+        for (var i=0;i<geojson.features.length;i++) {
+            L.geoJson(geojson.features[i], { 
+                    style: {
+                        color: color_def[geojson.features[i].properties["type_feedback"]],
+                        fillColor: "#fff",
+                        weight: 5,
+                        opacity: 0.9,
+                    },
+                    className:"leaflet-clickable-hover",
+                }).addTo(map)
+                .on("click",function(data) {
+                    
+                    mapRemoveMarkings();
+                    
+                    // neue markings hinzufügen        
+                            
+                    map_marking_wide = L.geoJson(data.layer.feature.geometry, { 
+                            style: {
+                                color: "#E32747",
+                                fillColor: "#fff",
+                                weight: 80,
+                                opacity: 0.08,
+                            },
+                        }).addTo(map);
+                            
+                    map_marking_close = L.geoJson(data.layer.feature.geometry, { 
+                            style: {
+                                color: "#E32747",
+                                fillColor: "#fff",
+                                weight: 30,
+                                opacity: 0.12,
+                            },
+                        }).addTo(map);
+                            
+                    map_marking_line = L.geoJson(data.layer.feature.geometry, { 
+                            style: {
+                                color: "#E32747",
+                                fillColor: "#fff",
+                                weight: 8,
+                                opacity: 1,
+                            },
+                        }).addTo(map);
+                    
+                    // projekt laden
+    
+                    loadProjectByUUID(data.layer.feature.properties["uuid"]);
+                    
+                });
+                    
+        }
+    });
+      
+</script>
 </div>
 
 <script>
@@ -149,7 +210,6 @@
     var project_mapping = {{ project_mapping|json_encode|raw }};
 
 </script>
-
 
 <div id="map_overlay_container" class="map_overlay_container_hidden">
 
@@ -165,9 +225,8 @@
             <h2 id="map_overlay_head_label">
                 Projekt #{{ content.field_project_number }}<br>
                 Neubau Radanlage
-                {{ content.field_project_status }}
             </h2>
-            <div id="map_overlay_head_status" class="map_overlay_head_status_planung">
+            <div id="map_overlay_head_status" class="map_overlay_head_status_planung {{ content.field_project_status[0] }}"> <!--  zb. map_overlay_head_status_planung, map_overlay_head_status_vorschlag -->
                 <div class="map_overlay_head_status_label" id="map_overlay_head_status_label_planung">In Planung</div>
                 <div class="map_overlay_head_status_label" id="map_overlay_head_status_label_vorschlag">Vorschlag</div>
             </div>
