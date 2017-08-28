@@ -5,12 +5,48 @@ window.onload = function () {
       load();
 }
 
+window.onpopstate = function (event) {
+      popstate(event);
+}
+
 function load() {
 
     if ($$("map_overlay_bignumber_slider")) { // große nummern initialiseren
         bignumberInit();
     }    
     
+    if (document.getElementsByTagName("BODY")[0]) {
+        if (document.getElementsByTagName("BODY")[0].className.indexOf("path-frontpage")<=0) { // ist nicht die startseite, dann detail anzeigen
+            projectExpandManual();
+        }
+    }
+    
+}
+
+function popstate(event) {
+    console.log("popstate");
+    
+    /*
+    
+        if (event.state==null) {
+        popupClose(); // wenn keine daten, dann wird das popup auf jeden fall geschlossen
+    } else {
+        if (event.state["loaded_in_popup"]==false||event.state["loaded_in_popup"]==null) { // daten, aber nicht im popup geladen, dann popup schließen
+            popupClose(); // wenn keine daten, dann wird das popup auf jeden fall geschlossen
+        } else { // es gibt daten, und im popup geladen
+            get(event.state["url"], "popupOpenEnd", null, null); // popup öffnen (aber ohne neuen state zu erzeugen)
+            popupOpen();
+        }
+    }
+    
+    
+ 
+
+
+
+
+    
+    */
 }
 
 /* GENERAL =============================================================================== */
@@ -73,6 +109,8 @@ function projectExpandLoad(alias) {
     $$("map_overlay_container").className="";
     $$("map_overlay_loader").style.opacity=1;
     $$("map_overlay_inner").style.opacity=0;
+    
+    history.pushState({"url":alias,"is_popup_open":true}, "", alias); // virtuellen seitenwechsel auf projekt detail
 
 }
 
@@ -95,9 +133,14 @@ function projectExpandFailed(inhalt) {
     
 }
 
+function projectExpandManual() {
+    $$("map_overlay_container").className="";
+}
+
 function projectCollapse() {
     $$("map_overlay_container").className="map_overlay_container_hidden";
     is_project_visible=false;
+    history.pushState({"url":"/","is_popup_open":false}, "", "/"); // virtuellen seitenwechsel auf leere seite
 }    
     
 /* Big Number ———————————————————————————————————————— */
