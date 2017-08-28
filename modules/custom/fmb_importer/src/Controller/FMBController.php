@@ -66,8 +66,6 @@ class FMBController extends ControllerBase {
       );
     }
 
-    kint($index);
-
     // check and import content
     foreach($values as $row) {
 
@@ -147,7 +145,6 @@ class FMBController extends ControllerBase {
           $entity->field_project_costs = $project_costs;
           $entity->field_project_period->set(0)->setValue($project_period);
           $entity->save();
-          continue;
           #print "Updated or inserted entity with UUID $uuid in drupal.\n";
 
           // update carto db
