@@ -85,7 +85,7 @@
     }
   </style>
   <script>
-  
+
     // Setup ------------------------------------------------
 
     var map = new L.Map('map', {
@@ -94,17 +94,17 @@
       minZoom: 12,
       maxZoom: 15,
     });
-        
+
     // Basemap ----------------------------------------------
 
-    var is_retina=window.devicePixelRatio>=2?"@2x":"";    
+    var is_retina=window.devicePixelRatio>=2?"@2x":"";
 
     L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}'+is_retina+'.png', {
         attribution: 'Positron'
       }).addTo(map);
 
     // Layer Bezirke ----------------------------------------
-    
+
     cartodb.createLayer(map, {
         user_name: 'hejco',
         type: 'cartodb',
@@ -116,41 +116,41 @@
       .addTo(map);
 
     // Maßnahmen VEKTOR -------------------------------------
-    
+
     var color_def={     // grün     // magenta
         "Like":         "#88E6DD",  //E1A2E9
         "Feedback":     "#39C6B8",  //BA1DC8
         "Dialog":       "#1B8A7A",  //FF3CD3
         "Review":       "#DEA167",  //652097
     };
-    
+
     var sql = new cartodb.SQL({ user: 'bosh', format: 'geojson' });
-        
+
     var map_marking_wide;
     var map_marking_close;
     var map_marking_line;
-    
+
     function mapRemoveMarkings() {
-        
+
         // alte markings entfernen
-                        
+
         if (map_marking_wide) {
             map.removeLayer(map_marking_wide);
         }
-                
+
         if (map_marking_close) {
             map.removeLayer(map_marking_close);
         }
-                
+
         if (map_marking_line) {
             map.removeLayer(map_marking_line);
         }
-        
+
     }
 
     sql.execute("SELECT the_geom,type_feedback,uuid FROM radverkehrsprojekte WHERE do_import='1'").done(function(geojson) { //cartodb_id="+cartodb_id
         for (var i=0;i<geojson.features.length;i++) {
-            L.geoJson(geojson.features[i], { 
+            L.geoJson(geojson.features[i], {
                     style: {
                         color: color_def[geojson.features[i].properties["type_feedback"]],
                         fillColor: "#fff",
@@ -160,12 +160,12 @@
                     className:"leaflet-clickable-hover",
                 }).addTo(map)
                 .on("click",function(data) {
-                    
+
                     mapRemoveMarkings();
-                    
-                    // neue markings hinzufügen        
-                            
-                    map_marking_wide = L.geoJson(data.layer.feature.geometry, { 
+
+                    // neue markings hinzufügen
+
+                    map_marking_wide = L.geoJson(data.layer.feature.geometry, {
                             style: {
                                 color: "#E32747",
                                 fillColor: "#fff",
@@ -173,8 +173,8 @@
                                 opacity: 0.08,
                             },
                         }).addTo(map);
-                            
-                    map_marking_close = L.geoJson(data.layer.feature.geometry, { 
+
+                    map_marking_close = L.geoJson(data.layer.feature.geometry, {
                             style: {
                                 color: "#E32747",
                                 fillColor: "#fff",
@@ -182,8 +182,8 @@
                                 opacity: 0.12,
                             },
                         }).addTo(map);
-                            
-                    map_marking_line = L.geoJson(data.layer.feature.geometry, { 
+
+                    map_marking_line = L.geoJson(data.layer.feature.geometry, {
                             style: {
                                 color: "#E32747",
                                 fillColor: "#fff",
@@ -191,16 +191,16 @@
                                 opacity: 1,
                             },
                         }).addTo(map);
-                    
+
                     // projekt laden
-    
+
                     loadProjectByUUID(data.layer.feature.properties["uuid"]);
-                    
+
                 });
-                    
+
         }
     });
-      
+
 </script>
 </div>
 
@@ -216,52 +216,52 @@
     <div id="map_overlay_triangle"></div>
 
     <div id="map_overlay_inner">
-        
+
         <!-- MAP OVERLAY INNER START -->
-    
+
         <div id="map_overlay_head">
-        
+
             <div id="map_overlay_head_wappen" class="map_overlay_head_wappen_friedrichshain_kreuzberg"></div>
             <h2 id="map_overlay_head_label">
                 Projekt #{{ content.field_project_number }}<br>
                 Neubau Radanlage
             </h2>
-            <div id="map_overlay_head_status" class="map_overlay_head_status_planung {{ content.field_project_status[0] }}"> <!--  zb. map_overlay_head_status_planung, map_overlay_head_status_vorschlag -->
-                <div class="map_overlay_head_status_label" id="map_overlay_head_status_label_planung">In Planung</div>
+            <div id="map_overlay_head_status" class="map_overlay_head_status_{{ content.field_project_status[0]['#plain_text']|clean_class }}">
+                <div class="map_overlay_head_status_label" id="map_overlay_head_status_label_planung"></div>
                 <div class="map_overlay_head_status_label" id="map_overlay_head_status_label_vorschlag">Vorschlag</div>
             </div>
             <div class="map_overlay_head_social_media map_overlay_head_social_media_twitter">t</div>
             <div class="map_overlay_head_social_media map_overlay_head_social_media_facebook">f</div>
-            
+
         </div>
-    
+
         <div id="map_overlay_data">
-    
+
             <ul id="map_overlay_gallery">
                 {{ content.field_project_images }}
             </ul>
-    
+
             <h1 id="map_overlay_head_title">
                 {{ node.label }}
                 <div style="display:none;">
                {{ content.votingapi_links }}
                </div>
             </h1>
-    
+
             <div class="map_overlay_title">Ziel dieser Maßnahme</div>
             <div class="map_overlay_content">{{ content.body }}<a>mehr dazu</a></div>
-    
+
             <div class="map_overlay_divide"><div></div><div></div></div>
-    
+
             <div class="map_overlay_title">Fakten zur Maßnahme</div>
             <div class="map_overlay_content">
                 <span class="map_overlay_content_fact"><span>Bauzeit:</span> Vorrausichtlich Februar – Mai 2018</span>
                 <span class="map_overlay_content_fact"><span>Kosten:</span> ca 30.000 €</span>
                 <a>weitere Fakten</a>
             </div>
-    
+
             <div class="map_overlay_divide"><div></div><div></div></div>
-    
+
             <div class="map_overlay_title">Zahlen und Daten</div>
             <div id="map_overlay_bignumber_slider">
                 <div class="map_overlay_bignumber_element">
@@ -281,9 +281,9 @@
                     <div class="map_overlay_bignumber_label">weniger Lärm für die Anwohner</div>
                 </div>
             </div>
-    
+
         </div>
-        
+
         <div id="map_overlay_voting">
             <div class="map_overlay_voting_container" id="map_overlay_voting_container_gut" onclick="votingAction(this);">
                 <div class="map_overlay_voting_icon"></div>
@@ -310,11 +310,11 @@
                 <div id="map_overlay_voting_feedback_send"><div>Abschicken</div></div>
             </div>
         </div>
-        
+
         <!-- MAP OVERLAY INNER END -->
-        
+
     </div>
-    
+
     <div id="map_overlay_loader"></div>
 
 </div>
