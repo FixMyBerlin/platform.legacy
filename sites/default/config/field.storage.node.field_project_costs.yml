@@ -1,0 +1,20 @@
+uuid: d999ab54-418b-4bf9-a93d-8326082bca06
+langcode: de
+status: true
+dependencies:
+  module:
+    - node
+id: node.field_project_costs
+field_name: field_project_costs
+entity_type: node
+type: integer
+settings:
+  unsigned: false
+  size: normal
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

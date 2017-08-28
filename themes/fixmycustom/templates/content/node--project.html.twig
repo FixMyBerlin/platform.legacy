@@ -89,7 +89,7 @@
     // Setup ------------------------------------------------
 
     var map = new L.Map('map', {
-      center: [52.520645, 13.409779],
+      center: [52.503161, 13.469303],
       zoom: 13,
       minZoom: 12,
       maxZoom: 15,
@@ -224,7 +224,7 @@
             <div id="map_overlay_head_wappen" class="map_overlay_head_wappen_friedrichshain_kreuzberg"></div>
             <h2 id="map_overlay_head_label">
                 Projekt #{{ content.field_project_number }}<br>
-                Neubau Radanlage
+                {{ content.field_project_type }}
             </h2>
             <div id="map_overlay_head_status" class="map_overlay_head_status_{{ content.field_project_status[0]['#plain_text']|clean_class }}">
                 <div class="map_overlay_head_status_label" id="map_overlay_head_status_label_vorschlag">Vorschlag</div>
@@ -258,9 +258,8 @@
 
             <div class="map_overlay_title">Fakten zur Maßnahme</div>
             <div class="map_overlay_content">
-                <span class="map_overlay_content_fact"><span>Bauzeit:</span> Vorrausichtlich Februar – Mai 2018</span>
-                <span class="map_overlay_content_fact"><span>Kosten:</span> ca 30.000 €</span>
-                <a>weitere Fakten</a>
+                <span class="map_overlay_content_fact"><span>Bauzeit:</span> Vorrausichtlich {{ content.field_project_period }}</span>
+                <span class="map_overlay_content_fact"><span>Kosten:</span> ca {{ content.field_project_costs }} €</span>
             </div>
 
             <div class="map_overlay_divide"><div></div><div></div></div>

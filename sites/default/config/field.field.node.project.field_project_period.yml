@@ -1,0 +1,26 @@
+uuid: 49e6bd93-406d-4148-bd25-e753ecfd7a60
+langcode: de
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_project_period
+    - node.type.project
+  module:
+    - datetime_range
+id: node.project.field_project_period
+field_name: field_project_period
+entity_type: node
+bundle: project
+label: Projektdauer
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    default_date_type: now
+    default_date: now
+    default_end_date_type: relative
+    default_end_date: '+1 year'
+default_value_callback: ''
+settings: {  }
+field_type: daterange

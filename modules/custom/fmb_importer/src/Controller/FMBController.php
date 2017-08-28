@@ -48,7 +48,6 @@ class FMBController extends ControllerBase {
       );
     }
     $values = $spreadsheet->values;
-    #$values = json_decode(file_get_contents('test.json'));
 
     // identify column names
     foreach($values as &$row) {
@@ -67,6 +66,8 @@ class FMBController extends ControllerBase {
       );
     }
 
+    kint($index);
+
     // check and import content
     foreach($values as $row) {
 
@@ -76,22 +77,59 @@ class FMBController extends ControllerBase {
         $title = $row[$index['Adresse']];
         $body = $row[$index['Beschreibung der Maßnahme']];
         $project_number = $row[$index['Projektnummer']];
+        $project_costs = $row[$index['Kosten']];
+        $project_status = $row[$index['Status']];
+        $project_type = $row[$index['Art der Maßn.']];
         $type_feedback = $row[$index['Art d. Feedback']];
+
+        // project period
+        $project_period = array('value' => '', 'end_value' => '');
+        if(!empty($row[$index['Beginn']])) {
+          $project_period['value'] = trim($row[$index['Beginn']]);
+          if(preg_match('/^\d{4}$/', $project_period['value'])) {
+            $project_period['value'] .= '-01-01';
+          }
+          else{
+            $project_period['value'] = date('Y-m-d', strtotime($project_period['value']));
+          }
+        }
+        if(!empty($row[$index['Fertigstellung']])) {
+          $project_period['end_value'] = trim($row[$index['Fertigstellung']]);
+          if(preg_match('/^\d{4}$/', $project_period['end_value'])) {
+            $project_period['end_value'] .= '-12-31';
+          }
+          else{
+            $project_period['end_value'] = date('Y-m-d', strtotime($project_period['end_value']));
+          }
+        }
+
         $the_geom = $row[$index['the_geom']];
         if(@json_decode($the_geom)) {
 
-          // status
-          $status = $row[$index['Status']];
-          $terms = taxonomy_term_load_multiple_by_name($status, 'project_status');
+          // term project status
+          $terms = taxonomy_term_load_multiple_by_name($project_status, 'project_status');
           if(!empty($terms)) {
-            $term_status = array_pop($terms);
+            $term_project_status = array_pop($terms);
           }
           else {
-            $term_status = \Drupal\taxonomy\Entity\Term::create([
+            $term_project_status = \Drupal\taxonomy\Entity\Term::create([
               'vid' => 'project_status',
-              'name' => $status,
+              'name' => $project_status,
             ]);
-            $term_status->save();
+            $term_project_status->save();
+          }
+
+          // term project type
+          $terms = taxonomy_term_load_multiple_by_name($project_type, 'project_type');
+          if(!empty($terms)) {
+            $term_project_type = array_pop($terms);
+          }
+          else {
+            $term_project_type = \Drupal\taxonomy\Entity\Term::create([
+              'vid' => 'project_type',
+              'name' => $project_type,
+            ]);
+            $term_project_type->save();
           }
 
           // create entity if empty
@@ -103,9 +141,13 @@ class FMBController extends ControllerBase {
           }
           $entity->title = $title;
           $entity->body = $body;
-          $entity->field_project_status = $term_status->id();
+          $entity->field_project_status = $term_project_status->id();
+          $entity->field_project_type = $term_project_type->id();
           $entity->field_project_number = $project_number;
+          $entity->field_project_costs = $project_costs;
+          $entity->field_project_period->set(0)->setValue($project_period);
           $entity->save();
+          continue;
           #print "Updated or inserted entity with UUID $uuid in drupal.\n";
 
           // update carto db

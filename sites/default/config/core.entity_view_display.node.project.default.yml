@@ -4,14 +4,17 @@ status: true
 dependencies:
   config:
     - field.field.node.project.body
+    - field.field.node.project.field_project_costs
     - field.field.node.project.field_project_images
     - field.field.node.project.field_project_number
+    - field.field.node.project.field_project_period
     - field.field.node.project.field_project_status
+    - field.field.node.project.field_project_type
     - field.field.node.project.field_sharing_image
     - field.field.node.project.field_sharing_text
-    - field.field.node.project.field_visualization_url
     - node.type.project
   module:
+    - datetime_range
     - image
     - text
     - user
@@ -26,6 +29,15 @@ content:
     weight: 101
     settings: {  }
     third_party_settings: {  }
+    region: content
+  field_project_costs:
+    weight: 108
+    label: hidden
+    settings:
+      thousand_separator: .
+      prefix_suffix: true
+    third_party_settings: {  }
+    type: number_integer
     region: content
   field_project_images:
     weight: 106
@@ -44,6 +56,16 @@ content:
     third_party_settings: {  }
     type: string
     region: content
+  field_project_period:
+    weight: 109
+    label: hidden
+    settings:
+      timezone_override: ''
+      format_type: html_year
+      separator: '-'
+    third_party_settings: {  }
+    type: daterange_default
+    region: content
   field_project_status:
     weight: 105
     label: hidden
@@ -52,9 +74,17 @@ content:
     third_party_settings: {  }
     type: entity_reference_label
     region: content
+  field_project_type:
+    weight: 110
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
   field_sharing_image:
     weight: 104
-    label: above
+    label: hidden
     settings:
       image_style: ''
       image_link: ''
@@ -63,18 +93,10 @@ content:
     region: content
   field_sharing_text:
     weight: 103
-    label: above
+    label: hidden
     settings: {  }
     third_party_settings: {  }
     type: basic_string
-    region: content
-  field_visualization_url:
-    weight: 102
-    label: hidden
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    type: string
     region: content
   links:
     weight: 100

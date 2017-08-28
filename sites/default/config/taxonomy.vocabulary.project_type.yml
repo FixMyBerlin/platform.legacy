@@ -1,0 +1,9 @@
+uuid: 841e6982-1912-4174-b3d4-18a8256b9cd1
+langcode: de
+status: true
+dependencies: {  }
+name: 'Projekt Typ'
+vid: project_type
+description: ''
+hierarchy: 0
+weight: 0

@@ -1,4 +1,4 @@
-hello_world.content:
+fmb_importer.content:
   path: '/admin/fmb/importer'
   defaults:
     _controller: '\Drupal\fmb_importer\Controller\FMBController::content'

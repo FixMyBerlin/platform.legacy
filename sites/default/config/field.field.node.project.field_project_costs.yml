@@ -1,0 +1,23 @@
+uuid: 4290ac80-4c6e-4425-b35b-a694dd2b5834
+langcode: de
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_project_costs
+    - node.type.project
+id: node.project.field_project_costs
+field_name: field_project_costs
+entity_type: node
+bundle: project
+label: Projektkosten
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer
