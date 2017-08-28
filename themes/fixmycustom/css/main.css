@@ -453,40 +453,52 @@ a {
     background-position: center center;
 }
 
-.map_overlay_head_status_planung {
-    background-image: url('../images/status_planung.png');
-}
 
-.map_overlay_head_status_vorschlag {
-    background-image: url('../images/status_vorschlag.png');
-}
+.map_overlay_head_status_vorschlag---idee   {     background-image: url('../images/status_01_vorschlag.png');    }
+.map_overlay_head_status_vorschlag---idee #map_overlay_head_status_label_vorschlag {    display: block;     }
 
-.map_overlay_head_status_planung #map_overlay_head_status_label_planung {
-    display: block;
-}
+.map_overlay_head_status_in-planung         {     background-image: url('../images/status_02_planung.png');    }
+.map_overlay_head_status_in-planung #map_overlay_head_status_label_planung {    display: block;     }
 
-.map_overlay_head_status_vorschlag #map_overlay_head_status_label_vorschlag {
-    display: block;
-}
+.map_overlay_head_status_in-ausführung      {     background-image: url('../images/status_03_ausfuehrung.png');    }
+.map_overlay_head_status_in-ausführung #map_overlay_head_status_label_ausfuehrung {    display: block;     }
+
+.map_overlay_head_status_fertiggestellt     {     background-image: url('../images/status_04_fertiggestellt.png');    }
+.map_overlay_head_status_fertiggestellt #map_overlay_head_status_label_fertiggestellt {    display: block;     }
+
+.map_overlay_head_status_in-review     {     background-image: url('../images/status_05_review.png');    }
+.map_overlay_head_status_in-review #map_overlay_head_status_label_review {    display: block;     }
 
 .map_overlay_head_status_label {
     font-size: 10px;
+    font-weight: normal;
     position: absolute;
-    bottom: 5px;
+    bottom: 6px;
     color: rgb(127,127,127);
     display: none;
+    width: 46%;
+    text-align: center;
 }
 
 #map_overlay_head_status_label_vorschlag {
-    left: -15px;
+    left:-19%;
  }
 
 #map_overlay_head_status_label_planung {
-    /*left: calc( 22% - 12px );*/
-    left:0px;
-    width:57%;
-    text-align: center;
- }
+    left:4%;
+}
+
+#map_overlay_head_status_label_ausfuehrung {
+    left:27%;
+}
+
+#map_overlay_head_status_label_fertiggestellt {
+    left:50%;
+}
+
+#map_overlay_head_status_label_review {
+    left:73%;
+}
 
 
 .map_overlay_head_social_media {
