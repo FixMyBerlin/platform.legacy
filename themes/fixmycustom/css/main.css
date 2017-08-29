@@ -524,12 +524,12 @@ a {
     background-color: #F8AE00;
 }
 
-.map_overlay_head_social_media_twitter {
+.map_overlay_head_social_media_t {
     right:20px;
     border-left-width: 1px;
  }
 
-.map_overlay_head_social_media_facebook {
+.map_overlay_head_social_media_f {
     right:51px;
     border-right-width: 1px;
 }
