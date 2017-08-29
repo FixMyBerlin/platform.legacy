@@ -52,14 +52,14 @@
      line-width: 3;
      line-color: #585858;
      line-opacity: 0.5;
-     line-dasharray: 5,5;  
-    
+     line-dasharray: 5,5;
+
     #XHain [spatial_name='02']{
      polygon-fill: #b4af97;
      polygon-opacity: 0.3;
      line-width: 3;
      line-color: #a3a3a3;
-    
+
      }
     }
   </style>
@@ -77,34 +77,34 @@
        marker-width: ramp([count], range(0, 20), quantiles(5)) }
         [zoom <= 10] {
        marker-width: ramp([count], range(0, 7), quantiles(5)) }
-    
+
      marker-fill: @signal15;
-    
+
      marker-allow-overlap: true;
      marker-line-width: 3;
      marker-line-color: #ffffff;
-    
-    
+
+
     }
-    
-    
+
+
     #Unfallnichtschwer [count <= 9] [zoom<15]{
      marker-opacity: 0.3;
     }
-    
-    
+
+
      #Unfallschwerpunkte [count >= 12] [zoom<15]{
      ::labels {
        text-name:"[count]";
        text-face-name: 'Open Sans Bold';
        text-fill: #ffffff;
-       text-allow-overlap:true; 
+       text-allow-overlap:true;
              marker-opacity: 0.6;
-    
+
        }}
         /*
 
-    
+
     #labelsschwerpunkte [count>=12][zoom>=15]
     ::labels {
      text-name: [count] + [name];
@@ -119,11 +119,11 @@
      text-placement: point;
      text-placement-type: simple;
            marker-opacity: 0.6;
-    
+
     }*/
   </style>
-  
-  
+
+
   <style type="text/css" id="unfallschwerpunkte_2016">
     @signal16: #ff6100;
     #layer {
@@ -137,30 +137,30 @@
        marker-width: ramp([count], range(0, 20), quantiles(5)) }
         [zoom <= 10] {
        marker-width: ramp([count], range(0, 7), quantiles(5)) }
-    
+
      marker-fill: @signal16;
-    
+
      marker-allow-overlap: true;
      marker-line-width: 3;
      marker-line-color: #ffffff;
-    
-    
+
+
     }
-    
+
     #Unfallnichtschwer [count <= 9] [zoom<15]{
      marker-opacity: 0.2;
     }
-    
+
      #Unfallschwerpunkte [count >= 10] [zoom<15]{
      ::labels {
        text-name:"[count]";
        text-face-name: 'Open Sans Bold';
        text-fill: #ffffff;
-       text-allow-overlap:true; 
+       text-allow-overlap:true;
              marker-opacity: 0.6;
-    
+
        }}
-    
+
         /*
 
     #labelsschwerpunkte [count>=10][zoom>=15]
@@ -177,51 +177,51 @@
      text-placement: point;
      text-placement-type: simple;
            marker-opacity: 0.6;
-    
+
     }*/
   </style>
-  
-  
+
+
 
   <style type="text/css" id="radanlagen">
-  
+
       @grn: #66c9df;
     @org:#7fa2bc;
-    
+
     #layer {
-    
+
      [zoom >= 17] {
      line-width: 4;}
      [zoom >= 15][zoom <=17] {
-     line-width: 3;} 
-     [zoom <= 14][zoom >=11] { 
+     line-width: 3;}
+     [zoom <= 14][zoom >=11] {
      line-width: 2; }
-     [zoom <= 11]{ 
-     line-width: 1; } 
-    
-    
+     [zoom <= 11]{
+     line-width: 1; }
+
+
      }
-    
-     #schutzstreifen [rva_typ = 'Schutzstreifen'] { 
+
+     #schutzstreifen [rva_typ = 'Schutzstreifen'] {
      line-opacity: 0.5;
      line-color: @grn;
     }
-    
+
      #Radfahrstreifen [rva_typ = 'Radfahrstreifen']{
      line-opacity: 0.8;
      line-color: @grn;
     }
-    
+
      #Radwege [rva_typ = 'Radwege']  {
      line-opacity: 0.5;
-    line-color: @org; 
+    line-color: @org;
     }
-    
+
      #Bussonderfahrstreifen [rva_typ = 'Bussonderfahrstreifen']  {
      line-opacity: 0.4;
     line-color: @org;}
   </style>
-  
+
 
 
 
@@ -249,9 +249,9 @@
     L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}'+is_retina+'.png', {
         attribution: 'Positron'
       }).addTo(map);
-      
+
     // Layer Bezirke ----------------------------------------
-    
+
     cartodb.createLayer(map, {
         user_name: 'hejco',
         type: 'cartodb',
@@ -264,9 +264,9 @@
       .done(function(layer) {
             layer_data["bezirke"]["carto_layer"]=layer;
       });
-      
+
     // Layer Radanlagen ----------------------------------------
-    
+
     cartodb.createLayer(map, {
         user_name: 'hejco',
         type: 'cartodb',
@@ -281,7 +281,7 @@
       });
 
     // Layer Unfallschwerpunkte ----------------------------------------
-    
+
     cartodb.createLayer(map, {
         user_name: 'hejco',
         type: 'cartodb',
@@ -313,9 +313,9 @@
     var map_marking_wide;
     var map_marking_close;
     var map_marking_line;
-    
+
     function mapAddMarkings(geo_data,properties) {
-            
+
         map_marking_wide = L.geoJson(geo_data, {
                 style: {
                     color: color_def[properties["type_feedback"]],
@@ -342,7 +342,7 @@
                     opacity: 1,
                 },
             }).addTo(map);
-                           
+
     }
 
     function mapRemoveMarkings() {
@@ -377,21 +377,21 @@
                 .on("click",function(data) {
 
                     mapRemoveMarkings();
-                    
+
                     (function(geo_data,properties) {
                         mapAddMarkings(geo_data,properties);
                     })(data.layer.feature.geometry,data.layer.feature.properties); // neue markings hinzufügen
 
                     // projekt laden
                     loadProjectByUUID(data.layer.feature.properties["uuid"]);
-                    
+
                 });
 
         }
     });
 
 
-      
+
 </script>
 </div>
 
@@ -426,8 +426,8 @@
                 <div class="map_overlay_head_status_label" id="map_overlay_head_status_label_fertiggestellt">Fertiggestellt</div>
                 <div class="map_overlay_head_status_label" id="map_overlay_head_status_label_review">Review</div>
             </div>
-            <a class="map_overlay_head_social_media map_overlay_head_social_media_t" target="_blank" href="https://twitter.com/home?status=http://www.fixmyberlin.de">t</a>
-            <a class="map_overlay_head_social_media map_overlay_head_social_media_f" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://www.fixmyberlin.de">f</a>
+            <a class="map_overlay_head_social_media map_overlay_head_social_media_t" target="_blank" href="https://twitter.com/home?status={{ url('<current>') }}">t</a>
+            <a class="map_overlay_head_social_media map_overlay_head_social_media_f" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{ url('<current>') }}">f</a>
 
         </div>
 
