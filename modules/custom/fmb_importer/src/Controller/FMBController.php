@@ -139,6 +139,8 @@ class FMBController extends ControllerBase {
           }
           $entity->title = $title;
           $entity->body = $body;
+          $entity->save();
+          $entity = \Drupal::entityManager()->loadEntityByUuid('node', $uuid);
           $entity->field_project_status = $term_project_status->id();
           $entity->field_project_type = $term_project_type->id();
           $entity->field_project_number = $project_number;
