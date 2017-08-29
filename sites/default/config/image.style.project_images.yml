@@ -5,9 +5,9 @@ dependencies: {  }
 name: project_images
 label: 'Projekt Bilder'
 effects:
-  babfd411-11d6-4c96-97f0-94944cb14515:
-    uuid: babfd411-11d6-4c96-97f0-94944cb14515
-    id: image_resize
+  2e530f27-9b14-41d8-a9e6-9231a10117e7:
+    uuid: 2e530f27-9b14-41d8-a9e6-9231a10117e7
+    id: image_scale_and_crop
     weight: 1
     data:
       width: 300
