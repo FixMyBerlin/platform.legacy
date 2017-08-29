@@ -44,6 +44,7 @@
   <div id="map" onmousedown="mapActionDown(event);" onmousemove="mapActionMove(event);" onclick="mapAction(event);"></div>
 
   <script src="http://libs.cartocdn.com/cartodb.js/v3/3.15/cartodb.js"></script>
+
   <style type="text/css" id="berliner_bezirke">
     #layer {
      polygon-fill: ramp([spatial_name], (#5F4690, #a0d9f1, #38A6A5, #0F8554, #73AF48, #EDAD08, #f49a2f, #CC503E, #94346E, #6F4070, #666666), ("01", "02", "03", "04", "05", "06", "07", "08", "09", "10"), "=");
@@ -51,15 +52,179 @@
      line-width: 3;
      line-color: #585858;
      line-opacity: 0.5;
+     line-dasharray: 5,5;  
     
     #XHain [spatial_name='02']{
-     polygon-fill: #efe8c1;
-     polygon-opacity: 0.5;
+     polygon-fill: #b4af97;
+     polygon-opacity: 0.3;
      line-width: 3;
      line-color: #a3a3a3;
+    
      }
     }
   </style>
+
+  <style type="text/css" id="unfallschwerpunkte_2015">
+    @signal15: #f78900;
+    #layer {
+      [zoom >= 15] {
+       marker-width: ramp([count], range(5, 40), quantiles(5)) }
+      [zoom = 14] {
+       marker-width: ramp([count], range(0, 30), quantiles(5)) }
+      [zoom = 13] {
+       marker-width: ramp([count], range(0, 25), quantiles(5)) }
+      [zoom <= 12] {
+       marker-width: ramp([count], range(0, 20), quantiles(5)) }
+        [zoom <= 10] {
+       marker-width: ramp([count], range(0, 7), quantiles(5)) }
+    
+     marker-fill: @signal15;
+    
+     marker-allow-overlap: true;
+     marker-line-width: 3;
+     marker-line-color: #ffffff;
+    
+    
+    }
+    
+    
+    #Unfallnichtschwer [count <= 9] [zoom<15]{
+     marker-opacity: 0.3;
+    }
+    
+    
+     #Unfallschwerpunkte [count >= 12] [zoom<15]{
+     ::labels {
+       text-name:"[count]";
+       text-face-name: 'Open Sans Bold';
+       text-fill: #ffffff;
+       text-allow-overlap:true; 
+             marker-opacity: 0.6;
+    
+       }}
+        /*
+
+    
+    #labelsschwerpunkte [count>=12][zoom>=15]
+    ::labels {
+     text-name: [count] + [name];
+     text-face-name: 'DejaVu Sans Book';
+     text-size: 10;
+     text-label-position-tolerance: 10;
+     text-fill: #e17cc1;
+     text-halo-fill: rgba(255,255,255,0.6);
+     text-halo-radius: 4	;
+     text-dy: 0;
+     text-allow-overlap: true;
+     text-placement: point;
+     text-placement-type: simple;
+           marker-opacity: 0.6;
+    
+    }*/
+  </style>
+  
+  
+  <style type="text/css" id="unfallschwerpunkte_2016">
+    @signal16: #ff6100;
+    #layer {
+      [zoom >= 15] {
+       marker-width: ramp([count], range(5, 40), quantiles(5)) }
+      [zoom = 14] {
+       marker-width: ramp([count], range(0, 30), quantiles(5)) }
+      [zoom = 13] {
+       marker-width: ramp([count], range(0, 25), quantiles(5)) }
+      [zoom <= 12] {
+       marker-width: ramp([count], range(0, 20), quantiles(5)) }
+        [zoom <= 10] {
+       marker-width: ramp([count], range(0, 7), quantiles(5)) }
+    
+     marker-fill: @signal16;
+    
+     marker-allow-overlap: true;
+     marker-line-width: 3;
+     marker-line-color: #ffffff;
+    
+    
+    }
+    
+    #Unfallnichtschwer [count <= 9] [zoom<15]{
+     marker-opacity: 0.2;
+    }
+    
+     #Unfallschwerpunkte [count >= 10] [zoom<15]{
+     ::labels {
+       text-name:"[count]";
+       text-face-name: 'Open Sans Bold';
+       text-fill: #ffffff;
+       text-allow-overlap:true; 
+             marker-opacity: 0.6;
+    
+       }}
+    
+        /*
+
+    #labelsschwerpunkte [count>=10][zoom>=15]
+    ::labels {
+     text-name: [count] + [name];
+     text-face-name: 'DejaVu Sans Book';
+     text-size: 10;
+     text-label-position-tolerance: 10;
+     text-fill: #e17cc1;
+     text-halo-fill: rgba(255,255,255,0.6);
+     text-halo-radius: 4	;
+     text-dy: 0;
+     text-allow-overlap: true;
+     text-placement: point;
+     text-placement-type: simple;
+           marker-opacity: 0.6;
+    
+    }*/
+  </style>
+  
+  
+
+  <style type="text/css" id="radanlagen">
+  
+      @grn: #66c9df;
+    @org:#7fa2bc;
+    
+    #layer {
+    
+     [zoom >= 17] {
+     line-width: 4;}
+     [zoom >= 15][zoom <=17] {
+     line-width: 3;} 
+     [zoom <= 14][zoom >=11] { 
+     line-width: 2; }
+     [zoom <= 11]{ 
+     line-width: 1; } 
+    
+    
+     }
+    
+     #schutzstreifen [rva_typ = 'Schutzstreifen'] { 
+     line-opacity: 0.5;
+     line-color: @grn;
+    }
+    
+     #Radfahrstreifen [rva_typ = 'Radfahrstreifen']{
+     line-opacity: 0.8;
+     line-color: @grn;
+    }
+    
+     #Radwege [rva_typ = 'Radwege']  {
+     line-opacity: 0.5;
+    line-color: @org; 
+    }
+    
+     #Bussonderfahrstreifen [rva_typ = 'Bussonderfahrstreifen']  {
+     line-opacity: 0.4;
+    line-color: @org;}
+  </style>
+  
+
+
+
   <style type="text/css" id="radverkehrsprojekte">
     #layer {
       line-width: 7;
@@ -72,8 +237,8 @@
 
     var map = new L.Map('map', {
       center: [52.510789, 13.459593],
-      zoom: 13,
-      minZoom: 12,
+      zoom: 11,
+      minZoom: 11,
       maxZoom: 15,
     });
 
@@ -100,6 +265,20 @@
             layer_data["bezirke"]["carto_layer"]=layer;
       });
       
+    // Layer Radanlagen ----------------------------------------
+    
+    cartodb.createLayer(map, {
+        user_name: 'hejco',
+        type: 'cartodb',
+        sublayers: [{
+          sql: "SELECT * FROM berlinradverkehrsanlagen10112015_copy",
+          cartocss: $('#radanlagen').html(),
+        }]
+      })
+      .addTo(map)
+      .done(function(layer) {
+            layer_data["radanlagen"]["carto_layer"]=layer;
+      });
 
     // Layer Unfallschwerpunkte ----------------------------------------
     
@@ -107,8 +286,12 @@
         user_name: 'hejco',
         type: 'cartodb',
         sublayers: [{
-          sql: "SELECT * FROM berliner_bezirke",
-          cartocss: $('#berliner_bezirke').html(),
+          sql: "SELECT * FROM accident_points_2015_1",
+          cartocss: $('#unfallschwerpunkte_2015').html(),
+        },
+        {
+          sql: "SELECT * FROM berlin_bike_accident_spots_2016",
+          cartocss: $('#unfallschwerpunkte_2016').html(),
         }]
       })
       .addTo(map)
@@ -207,6 +390,8 @@
         }
     });
 
+
+      
 </script>
 </div>
 

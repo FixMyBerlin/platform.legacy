@@ -80,12 +80,12 @@ var layer_data={
     },
     "unfallschwerpunkte": {
         "label":"Unfallschwerpunkte",
-        "is_visible":true,
+        "is_visible":false,
         "is_interactive":true,
     },
     "radanlagen": {
         "label":"Vorhandene Radanlagen",
-        "is_visible":true,
+        "is_visible":false,
         "is_interactive":true,
     },
     "bezirke": {
