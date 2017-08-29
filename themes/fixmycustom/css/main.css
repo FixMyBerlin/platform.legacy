@@ -292,6 +292,106 @@ a {
     height: 100%;
 }
 
+#map_layer {
+    position: fixed;
+    left:40px;
+    left: 62px;
+    top:160px;
+    width:auto;
+    height: auto;
+    overflow: hidden;
+    z-index: 20;
+    font-family: 'Roboto', serif;
+    font-size: 14px;
+    font-weight: 400;
+    text-transform: uppercase;
+
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+#map_layer li {
+    position: relative;
+    width:auto;
+    height: auto;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    transition: opacity 0.2s;
+    cursor: pointer;
+    transition: margin-top 0.2s, opacity 0.2s;
+}
+
+
+#map_layer li:nth-child(0) {    z-index: 30;    }
+#map_layer li:nth-child(1) {    z-index: 29;    }
+#map_layer li:nth-child(2) {    z-index: 28;    }
+#map_layer li:nth-child(3) {    z-index: 27;    }
+#map_layer li:nth-child(4) {    z-index: 26;    }
+#map_layer li:nth-child(5) {    z-index: 25;    }
+#map_layer li:nth-child(6) {    z-index: 24;    }
+#map_layer li:nth-child(7) {    z-index: 23;    }
+#map_layer li:nth-child(8) {    z-index: 22;    }
+#map_layer li:nth-child(9) {    z-index: 21;    }
+#map_layer li:nth-child(10) {    z-index: 20;    }
+
+
+#map_layer li:not(:first-child) {
+    margin-top: -26px;
+}
+
+#map_layer:hover li {
+    margin-top: 0px !important;
+}
+
+#map_layer:hover li div {
+    color:rgba(50,50,50,1);
+    transition: color 0.2s;
+}
+
+#map_layer li div {
+    color: rgba(50,50,50,0);
+}
+
+.map_layer_element_visible {
+    opacity: 1;
+}
+
+.map_layer_element_hidden {
+    opacity: 0.5;
+}
+
+/*
+.map_layer_element_visible:hover {
+    opacity: 0.8;
+}
+
+.map_layer_element_hidden:hover {
+    opacity: 0.6;
+}*/
+
+#map_layer li div::before {
+    position: relative;
+    width:40px;
+    height: 20px;
+    content:"";
+    display: inline-block;
+    margin-right: 10px;
+    top:5px;
+    
+    background-size: contain;
+    background-repeat:no-repeat;
+    background-position: center center;
+    background-image: url('../images/layer_blob_visible.svg');
+    
+    
+}
+
+.map_layer_element_visible div::before {
+    background-image: url('../images/layer_blob_visible.svg') !important;
+}
+
 #map_overlay_container {
     position: fixed;
     right:0px;

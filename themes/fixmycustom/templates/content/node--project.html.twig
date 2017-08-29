@@ -46,36 +46,18 @@
   <script src="http://libs.cartocdn.com/cartodb.js/v3/3.15/cartodb.js"></script>
   <style type="text/css" id="berliner_bezirke">
     #layer {
-      polygon-fill: ramp([spatial_name], (#5F4690, #a0d9f1, #38A6A5, #0F8554, #73AF48, #EDAD08, #f49a2f, #CC503E, #94346E, #6F4070, #666666), ("01", "02", "03", "04", "05", "06", "07", "08", "09", "10"), "=");
-      polygon-opacity: 0.0;
-      line-width: 3;
-      line-color: #e7abab;
-      line-opacity: 0.7;
-
+     polygon-fill: ramp([spatial_name], (#5F4690, #a0d9f1, #38A6A5, #0F8554, #73AF48, #EDAD08, #f49a2f, #CC503E, #94346E, #6F4070, #666666), ("01", "02", "03", "04", "05", "06", "07", "08", "09", "10"), "=");
+     polygon-opacity: 0.0;
+     line-width: 3;
+     line-color: #585858;
+     line-opacity: 0.5;
+    
     #XHain [spatial_name='02']{
-      polygon-fill: #a0d9f1;
-      polygon-opacity: 0.3;
-      line-width: 3;
-      line-color: #a3a3a3;
-      }
-    #Pank [spatial_name='03']{
-      polygon-fill: #e7ce90;
-      polygon-opacity: 0.1;
-      line-width: 3;
-      line-color: #a3a3a3;
-      }
-      #Span [spatial_name='05']{
-      polygon-fill: #e7ce90;
-      polygon-opacity: 0.1;
-      line-width: 3;
-      line-color: #a3a3a3;
-        }
-     #TS [spatial_name='07']{
-      polygon-fill: #e7ce90;
-      polygon-opacity: 0.1;
-      line-width: 3;
-      line-color: #a3a3a3;
-      }
+     polygon-fill: #efe8c1;
+     polygon-opacity: 0.5;
+     line-width: 3;
+     line-color: #a3a3a3;
+     }
     }
   </style>
   <style type="text/css" id="radverkehrsprojekte">
@@ -102,9 +84,9 @@
     L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}'+is_retina+'.png', {
         attribution: 'Positron'
       }).addTo(map);
-
+      
     // Layer Bezirke ----------------------------------------
-
+    
     cartodb.createLayer(map, {
         user_name: 'hejco',
         type: 'cartodb',
@@ -113,15 +95,34 @@
           cartocss: $('#berliner_bezirke').html(),
         }]
       })
-      .addTo(map);
+      .addTo(map)
+      .done(function(layer) {
+            layer_data["bezirke"]["carto_layer"]=layer;
+      });
+      
+
+    // Layer Unfallschwerpunkte ----------------------------------------
+    
+    cartodb.createLayer(map, {
+        user_name: 'hejco',
+        type: 'cartodb',
+        sublayers: [{
+          sql: "SELECT * FROM berliner_bezirke",
+          cartocss: $('#berliner_bezirke').html(),
+        }]
+      })
+      .addTo(map)
+      .done(function(layer) {
+            layer_data["unfallschwerpunkte"]["carto_layer"]=layer;
+      });
 
     // Maßnahmen VEKTOR -------------------------------------
 
     var color_def={     // grün     // magenta
-        "Like":         "#88E6DD",  //E1A2E9
-        "Feedback":     "#39C6B8",  //BA1DC8
-        "Dialog":       "#1B8A7A",  //FF3CD3
-        "Review":       "#DEA167",  //652097
+        "Like":         "#E1A2E9",
+        "Feedback":     "#BA1DC8",
+        "Dialog":       "#FF3CD3",
+        "Review":       "#652097"
     };
 
     var sql = new cartodb.SQL({ user: 'bosh', format: 'geojson' });
@@ -130,31 +131,29 @@
     var map_marking_close;
     var map_marking_line;
     
-    function mapAddMarkings(geo_data) {
-    
-        console.log("zeigen");
-        
+    function mapAddMarkings(geo_data,properties) {
+            
         map_marking_wide = L.geoJson(geo_data, {
                 style: {
-                    color: "#E32747",
+                    color: color_def[properties["type_feedback"]],
                     fillColor: "#fff",
                     weight: 80,
-                    opacity: 0.08,
+                    opacity: 0.1,
                 },
             }).addTo(map);
 
         map_marking_close = L.geoJson(geo_data, {
                 style: {
-                    color: "#E32747",
+                    color: color_def[properties["type_feedback"]],
                     fillColor: "#fff",
                     weight: 30,
-                    opacity: 0.12,
+                    opacity: 0.2,
                 },
             }).addTo(map);
 
         map_marking_line = L.geoJson(geo_data, {
                 style: {
-                    color: "#E32747",
+                    color: color_def[properties["type_feedback"]],
                     fillColor: "#fff",
                     weight: 8,
                     opacity: 1,
@@ -196,13 +195,13 @@
 
                     mapRemoveMarkings();
                     
-                    (function(geo_data) {
-                        mapAddMarkings(geo_data);
-                    })(data.layer.feature.geometry); // neue markings hinzufügen
+                    (function(geo_data,properties) {
+                        mapAddMarkings(geo_data,properties);
+                    })(data.layer.feature.geometry,data.layer.feature.properties); // neue markings hinzufügen
 
                     // projekt laden
                     loadProjectByUUID(data.layer.feature.properties["uuid"]);
-
+                    
                 });
 
         }
@@ -217,6 +216,8 @@
     var project_mapping = {{ project_mapping|json_encode|raw }};
 
 </script>
+
+<ul id="map_layer"></ul>
 
 <div id="map_overlay_container" class="map_overlay_container_hidden">
 

@@ -21,6 +21,10 @@ function load() {
         }
     }
     
+    if($$("map_layer")) {
+        layerCreate();
+    }
+    
 }
 
 function popstate(event) {
@@ -65,6 +69,74 @@ function mapAction() {
 }
 
 /* SIDEBAR =============================================================================== */
+
+/* Layer —————————-------——————————————————————————————— */
+
+var layer_data={
+    "radprojekte": {
+        "label":"Radprojekte",
+        "is_visible":true,
+        "is_interactive":false,
+    },
+    "unfallschwerpunkte": {
+        "label":"Unfallschwerpunkte",
+        "is_visible":true,
+        "is_interactive":true,
+    },
+    "radanlagen": {
+        "label":"Vorhandene Radanlagen",
+        "is_visible":true,
+        "is_interactive":true,
+    },
+    "bezirke": {
+        "label":"Bezirke",
+        "is_visible":true,
+        "is_interactive":true,
+    }
+}
+
+function layerCreate() {
+
+    var ergebnis='';
+    
+    for (element in layer_data) {
+    
+        ergebnis=ergebnis+
+        '<li class="map_layer_element_'+(layer_data[element]["is_visible"]?"visible":"hidden")+'" onclick="layerToggle(this,\''+element+'\')"><div>'+layer_data[element]["label"]+'</div></li>';
+        
+        if (!layer_data[element]["is_visible"]) { // direkt auch in carto ausblenden
+            if (layer_data[element]["carto_layer"]) {
+                layer_data[element]["carto_layer"].hide();
+            }
+        }
+        
+    }
+    
+    $$("map_layer").innerHTML=ergebnis;
+
+}
+
+function layerToggle(element,key) {
+
+    if (layer_data[key]["is_interactive"]) {
+
+        if (layer_data[key]["is_visible"]) {
+            layer_data[key]["is_visible"]=false; 
+            element.className="map_layer_element_hidden";
+            if (layer_data[key]["carto_layer"]) {
+                layer_data[key]["carto_layer"].hide();
+            }
+        } else {
+            layer_data[key]["is_visible"]=true;
+            element.className="map_layer_element_visible";
+            if (layer_data[key]["carto_layer"]) {
+                layer_data[key]["carto_layer"].show();
+            }
+        }
+    
+    }
+}
+
 
 /* Project Load ———————————————————————————————————————— */
 
