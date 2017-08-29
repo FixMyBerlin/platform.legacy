@@ -201,6 +201,10 @@ function votingExtend(element) {
         // richtige überschrift anzeigen
         $$("map_overlay_voting_feedback_title_"+current_voting_type).style.display="block";
         $$("map_overlay_voting_feedback_field").placeholder=$$("map_overlay_voting_feedback_placeholder_"+current_voting_type).innerText;
+        $$("map_overlay_voting_feedback_field").value="";
+        window.setTimeout(function() {
+            $$("map_overlay_voting_feedback_field").focus();
+        }, 200);
         
         is_voting_extended=true;
     

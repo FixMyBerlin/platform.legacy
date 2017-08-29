@@ -774,6 +774,7 @@ a {
     left:0px;
     color: white;
     font-weight: bold;
+    color: black;
 }
 
 #map_overlay_voting_feedback {
@@ -826,9 +827,14 @@ a {
     margin-bottom: 20px;
     padding-left: 20px;
     box-sizing: border-box;
-    box-shadow: inset 1px 0px 0px rgba(0,0,0,0.1);
+ /*   box-shadow: inset 1px 0px 0px rgba(0,0,0,0.1);*/
     
     flex-grow: 1; 
+    
+    background-color: white;
+    padding: 10px;
+    padding-top: 7px;
+    padding-bottom: 7px;
 }
 
 #map_overlay_voting_feedback_field::-webkit-input-placeholder { /* WebKit, Blink, Edge */
