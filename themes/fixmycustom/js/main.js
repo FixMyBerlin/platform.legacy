@@ -24,29 +24,19 @@ function load() {
 }
 
 function popstate(event) {
-    console.log("popstate");
+
+   // console.log(event.state);
     
-    /*
-    
-        if (event.state==null) {
-        popupClose(); // wenn keine daten, dann wird das popup auf jeden fall geschlossen
+    if (event.state==null) {
+        projectCollapse(false,true);
     } else {
-        if (event.state["loaded_in_popup"]==false||event.state["loaded_in_popup"]==null) { // daten, aber nicht im popup geladen, dann popup schließen
-            popupClose(); // wenn keine daten, dann wird das popup auf jeden fall geschlossen
+        if (event.state["is_popup_open"]==false||event.state["is_popup_open"]==null) { // daten, aber nicht im popup geladen, dann popup schließen
+            projectCollapse(false,true);
         } else { // es gibt daten, und im popup geladen
-            get(event.state["url"], "popupOpenEnd", null, null); // popup öffnen (aber ohne neuen state zu erzeugen)
-            popupOpen();
+            projectExpand(event.state["url"],false);
         }
     }
-    
-    
- 
 
-
-
-
-    
-    */
 }
 
 /* GENERAL =============================================================================== */
@@ -66,8 +56,7 @@ function mapAction() {
 
     if (!is_map_action_moved) { // alle map drags ignorieren
         
-        projectCollapse();
-        mapRemoveMarkings(); // alle verbleibenden markings weg
+        projectCollapse(true,true);
         
         is_map_action_moved=false;
         
@@ -80,18 +69,18 @@ function mapAction() {
 /* Project Load ———————————————————————————————————————— */
 
 function loadProjectByUUID(uuid) {
-    projectExpand(project_mapping[uuid].alias);
+    projectExpand(project_mapping[uuid].alias,true);
 }
 
 var is_project_visible=false;
 
-function projectExpand(alias) {
+function projectExpand(alias,do_state) {
 
     if (is_project_visible) { // gab schon ein anderes projekt
-        projectCollapse();
-        window.setTimeout("projectExpandLoad('"+alias+"');",300);
+        projectCollapse(false,false);
+        window.setTimeout("projectExpandLoad('"+alias+"',"+do_state+");",300);
     } else {
-        projectExpandLoad(alias);
+        projectExpandLoad(alias,do_state);
     }
 
     is_project_visible=true;
@@ -99,7 +88,7 @@ function projectExpand(alias) {
 
 var load_time_start=null;
 
-function projectExpandLoad(alias) {
+function projectExpandLoad(alias,do_state) {
 
     load_time_start=Date.now();
     
@@ -110,7 +99,9 @@ function projectExpandLoad(alias) {
     $$("map_overlay_loader").style.opacity=1;
     $$("map_overlay_inner").style.opacity=0;
     
-    history.pushState({"url":alias,"is_popup_open":true}, "", alias); // virtuellen seitenwechsel auf projekt detail
+    if (do_state) {
+        history.pushState({"url":alias,"is_popup_open":true}, "", alias); // virtuellen seitenwechsel auf projekt detail
+    }
 
 }
 
@@ -137,10 +128,19 @@ function projectExpandManual() {
     $$("map_overlay_container").className="";
 }
 
-function projectCollapse() {
+function projectCollapse(do_state,do_remove_markings) {
+
     $$("map_overlay_container").className="map_overlay_container_hidden";
     is_project_visible=false;
-    history.pushState({"url":"/","is_popup_open":false}, "", "/"); // virtuellen seitenwechsel auf leere seite
+
+    if (do_state) {
+        history.pushState({"url":"/","is_popup_open":false}, "", "/"); // virtuellen seitenwechsel auf leere seite
+    }
+    
+    if (do_remove_markings) {
+        mapRemoveMarkings(); // alle verbleibenden markings weg
+    }
+    
 }    
     
 /* Big Number ———————————————————————————————————————— */

@@ -404,8 +404,11 @@ a {
     padding-bottom: 5px;
     box-sizing: border-box;
     color:rgb(127,127,127);
-    width:50%;
+    width:40%;
     padding-left: 64px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 #map_overlay_head_label span:not(:last-child) {

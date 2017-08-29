@@ -129,6 +129,39 @@
     var map_marking_wide;
     var map_marking_close;
     var map_marking_line;
+    
+    function mapAddMarkings(geo_data) {
+    
+        console.log("zeigen");
+        
+        map_marking_wide = L.geoJson(geo_data, {
+                style: {
+                    color: "#E32747",
+                    fillColor: "#fff",
+                    weight: 80,
+                    opacity: 0.08,
+                },
+            }).addTo(map);
+
+        map_marking_close = L.geoJson(geo_data, {
+                style: {
+                    color: "#E32747",
+                    fillColor: "#fff",
+                    weight: 30,
+                    opacity: 0.12,
+                },
+            }).addTo(map);
+
+        map_marking_line = L.geoJson(geo_data, {
+                style: {
+                    color: "#E32747",
+                    fillColor: "#fff",
+                    weight: 8,
+                    opacity: 1,
+                },
+            }).addTo(map);
+                           
+    }
 
     function mapRemoveMarkings() {
 
@@ -162,38 +195,12 @@
                 .on("click",function(data) {
 
                     mapRemoveMarkings();
-
-                    // neue markings hinzufügen
-
-                    map_marking_wide = L.geoJson(data.layer.feature.geometry, {
-                            style: {
-                                color: "#E32747",
-                                fillColor: "#fff",
-                                weight: 80,
-                                opacity: 0.08,
-                            },
-                        }).addTo(map);
-
-                    map_marking_close = L.geoJson(data.layer.feature.geometry, {
-                            style: {
-                                color: "#E32747",
-                                fillColor: "#fff",
-                                weight: 30,
-                                opacity: 0.12,
-                            },
-                        }).addTo(map);
-
-                    map_marking_line = L.geoJson(data.layer.feature.geometry, {
-                            style: {
-                                color: "#E32747",
-                                fillColor: "#fff",
-                                weight: 8,
-                                opacity: 1,
-                            },
-                        }).addTo(map);
+                    
+                    (function(geo_data) {
+                        mapAddMarkings(geo_data);
+                    })(data.layer.feature.geometry); // neue markings hinzufügen
 
                     // projekt laden
-
                     loadProjectByUUID(data.layer.feature.properties["uuid"]);
 
                 });
@@ -228,13 +235,13 @@
             </h2>
             <div id="map_overlay_head_status" class="map_overlay_head_status_{{ content.field_project_status[0]['#plain_text']|clean_class }}">
                 <div class="map_overlay_head_status_label" id="map_overlay_head_status_label_vorschlag">Vorschlag</div>
-                <div class="map_overlay_head_status_label" id="map_overlay_head_status_label_planung">In Planung</div>
-                <div class="map_overlay_head_status_label" id="map_overlay_head_status_label_ausfuehrung">In Ausführung</div>
+                <div class="map_overlay_head_status_label" id="map_overlay_head_status_label_planung">Planung</div>
+                <div class="map_overlay_head_status_label" id="map_overlay_head_status_label_ausfuehrung">Ausführung</div>
                 <div class="map_overlay_head_status_label" id="map_overlay_head_status_label_fertiggestellt">Fertiggestellt</div>
-                <div class="map_overlay_head_status_label" id="map_overlay_head_status_label_review">In Review</div>
+                <div class="map_overlay_head_status_label" id="map_overlay_head_status_label_review">Review</div>
             </div>
-            <div class="map_overlay_head_social_media map_overlay_head_social_media_twitter">t</div>
-            <div class="map_overlay_head_social_media map_overlay_head_social_media_facebook">f</div>
+            <a class="map_overlay_head_social_media map_overlay_head_social_media_twitter" target="_blank" href="https://twitter.com/home?status=http://www.fixmyberlin.de">t</a>
+            <a class="map_overlay_head_social_media map_overlay_head_social_media_facebook" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://www.fixmyberlin.de">f</a>
 
         </div>
 
@@ -252,14 +259,14 @@
             </h1>
 
             <div class="map_overlay_title">Ziel dieser Maßnahme</div>
-            <div class="map_overlay_content">{{ content.body }}<a>mehr dazu</a></div>
+            <div class="map_overlay_content">{{ content.body }}<!--<a>mehr dazu</a>--></div>
 
             <div class="map_overlay_divide"><div></div><div></div></div>
 
             <div class="map_overlay_title">Fakten zur Maßnahme</div>
             <div class="map_overlay_content">
                 <span class="map_overlay_content_fact"><span>Bauzeit:</span> Vorrausichtlich {{ content.field_project_period }}</span>
-                <span class="map_overlay_content_fact"><span>Kosten:</span> ca {{ content.field_project_costs }} €</span>
+                <span class="map_overlay_content_fact"><span>Kosten:</span> ca. {{ content.field_project_costs }} €</span>
             </div>
 
             <div class="map_overlay_divide"><div></div><div></div></div>
